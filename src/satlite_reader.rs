@@ -1,7 +1,7 @@
 #![allow(non_snake_case)]
 use super::MetError;
 use super::MetReader;
-use byteorder::{LittleEndian, ReadBytesExt};
+use byteorder::{BigEndian, LittleEndian, ReadBytesExt};
 use std::io::Cursor;
 use std::result::Result;
 use std::string::String;
@@ -22,35 +22,68 @@ impl MetReader for SatReader {
         dbg!(byteSequence);
 
         let mut firstClassHeadLength = Cursor::new(&d[14..16]);
-        let firstClassHeadLength = firstClassHeadLength.read_i16::<LittleEndian>()?;
+        let firstClassHeadLength = if byteSequence == 0 {
+            firstClassHeadLength.read_i16::<LittleEndian>()?
+        } else {
+            firstClassHeadLength.read_i16::<BigEndian>()?
+        };
         dbg!(firstClassHeadLength);
 
         let mut secondClassHeadLength = Cursor::new(&d[16..18]);
-        let secondClassHeadLength = secondClassHeadLength.read_i16::<LittleEndian>()?;
+        let secondClassHeadLength = if byteSequence == 0 {
+            secondClassHeadLength.read_i16::<LittleEndian>()?
+        } else {
+            secondClassHeadLength.read_i16::<BigEndian>()?
+        };
         dbg!(secondClassHeadLength);
 
         let mut padDataLength = Cursor::new(&d[18..20]);
-        let padDataLength = padDataLength.read_i16::<LittleEndian>()?;
+        let padDataLength = if byteSequence == 0 {
+            padDataLength.read_i16::<LittleEndian>()?
+        } else {
+            padDataLength.read_i16::<BigEndian>()?
+        };
         dbg!(padDataLength);
 
         let mut recordLength = Cursor::new(&d[20..22]);
-        let recordLength = recordLength.read_i16::<LittleEndian>()?;
+        let recordLength = if byteSequence == 0 {
+            recordLength.read_i16::<LittleEndian>()?
+        } else {
+            recordLength.read_i16::<BigEndian>()?
+        };
         dbg!(recordLength);
 
         let mut headRecordNumber = Cursor::new(&d[22..24]);
-        let headRecordNumber = headRecordNumber.read_i16::<LittleEndian>()?;
+        let headRecordNumber = if byteSequence == 0 {
+            headRecordNumber.read_i16::<LittleEndian>()?
+        } else {
+            headRecordNumber.read_i16::<BigEndian>()?
+        };
+
         dbg!(headRecordNumber);
 
         let mut dataRecordNumber = Cursor::new(&d[24..26]);
-        let dataRecordNumber = dataRecordNumber.read_i16::<LittleEndian>()?;
+        let dataRecordNumber = if byteSequence == 0 {
+            dataRecordNumber.read_i16::<LittleEndian>()?
+        } else {
+            dataRecordNumber.read_i16::<BigEndian>()?
+        };
         dbg!(dataRecordNumber);
 
         let mut productCategory = Cursor::new(&d[26..28]);
-        let productCategory = productCategory.read_i16::<LittleEndian>()?;
+        let productCategory = if byteSequence == 0 {
+            productCategory.read_i16::<LittleEndian>()?
+        } else {
+            productCategory.read_i16::<BigEndian>()?
+        };
         dbg!(productCategory);
 
         let mut compressMethod = Cursor::new(&d[28..30]);
-        let compressMethod = compressMethod.read_i16::<LittleEndian>()?;
+        let compressMethod = if byteSequence == 0 {
+            compressMethod.read_i16::<LittleEndian>()?
+        } else {
+            compressMethod.read_i16::<BigEndian>()?
+        };
         dbg!(compressMethod);
 
         let formatString = &d[30..38];
@@ -58,7 +91,11 @@ impl MetReader for SatReader {
         dbg!(formatString);
 
         let mut qualityFlag = Cursor::new(&d[38..40]);
-        let qualityFlag = qualityFlag.read_i16::<LittleEndian>()?;
+        let qualityFlag = if byteSequence == 0 {
+            qualityFlag.read_i16::<LittleEndian>()?
+        } else {
+            qualityFlag.read_i16::<BigEndian>()?
+        };
         dbg!(qualityFlag);
 
         let satelliteName = &d[40..48];
@@ -66,128 +103,239 @@ impl MetReader for SatReader {
         dbg!(satelliteName);
 
         let mut year = Cursor::new(&d[48..50]);
-        let year = year.read_i16::<LittleEndian>()?;
+        let year = if byteSequence == 0 {
+            year.read_i16::<LittleEndian>()?
+        } else {
+            year.read_i16::<BigEndian>()?
+        };
         dbg!(year);
 
         let mut month = Cursor::new(&d[50..52]);
-        let month = month.read_i16::<LittleEndian>()?;
+        let month = if byteSequence == 0 {
+            month.read_i16::<LittleEndian>()?
+        } else {
+            month.read_i16::<BigEndian>()?
+        };
         dbg!(month);
 
         let mut day = Cursor::new(&d[52..54]);
-        let day = day.read_i16::<LittleEndian>()?;
+        let day = if byteSequence == 0 {
+            day.read_i16::<LittleEndian>()?
+        } else {
+            day.read_i16::<BigEndian>()?
+        };
         dbg!(day);
 
         let mut hour = Cursor::new(&d[54..56]);
-        let hour = hour.read_i16::<LittleEndian>()?;
+        let hour = if byteSequence == 0 {
+            hour.read_i16::<LittleEndian>()?
+        } else {
+            hour.read_i16::<BigEndian>()?
+        };
         dbg!(hour);
 
         let mut minute = Cursor::new(&d[56..58]);
-        let minute = minute.read_i16::<LittleEndian>()?;
+        let minute = if byteSequence == 0 {
+            minute.read_i16::<LittleEndian>()?
+        } else {
+            minute.read_i16::<BigEndian>()?
+        };
         dbg!(minute);
 
         let mut channel = Cursor::new(&d[58..60]);
-        let channel = channel.read_i16::<LittleEndian>()?;
+        let channel = if byteSequence == 0 {
+            channel.read_i16::<LittleEndian>()?
+        } else {
+            channel.read_i16::<BigEndian>()?
+        };
         dbg!(channel);
 
         let mut flagOfProjection = Cursor::new(&d[60..62]);
-        let flagOfProjection = flagOfProjection.read_i16::<LittleEndian>()?;
+        let flagOfProjection = if byteSequence == 0 {
+            flagOfProjection.read_i16::<LittleEndian>()?
+        } else {
+            flagOfProjection.read_i16::<BigEndian>()?
+        };
         dbg!(flagOfProjection);
 
         let mut widthOfImage = Cursor::new(&d[62..64]);
-        let widthOfImage = widthOfImage.read_i16::<LittleEndian>()?;
+        let widthOfImage = if byteSequence == 0 {
+            widthOfImage.read_i16::<LittleEndian>()?
+        } else {
+            widthOfImage.read_i16::<BigEndian>()?
+        };
         dbg!(widthOfImage);
 
         let mut heightOfImage = Cursor::new(&d[64..66]);
-        let heightOfImage = heightOfImage.read_i16::<LittleEndian>()?;
+        let heightOfImage = if byteSequence == 0 {
+            heightOfImage.read_i16::<LittleEndian>()?
+        } else {
+            heightOfImage.read_i16::<BigEndian>()?
+        };
         dbg!(heightOfImage);
 
         let mut scanLineNumberOfImageTopLeft = Cursor::new(&d[66..68]);
-        let scanLineNumberOfImageTopLeft =
-            scanLineNumberOfImageTopLeft.read_i16::<LittleEndian>()?;
+        let scanLineNumberOfImageTopLeft = if byteSequence == 0 {
+            scanLineNumberOfImageTopLeft.read_i16::<LittleEndian>()?
+        } else {
+            scanLineNumberOfImageTopLeft.read_i16::<BigEndian>()?
+        };
         dbg!(scanLineNumberOfImageTopLeft);
 
         let mut pixelNumberOfImageTopLeft = Cursor::new(&d[68..70]);
-        let pixelNumberOfImageTopLeft = pixelNumberOfImageTopLeft.read_i16::<LittleEndian>()?;
+        let pixelNumberOfImageTopLeft = if byteSequence == 0 {
+            pixelNumberOfImageTopLeft.read_i16::<LittleEndian>()?
+        } else {
+            pixelNumberOfImageTopLeft.read_i16::<BigEndian>()?
+        };
         dbg!(pixelNumberOfImageTopLeft);
 
         let mut sampleRatio = Cursor::new(&d[70..72]);
-        let sampleRatio = sampleRatio.read_i16::<LittleEndian>()?;
+        let sampleRatio = if byteSequence == 0 {
+            sampleRatio.read_i16::<LittleEndian>()?
+        } else {
+            sampleRatio.read_i16::<BigEndian>()?
+        };
         dbg!(sampleRatio);
 
         let mut latitudeOfNorth = Cursor::new(&d[72..74]);
-        let latitudeOfNorth = latitudeOfNorth.read_i16::<LittleEndian>()?;
+        let latitudeOfNorth = if byteSequence == 0 {
+            latitudeOfNorth.read_i16::<LittleEndian>()?
+        } else {
+            latitudeOfNorth.read_i16::<BigEndian>()?
+        };
         dbg!(latitudeOfNorth);
 
-        let latitudeOfNorth = latitudeOfNorth/90;
+        let latitudeOfNorth = latitudeOfNorth as f32 / 100.0;
         dbg!(latitudeOfNorth);
 
         let mut latitudeOfSouth = Cursor::new(&d[74..76]);
-        let latitudeOfSouth = latitudeOfSouth.read_i16::<LittleEndian>()?;
+        let latitudeOfSouth = if byteSequence == 0 {
+            latitudeOfSouth.read_i16::<LittleEndian>()?
+        } else {
+            latitudeOfSouth.read_i16::<BigEndian>()?
+        };
         dbg!(latitudeOfSouth);
 
-        let latitudeOfSouth = latitudeOfSouth/90;
+        let latitudeOfSouth = latitudeOfSouth as f32 / 100.0;
         dbg!(latitudeOfSouth);
 
         let mut longitudeOfWest = Cursor::new(&d[76..78]);
-        let longitudeOfWest = longitudeOfWest.read_i16::<LittleEndian>()?;
+        let longitudeOfWest = if byteSequence == 0 {
+            longitudeOfWest.read_i16::<LittleEndian>()?
+        } else {
+            longitudeOfWest.read_i16::<BigEndian>()?
+        };
         dbg!(longitudeOfWest);
 
-        let longitudeOfWest = longitudeOfWest/-180;
+        let longitudeOfWest = longitudeOfWest as f32 / 100.0;
         dbg!(longitudeOfWest);
 
         let mut longitudeOfEast = Cursor::new(&d[78..80]);
-        let longitudeOfEast = longitudeOfEast.read_i16::<LittleEndian>()?;
+        let longitudeOfEast = if byteSequence == 0 {
+            longitudeOfEast.read_i16::<LittleEndian>()?
+        } else {
+            longitudeOfEast.read_i16::<BigEndian>()?
+        };
         dbg!(longitudeOfEast);
 
-        let longitudeOfEast = longitudeOfEast/180;
+        let longitudeOfEast = longitudeOfEast as f32 / 100.0;
         dbg!(longitudeOfEast);
 
         let mut centerLatitudeOfProjection = Cursor::new(&d[80..82]);
-        let centerLatitudeOfProjection = centerLatitudeOfProjection.read_i16::<LittleEndian>()?;
+        let centerLatitudeOfProjection = if byteSequence == 0 {
+            centerLatitudeOfProjection.read_i16::<LittleEndian>()?
+        } else {
+            centerLatitudeOfProjection.read_i16::<BigEndian>()?
+        };
         dbg!(centerLatitudeOfProjection);
 
         let mut centerLongitudeOfProjection = Cursor::new(&d[82..84]);
-        let centerLongitudeOfProjection = centerLongitudeOfProjection.read_i16::<LittleEndian>()?;
+        let centerLongitudeOfProjection = if byteSequence == 0 {
+            centerLongitudeOfProjection.read_i16::<LittleEndian>()?
+        } else {
+            centerLongitudeOfProjection.read_i16::<BigEndian>()?
+        };
         dbg!(centerLongitudeOfProjection);
 
         let mut standardLatitude1 = Cursor::new(&d[84..86]);
-        let standardLatitude1 = standardLatitude1.read_i16::<LittleEndian>()?;
+        let standardLatitude1 = if byteSequence == 0 {
+            standardLatitude1.read_i16::<LittleEndian>()?
+        } else {
+            standardLatitude1.read_i16::<BigEndian>()?
+        };
         dbg!(standardLatitude1);
 
         let mut standardLatitude2 = Cursor::new(&d[86..88]);
-        let standardLatitude2 = standardLatitude2.read_i16::<LittleEndian>()?;
+        let standardLatitude2 = if byteSequence == 0 {
+            standardLatitude2.read_i16::<LittleEndian>()?
+        } else {
+            standardLatitude2.read_i16::<BigEndian>()?
+        };
         dbg!(standardLatitude2);
 
         let mut horizontalResolution = Cursor::new(&d[88..90]);
-        let horizontalResolution = horizontalResolution.read_i16::<LittleEndian>()?;
+        let horizontalResolution = if byteSequence == 0 {
+            horizontalResolution.read_i16::<LittleEndian>()?
+        } else {
+            horizontalResolution.read_i16::<BigEndian>()?
+        };
         dbg!(horizontalResolution);
 
         let mut verticalResolution = Cursor::new(&d[90..92]);
-        let verticalResolution = verticalResolution.read_i16::<LittleEndian>()?;
+        let verticalResolution = if byteSequence == 0 {
+            verticalResolution.read_i16::<LittleEndian>()?
+        } else {
+            verticalResolution.read_i16::<BigEndian>()?
+        };
         dbg!(verticalResolution);
 
         let mut overlapFlagGeoGrid = Cursor::new(&d[92..94]);
-        let overlapFlagGeoGrid = overlapFlagGeoGrid.read_i16::<LittleEndian>()?;
+        let overlapFlagGeoGrid = if byteSequence == 0 {
+            overlapFlagGeoGrid.read_i16::<LittleEndian>()?
+        } else {
+            overlapFlagGeoGrid.read_i16::<BigEndian>()?
+        };
         dbg!(overlapFlagGeoGrid);
 
         let mut overlapValueGeoGrid = Cursor::new(&d[94..96]);
-        let overlapValueGeoGrid = overlapValueGeoGrid.read_i16::<LittleEndian>()?;
+        let overlapValueGeoGrid = if byteSequence == 0 {
+            overlapValueGeoGrid.read_i16::<LittleEndian>()?
+        } else {
+            overlapValueGeoGrid.read_i16::<BigEndian>()?
+        };
         dbg!(overlapValueGeoGrid);
 
         let mut dataLengthOfColorTable = Cursor::new(&d[96..98]);
-        let dataLengthOfColorTable = dataLengthOfColorTable.read_i16::<LittleEndian>()?;
+        let dataLengthOfColorTable = if byteSequence == 0 {
+            dataLengthOfColorTable.read_i16::<LittleEndian>()?
+        } else {
+            dataLengthOfColorTable.read_i16::<BigEndian>()?
+        };
         dbg!(dataLengthOfColorTable);
 
         let mut dataLengthOfCalibration = Cursor::new(&d[98..100]);
-        let dataLengthOfCalibration = dataLengthOfCalibration.read_i16::<LittleEndian>()?;
+        let dataLengthOfCalibration = if byteSequence == 0 {
+            dataLengthOfCalibration.read_i16::<LittleEndian>()?
+        } else {
+            dataLengthOfCalibration.read_i16::<BigEndian>()?
+        };
         dbg!(dataLengthOfCalibration);
 
         let mut dataLengthOfGeolocation = Cursor::new(&d[100..102]);
-        let dataLengthOfGeolocation = dataLengthOfGeolocation.read_i16::<LittleEndian>()?;
+        let dataLengthOfGeolocation = if byteSequence == 0 {
+            dataLengthOfGeolocation.read_i16::<LittleEndian>()?
+        } else {
+            dataLengthOfGeolocation.read_i16::<BigEndian>()?
+        };
         dbg!(dataLengthOfGeolocation);
 
         let mut reserved = Cursor::new(&d[102..104]);
-        let reserved = reserved.read_i16::<LittleEndian>()?;
+        let reserved = if byteSequence == 0 {
+            reserved.read_i16::<LittleEndian>()?
+        } else {
+            reserved.read_i16::<BigEndian>()?
+        };
         dbg!(reserved);
 
         let mut ind = 104;
@@ -208,6 +356,7 @@ impl MetReader for SatReader {
 }
 
 #[test]
+#[ignore]
 fn test_metreader() {
     let ref d = vec![1u8, 2, 3, 4];
     let r = SatReader::read::<SatReader>(&d);
@@ -217,7 +366,7 @@ fn test_metreader() {
 #[test]
 fn test_read_satfile() {
     let r = SatReader::read_file::<SatReader>(
-        r##"E:\BaiduNetdiskDownload\ANI_IR1_R04_20200509_0900_FY2G.AWX"##,
+        r##"D:\BaiduNetdiskDownload\ANI_IR1_R04_20200509_0900_FY2G.AWX"##,
     );
     assert!(r.is_err())
 }
