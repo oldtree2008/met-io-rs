@@ -9,3 +9,4 @@ edition = "2018"
 [dependencies]
 thiserror = "1.0.16"
 byteorder = "1.3.4"
+binread = "1.0.0"
