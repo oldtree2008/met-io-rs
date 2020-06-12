@@ -10,3 +10,10 @@ edition = "2018"
 thiserror = "1.0.16"
 byteorder = "1.3.4"
 binread = "1.0.0"
+palette={git="https://gitee.com/oldtree2008/palette"}
+log = "0.4.8"
+image = "0.23.5"
+
+[[bin]]
+name="awx2img"
+path="bin/awx2img.rs"

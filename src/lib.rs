@@ -3,6 +3,8 @@ mod satlite_reader;
 use error::MetError;
 use std::fs::File;
 use std::io::Read;
+
+pub use satlite_reader::*;
 pub trait MetReader {
     fn read<T>(r: &[u8]) -> Result<T, MetError>;
     fn read_file<T>(file_name: &str) -> Result<T, MetError> {

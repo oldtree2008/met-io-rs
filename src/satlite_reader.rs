@@ -1,9 +1,11 @@
 #![allow(non_snake_case)]
 use super::MetError;
-use super::MetReader;
+// use super::MetReader;
 
 use std::io::Cursor;
+use std::io::Read;
 use std::result::Result;
+use std::fs::File;
 
 use binread::prelude::*;
 use binread::NullString;
@@ -11,7 +13,7 @@ use std::io::SeekFrom;
 
 #[derive(Debug,BinRead)]
 #[br(little)]
-struct Product {    
+pub struct Product {    
     fName:NullString,
     #[br(seek_before = SeekFrom::Start(12))]
     byteSequence:u16,
@@ -37,7 +39,7 @@ struct Product {
 
     //for product1
     #[br(is_little=(byteSequence==0),if(productCategory==1))]
-    header1:Option<Header1>,
+    pub header1:Option<Header1>,
     #[br(is_little=(byteSequence==0),if(productCategory==1),calc=header1.as_ref().unwrap().widthOfImage  as u64)]
     data1_width:Option<u64>,
     #[br(is_little=(byteSequence==0),if(productCategory==1),calc=header1.as_ref().unwrap().heightOfImage  as u64)]
@@ -47,7 +49,7 @@ struct Product {
     #[br(is_little=(byteSequence==0),if(productCategory==1),calc=(headRecordNumber*recordLength) as u64)]
     data1_start:Option<u64>,
     #[br(is_little=(byteSequence==0),if(productCategory==1),seek_before=SeekFrom::Start(data1_start.unwrap()),count=data1_len.unwrap())]
-    data1:Option<Vec<u8>>,
+    pub data1:Option<Vec<u8>>,
     
     
     //HeadExt
@@ -75,7 +77,7 @@ struct Product {
 
 #[derive(Debug,BinRead)]
 #[br(little)]
-struct Header1 {
+pub struct Header1 {
     satelliteName: NullString,
     #[br(seek_before = SeekFrom::Start(48))]
     year:u16,
@@ -85,8 +87,8 @@ struct Header1 {
     minute:u16,
     channel:i16,
     flagOfProjection:i16,
-    widthOfImage:i16,
-    heightOfImage:i16,
+    pub widthOfImage:i16,
+    pub heightOfImage:i16,
     scanLineNumberOfImageTopLeft:i16,
     pixelNumberOfImageTopLeft:i16,
     sampleRatio:i16,
@@ -118,35 +120,37 @@ struct Header1 {
 }
 
 #[derive(Debug)]
-struct SatReader;
+pub struct SatReader(pub Product);
 
-impl MetReader for SatReader {
-    fn read<SatReader>(d: &[u8]) -> Result<SatReader, MetError> {
-        let mut reader = Cursor::new(d);
+impl SatReader {
+    pub fn read(fname:&str) -> Result<SatReader, MetError> {
+        let mut f = File::open(fname)?;
+        let mut d = Vec::new();
+        f.read_to_end(&mut d)?;
+        let mut reader = Cursor::new(&d);
         dbg!(d.len());
-        let header:Product = reader.read_le().unwrap();
-        dbg!(header.productCategory);
-        dbg!(&header.data1.unwrap().len());
-        dbg!(header.header1.unwrap().channel);
-      
-
-
-        Err(MetError::ReadSatError("demo".to_string()))
+        let product:Product = reader.read_le().unwrap();
+        // dbg!(product.productCategory);
+        // dbg!(product.manufacturer);
+        // dbg!(&product.data1.unwrap()[900..1000]);
+        // dbg!(product.header1.unwrap().channel);
+        Ok(SatReader(product))
     }
 }
 
-#[test]
-#[ignore]
-fn test_metreader() {
-    let ref d = vec![1u8, 2, 3, 4];
-    let r = SatReader::read::<SatReader>(&d);
-    assert!(r.is_err());
-}
+// #[test]
+// #[ignore]
+// fn test_metreader() {
+//     let ref d = vec![1u8, 2, 3, 4];
+//     let r = SatReader::read::<SatReader>(&d);
+//     assert!(r.is_err());
+// }
 
-#[test]
-fn test_read_satfile() {
-    let r = SatReader::read_file::<SatReader>(
-        r##"D:\BaiduNetdiskDownload\ANI_IR1_R04_20200509_0900_FY2G.AWX"##,
-    );
-    assert!(r.is_err())
-}
+// #[test]
+// fn test_read_satfile() {
+//     let r = SatReader::read_file::<SatReader>(
+//         r##"D:\BaiduNetdiskDownload\ANI_IR1_R04_20200509_0900_FY2G.AWX"##,
+//         // r##"H:\data\yuntu\ERNA19J1.AWX"##,
+//     );
+//     assert!(r.is_err())
+// }
