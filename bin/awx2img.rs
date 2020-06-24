@@ -1,7 +1,7 @@
-use std::path::Path;
-use palette::*;
-use image::{GenericImageView, ImageBuffer, RgbaImage, imageops};
+use image::{imageops, GenericImageView, ImageBuffer, RgbaImage};
 use met_io_rs::*;
+use palette::*;
+use std::path::Path;
 
 pub fn main() {
     println!("awx2img");
@@ -9,9 +9,7 @@ pub fn main() {
     let p = Path::new("palette/I-01.xml");
     let pal = Palette::new_with_file(&p).unwrap();
     let c = pal.get_color(2.0);
-    let r = SatReader::read(
-        r##"D:\BaiduNetdiskDownload\ANI_IR1_R04_20200509_0900_FY2G.AWX"##,
-    );
+    let r = SatReader::read(r##"D:\BaiduNetdiskDownload\ANI_IR1_R04_20200509_0900_FY2G.AWX"##);
     let r = r.unwrap();
     let p = r.0;
     let header = &p.header1.unwrap();
@@ -21,12 +19,12 @@ pub fn main() {
     dbg!(header.heightOfImage);
     let w = header.widthOfImage;
     let h = header.heightOfImage;
-    let mut imgbuf = ImageBuffer::new(w as u32,h as u32);
-    for (x,y,pixel) in imgbuf.enumerate_pixels_mut() {
-        let index = y* w as u32 + x ;
+    let mut imgbuf = ImageBuffer::new(w as u32, h as u32);
+    for (x, y, pixel) in imgbuf.enumerate_pixels_mut() {
+        let index = y * w as u32 + x;
         let v = data[index as usize];
         let c = pal.get_color(v as f64).unwrap();
-        *pixel = image::Rgba([c.r,c.g,c.b,c.a]);
+        *pixel = image::Rgba([c.r, c.g, c.b, c.a]);
     }
     imgbuf.save("demo.png").unwrap();
 }
