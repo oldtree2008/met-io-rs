@@ -1,10 +1,17 @@
 mod error;
+mod hdf5_error;
+mod hdf5_reader;
 mod satlite_reader;
+
 use error::MetError;
+
 use std::fs::File;
 use std::io::Read;
 
+pub use hdf5_error::Hdf5Error;
+pub use hdf5_reader::*;
 pub use satlite_reader::*;
+
 pub trait MetReader {
     fn read<T>(r: &[u8]) -> Result<T, MetError>;
     fn read_file<T>(file_name: &str) -> Result<T, MetError> {
@@ -14,11 +21,3 @@ pub trait MetReader {
         Self::read(&data)
     }
 }
-
-// #[cfg(test)]
-// mod tests {
-//     #[test]
-//     fn it_works() {
-//         assert_eq!(2 + 2, 4);
-//     }
-// }
