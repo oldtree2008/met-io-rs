@@ -1,9 +1,16 @@
 mod error;
+mod grid2img;
 mod hdf5_error;
 mod hdf5_reader;
 mod satlite_reader;
+mod xradar_reader;
 
+pub use grid2img::*;
+pub mod transforms;
 use error::MetError;
+pub mod radar_grid;
+
+pub use xradar_reader::*;
 
 use std::fs::File;
 use std::io::Read;

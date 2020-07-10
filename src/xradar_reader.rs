@@ -1,10 +1,9 @@
 #![allow(no_snake_case)]
+use super::radar_grid::RadialData;
 use binread::prelude::*;
 use binread::NullString;
 use encoding_rs::*;
 use image::{imageops, GenericImageView, ImageBuffer, RgbaImage};
-use met_io_rs::radar_grid::RadialData;
-use met_io_rs::*;
 use palette::*;
 use std::convert::Into;
 use std::convert::TryInto;
@@ -172,192 +171,98 @@ pub struct Observe {
     reserve: Vec<i8>,
 }
 #[derive(Debug)]
-pub struct XRadarReader;
+pub struct XRadarReader(pub (Product, Vec<u8>));
 
 impl XRadarReader {
-    // pub fn new()->Option<RadialData> {
-    //     None
-    // }
+    pub fn read(fname: &str) -> Option<Self> {
+        let mut file = File::open(fname).unwrap();
+        let mut d = Vec::new();
+        file.read_to_end(&mut d).unwrap();
+        let mut reader = Cursor::new(&d);
+        let p: Product = reader.read_le().unwrap();
+        Some(XRadarReader((p, d)))
+    }
 }
 
-// impl Into<RadialData> for XRadarReader {
-//      fn into(self)->RadialData {
-//         RadialData {
-//             eles:vec![],
-//             azs:vec![vec![]],
-//             rs:vec![vec![]],
-//             data:vec![vec![vec![]]],
-//         }
-//      }
-// }
+impl Into<RadialData> for XRadarReader {
+    fn into(self) -> RadialData {
+        let xr = self.0;
+        let p: Product = xr.0;
+        let d: Vec<u8> = xr.1;
+        let _elNum = &p.observe.SSLayerNumber;
 
-pub fn main() {
-    let fname = r##"H:\data\20200704_164546.00.002.001_R1"##;
-    let p = Path::new("palette/REFcolortable.xml");
-    let p = Path::new("palette/xradar.xml");
-    let pal = Palette::new_with_file(&p).unwrap();
-    let mut file = File::open(fname).unwrap();
+        dbg!(_elNum);
+        let radiohead_size = 64;
+        let mut vol_ref = Vec::new();
+        let mut eles = Vec::new();
+        let mut azs = Vec::new();
+        let mut rs = Vec::new();
+        for el in 0..*_elNum {
+            println!("layer {}", el);
+            let refBins = &p.observe.ERDistanceNum[el as usize];
+            let dplBins = &p.observe.ECDistanceNum[el as usize];
 
-    let mut d = Vec::new();
-    file.read_to_end(&mut d).unwrap();
-    let mut reader = Cursor::new(&d);
-
-    // fn read_le_i16(input: &mut &[u8]) -> i16 {
-    //     let (int_bytes, rest) = input.split_at(std::mem::size_of::<i16>());
-    //     *input = rest;
-    //     i16::from_be_bytes(int_bytes.try_into().unwrap())
-    // }
-
-    let p: Product = reader.read_le().unwrap();
-
-    let _elNum = &p.observe.SSLayerNumber;
-
-    dbg!(&p);
-
-    // let province = &p.address.Province_;
-    // let province = String::from_utf16_lossy(province);
-    // dbg!(province);
-
-    dbg!(_elNum);
-    let radiohead_size = 64;
-
-    let mut vol_ref = Vec::new();
-    for el in 0..*_elNum {
-        println!("layer {}", el);
-        let refBins = &p.observe.ERDistanceNum[el as usize];
-        let dplBins = &p.observe.ECDistanceNum[el as usize];
-        let offset = &p.observe.PPIInFileSD[el as usize];
-        let length = radiohead_size + refBins * 7 + dplBins * 2;
-        let az_num = &p.observe.ERadialNum[el as usize];
-        dbg!(refBins, dplBins, offset, length, az_num);
-        let mut az_ref = Vec::new();
-        for az in 0..*az_num {
-            //定位到数据位置
-            let pos = offset + (az as u32) * length as u32 + radiohead_size as u32;
-            // dbg!(offset);
-            //提取反射率 一个字节
-            let mut bin_data = Vec::new();
-            for bin in 0..*refBins {
-                let dpos = (pos + bin as u32) as usize;
-                // if d[dpos]!=0u8 {
-                //     dbg!(&d[dpos]);
-                // }
-                let mut vv = d[dpos] as f32;
-                if vv > 2.0 && vv < 255.0 {
-                    vv = vv * 0.5 - 33.0;
-                    bin_data.push(vv);
-                } else {
-                    bin_data.push(999.0);
+            //ERlibL
+            let refWidth = &p.observe.ERlibL[el as usize];
+            //EClutterL
+            let dplWidth = &p.observe.EClutterL[el as usize];
+            let offset = &p.observe.PPIInFileSD[el as usize];
+            let length = radiohead_size + refBins * 7 + dplBins * 2;
+            let az_num = &p.observe.ERadialNum[el as usize];
+            dbg!(refBins, dplBins, offset, length, az_num);
+            let mut az_ref = Vec::new();
+            let mut el_found = false;
+            let mut el_az = Vec::new();
+            
+            let mut az_range = Vec::new();
+            for az in 0..*az_num {
+                let az_pos = offset + (az as u32) * length as u32 + 4;
+                let az_value = u16::from_le_bytes([d[az_pos as usize], d[az_pos as usize + 1]]);
+                let az_value = az_value as f32 / 100.0;
+                // println!("az_value {}",az_value);
+                let el_pos = offset + (az as u32) * length as u32 + 6;
+                let el_value = u16::from_le_bytes([d[el_pos as usize], d[el_pos as usize + 1]]);
+                let el_value = el_value as f32 / 100.0;
+                // println!("el_value {}",el_value);
+                if !el_found {
+                    eles.push(el_value);
+                    el_found = true;
                 }
+                el_az.push(az_value);
+                //定位到数据位置
+                let pos = offset + (az as u32) * length as u32 + radiohead_size as u32;
+                // dbg!(offset);
+                //提取反射率 一个字节
+                let mut bin_data = Vec::new();
+                let mut ranges = Vec::new();
+                for bin in 0..*refBins {
+                    let dpos = (pos + bin as u32) as usize;
+                    let mut vv = d[dpos] as f32;
+                    if vv > 2.0 && vv < 255.0 {
+                        vv = vv * 0.5 - 33.0;
+                        bin_data.push(vv);
+                    } else {
+                        bin_data.push(999.0);
+                    }
+                    // ranges.push((bin * (*refWidth)) as f64);
+                    ranges.push(bin as f64 * ((*refWidth) as f64));
+                }
+                // println!("ranges {:?}",ranges);
+                az_range.push(ranges);
+                // println!("{:?}",bin_data);
+                az_ref.push(bin_data);
             }
-            // println!("{:?}",bin_data);
-            az_ref.push(bin_data);
+            az_ref.push(az_ref[0].clone());
+            vol_ref.push(az_ref);
+            el_az.push(360.0);
+            azs.push(el_az);
+            rs.push(az_range)
         }
-        az_ref.push(az_ref[0].clone());
-        vol_ref.push(az_ref);
-    }
-
-    fn find_index(azs: &Vec<f32>, az: f32) -> Option<usize> {
-        let az_len = azs.len();
-        for (i, a) in azs[0..az_len - 1].iter().enumerate() {
-            if az >= azs[i] && az < azs[i + 1] {
-                return Some(i);
-            }
+        RadialData {
+            eles: eles,
+            azs: azs,
+            rs: rs,
+            data: vol_ref,
         }
-        None
     }
-    let h = 0.0;
-    let elevation = 14.0;
-    let z = 520.0;
-    let res = 150.0;
-    let R: usize = 1000;
-    let W = 2 * R;
-    let mut grid_value = vec![-999.0; 2 * R * 2 * R];
-    let elv_values = &vol_ref[2];
-    let mut elv_azs = Vec::new();
-    for i in 0..=360 {
-        elv_azs.push(i as f32);
-    }
-    grid_value.iter_mut().enumerate().for_each(|(i, d)| {
-        let y = i / (2 * R);
-        let x = i % (2 * R);
-        let x = x as f32 - 1000.0;
-        let y = y as f32 - 1000.0;
-        // println!("x {} y {}",x,y);
-        let dst = (x * x + y * y).sqrt();
-
-        //for ppi
-        let (az, rang, elv) =
-            transforms::cartesian_to_antenna_cwr(x * 150.0, -y * 150.0, elevation, h);
-        //for ppz
-        // let (_, _, z) = transforms::cartesian_to_antenna_cwr(x, -y, elevation, h);
-        // let (az, rang, elv) = transforms::cartesian_xyz_to_antenna(x, -y, z, h);
-        // println!("elv {}",elv);
-
-        if rang < 999.0 * 150.0
-        /*&& x>-50.0 && x<50.0  && y>-50.0 && y<50.0*/
-        {
-            // let elv_idx = find_index(&elvs, elv);
-            // if let Some(elv_idx) = elv_idx {
-            //     let elv_azs = &elv_az[elv_idx]; // 第一层上的所有方位角
-            //     let elv_values = &elv_az_range_value[elv_idx];
-            // println!("elv_idx {:?}   elv {}", elv_idx, elv);
-
-            let az = az.to_degrees();
-            let idx = find_index(&elv_azs, az);
-            if let Some(ii) = idx {
-                let az0 = elv_azs[ii];
-                let az1 = elv_azs[ii + 1];
-                let rang0 = (rang / 150.0).floor() as usize;
-                let rang1 = (rang / 150.0).ceil() as usize;
-                let mut v00 = elv_values[ii][rang0] as f32;
-                let mut v01 = elv_values[ii][rang1] as f32;
-                let mut v10 = elv_values[ii + 1][rang0] as f32;
-                let mut v11 = elv_values[ii + 1][rang1] as f32;
-
-                let v = radar_grid::interp_ppi(
-                    az,
-                    rang / 150.0,
-                    az0,
-                    az1,
-                    rang0 as f32,
-                    rang1 as f32,
-                    v00 as f32,
-                    v01 as f32,
-                    v10 as f32,
-                    v11 as f32,
-                );
-                // let v = (v - 64.0) / 2.0;
-                *d = v;
-                // println!(
-                //     "az {} az0 {} az1 {} range {} range0 {} range1 {}  v00 {}  v01 {} v10 {} v11 {} v {}",
-                //     // elv,
-                //     az,
-                //     &elv_azs[ii],
-                //     &elv_azs[ii + 1],
-                //     rang,
-                //     rang0,
-                //     rang1,
-                //     v00,
-                //     v01,
-                //     v10,
-                //     v11,
-                //     v
-                // );
-
-                // println!("x {} y {} v {}",x,y,v);
-            }
-        }
-        // }
-    });
-
-    let mut imgbuf = ImageBuffer::new(2000, 2000);
-    for (x, y, pixel) in imgbuf.enumerate_pixels_mut() {
-        let index = y * 2000 as u32 + x;
-
-        let v = grid_value[index as usize];
-        let c = pal.get_color(v as f64).unwrap();
-        *pixel = image::Rgba([c.r, c.g, c.b, c.a]);
-    }
-    imgbuf.save("radar2.png").unwrap();
 }

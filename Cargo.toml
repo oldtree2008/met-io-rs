@@ -17,6 +17,7 @@ hdf5 = "0.6.1"
 ndarray = "0.13.1"
 rayon = "1.3.1"
 kdtree = "0.6.0"
+encoding_rs = "0.8.23"
 
 [[bin]]
 name="awx2img"
@@ -29,3 +30,15 @@ path="bin/hdf5data.rs"
 [[bin]]
 name="xradar"
 path="bin/xradar.rs"
+
+[[bin]]
+name="vbtradar"
+path="bin/vbtradar.rs"
+
+[[bin]]
+name="xreader"
+path="bin/xradar_reader.rs"
+
+[[bin]]
+name="transfer"
+path="bin/transfer.rs"
