@@ -9,7 +9,7 @@ pub fn main() {
     let p = Path::new("palette/I-01.xml");
     let pal = Palette::new_with_file(&p).unwrap();
     let c = pal.get_color(2.0);
-    let r = SatReader::read(r##"D:\BaiduNetdiskDownload\ANI_IR1_R04_20200509_0900_FY2G.AWX"##);
+    let r = AwxReader::read(r##"D:\BaiduNetdiskDownload\ANI_IR1_R04_20200509_0900_FY2G.AWX"##);
     let r = r.unwrap();
     let p = r.0;
     let header = &p.header1.unwrap();

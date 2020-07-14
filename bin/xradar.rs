@@ -3,7 +3,7 @@ use binread::prelude::*;
 use binread::NullString;
 use encoding_rs::*;
 use image::{imageops, GenericImageView, ImageBuffer, RgbaImage};
-use met_io_rs::radar_grid::RadialData;
+
 use met_io_rs::*;
 use palette::*;
 use std::convert::Into;
@@ -315,7 +315,7 @@ pub fn main() {
                 let mut v10 = elv_values[ii + 1][rang0] as f32;
                 let mut v11 = elv_values[ii + 1][rang1] as f32;
 
-                let v = radar_grid::interp_ppi(
+                let v = met_io_rs::interp_ppi(
                     az,
                     rang / 150.0,
                     az0,

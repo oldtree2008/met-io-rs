@@ -515,7 +515,7 @@ pub fn main() {
                     if v11 == 255.0 {
                         v11 = 999.0
                     }
-                    let v = radar_grid::interp_ppi(
+                    let v = met_io_rs::interp_ppi(
                         az,
                         rang_idx,
                         az0,

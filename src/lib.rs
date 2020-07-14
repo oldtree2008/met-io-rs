@@ -1,23 +1,22 @@
 mod error;
-mod grid2img;
 mod hdf5_error;
 mod hdf5_reader;
-mod satlite_reader;
-mod xradar_reader;
+mod utils;
+mod converter;
+mod reader;
+mod data_type;
 
-pub use grid2img::*;
-pub mod transforms;
+pub use converter::*;
+pub use utils::transforms;
+pub use reader::*;
+pub use data_type::*;
 use error::MetError;
-pub mod radar_grid;
-
-pub use xradar_reader::*;
 
 use std::fs::File;
 use std::io::Read;
-
 pub use hdf5_error::Hdf5Error;
 pub use hdf5_reader::*;
-pub use satlite_reader::*;
+
 
 pub trait MetReader {
     fn read<T>(r: &[u8]) -> Result<T, MetError>;
