@@ -1,4 +1,4 @@
-use image::{imageops, GenericImageView, ImageBuffer, RgbaImage};
+use image::ImageBuffer;
 use palette::*;
 use std::path::Path;
 pub fn grid2img(data: &(usize, usize, Vec<f32>), palfile: &str, output: &str) {

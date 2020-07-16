@@ -1,3 +1,4 @@
+#![allow(non_snake_case)]
 pub fn antenna_to_cartesian(ranges: f32, azimuths: f32, elevations: f32) -> (f32, f32, f32) {
     let theta_e = elevations * std::f32::consts::PI / 180.0; //# elevation angle in radians.
     let theta_a = azimuths * std::f32::consts::PI / 180.0; //     # azimuth angle in radians.

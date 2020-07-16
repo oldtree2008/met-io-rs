@@ -1,3 +1,5 @@
+#![allow(non_snake_case)]
+
 use binread::prelude::*;
 use binread::NullString;
 use encoding_rs::*;
@@ -515,7 +517,7 @@ pub fn main() {
                     if v11 == 255.0 {
                         v11 = 999.0
                     }
-                    let v = met_io_rs::interp_ppi(
+                    let v = met_io_rs::interplate::interp_ppi(
                         az,
                         rang_idx,
                         az0,

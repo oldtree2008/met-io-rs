@@ -315,7 +315,7 @@ pub fn main() {
                 let mut v10 = elv_values[ii + 1][rang0] as f32;
                 let mut v11 = elv_values[ii + 1][rang1] as f32;
 
-                let v = met_io_rs::interp_ppi(
+                let v = met_io_rs::interplate::interp_ppi(
                     az,
                     rang / 150.0,
                     az0,

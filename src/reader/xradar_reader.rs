@@ -1,8 +1,9 @@
-#![allow(no_snake_case)]
+#![allow(non_snake_case)]
 use crate::data_type::RadialData;
 use binread::prelude::*;
 use binread::NullString;
 use encoding_rs::*;
+use std::collections::HashMap;
 use std::convert::Into;
 use std::fs::File;
 use std::io::Cursor;
@@ -84,7 +85,7 @@ pub struct Observe {
     StartDay: u16,
     StartHour: u16,
     StartMinute: u16,
-    Startsecond: u16,
+    StartSecond: u16,
     StartGPSTime: u32, //开始GPS时间，以微秒为单位
     Calibration: u16,  //定标情况 - 0:没有定标 - 1:自动定标 - 2:一周内人工定标 - 3:一月内人工定标
     IntensityI: u16,   //强度积分次数
@@ -150,7 +151,7 @@ pub struct Observe {
     speed: i16,            //速度
     SpectrumWidth: i16,    //谱宽
     EndYear: u16,          //观测结束时间年
-    EndMouth: u16,         //观测结束时间月
+    EndMonth: u16,         //观测结束时间月
     EndDay: u16,           //观测结束时间日
     EndHour: u16,          //观测结束时间时
     EndMinute: u16,        //观测结束时间分
@@ -175,18 +176,21 @@ impl XRadarReader {
         file.read_to_end(&mut d).unwrap();
         let mut reader = Cursor::new(&d);
         let p: Product = reader.read_le().unwrap();
+        // dbg!(&p.address);
         Some(XRadarReader((p, d)))
     }
 }
 
 impl Into<RadialData> for XRadarReader {
     fn into(self) -> RadialData {
+        let mut props = HashMap::new();
+
         let xr = self.0;
         let p: Product = xr.0;
         let d: Vec<u8> = xr.1;
         let _elNum = &p.observe.SSLayerNumber;
 
-        dbg!(_elNum);
+        // dbg!(_elNum);
         let radiohead_size = 64;
         let mut vol_ref = Vec::new();
         let mut eles = Vec::new();
@@ -204,7 +208,7 @@ impl Into<RadialData> for XRadarReader {
             let offset = &p.observe.PPIInFileSD[el as usize];
             let length = radiohead_size + refBins * 7 + dplBins * 2;
             let az_num = &p.observe.ERadialNum[el as usize];
-            dbg!(refBins, dplBins, offset, length, az_num);
+            // dbg!(refBins, dplBins, offset, length, az_num);
             let mut az_ref = Vec::new();
             let mut el_found = false;
             let mut el_az = Vec::new();
@@ -237,7 +241,7 @@ impl Into<RadialData> for XRadarReader {
                         vv = vv * 0.5 - 33.0;
                         bin_data.push(vv);
                     } else {
-                        bin_data.push(999.0);
+                        bin_data.push(crate::MISSING);
                     }
                     // ranges.push((bin * (*refWidth)) as f64);
                     ranges.push(bin as f64 * ((*refWidth) as f64));
@@ -253,11 +257,39 @@ impl Into<RadialData> for XRadarReader {
             azs.push(el_az);
             rs.push(az_range)
         }
+        let start_date = format!(
+            "{}{:02}{:02}",
+            &p.observe.StartYear, &p.observe.StartMonth, &p.observe.StartDay,
+        );
+        let start_time = format!(
+            "{:02}{:02}{:02}",
+            &p.observe.StartHour, &p.observe.StartMinute, &p.observe.StartSecond
+        );
+        let end_time = format!(
+            "{}{:02}{:02}{:02}{:02}{:02}",
+            &p.observe.EndYear,
+            &p.observe.EndMonth,
+            &p.observe.EndDay,
+            &p.observe.EndHour,
+            &p.observe.EndMinute,
+            &p.observe.EndSecond
+        );
+        let prov = &p.address.Province;
+        let ar = &p.address.Area;
+        props.insert("province".to_string(), prov.clone());
+        props.insert("area".to_string(), ar.clone());
         RadialData {
             eles: eles,
             azs: azs,
             rs: rs,
             data: vol_ref,
+            start_time,
+            start_date,
+            end_time,
+            lon: *&p.address.Longitude,
+            lat: *&p.address.Latitude,
+            height: *&p.address.Height as f32 / 1000.0,
+            props,
         }
     }
 }

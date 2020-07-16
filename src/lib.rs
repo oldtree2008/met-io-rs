@@ -1,22 +1,24 @@
+mod converter;
+mod data_type;
 mod error;
 mod hdf5_error;
 mod hdf5_reader;
-mod utils;
-mod converter;
 mod reader;
-mod data_type;
+mod utils;
 
 pub use converter::*;
-pub use utils::transforms;
-pub use reader::*;
 pub use data_type::*;
 use error::MetError;
+pub use reader::*;
+pub use utils::interplate;
+pub use utils::transforms;
 
-use std::fs::File;
-use std::io::Read;
 pub use hdf5_error::Hdf5Error;
 pub use hdf5_reader::*;
+use std::fs::File;
+use std::io::Read;
 
+pub const MISSING: f32 = 9999.0; //无效值
 
 pub trait MetReader {
     fn read<T>(r: &[u8]) -> Result<T, MetError>;

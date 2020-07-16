@@ -4,7 +4,7 @@ fn main() {
     let xr = XRadarReader::read(fname).unwrap();
     let rad: RadialData = xr.into();
 
-    println!("eles {:?}", rad.eles);
+    println!("eles {:?} {}  {}", rad.start_time, rad.lon, rad.lat);
 
     // let ret = rad
     //     .ppi_to_grid(0.54, -150000.0, 150000.0, -150000.0, 150000.0, 75.0, 0.0)
@@ -16,11 +16,21 @@ fn main() {
     // println!("{:?} {}", ret.0, ret.1);
 
     let ret = rad
-        .ppi_to_grid_lonlat(0.54, -150000.0, 150000.0, -150000.0, 150000.0, 0.0)
+        .ppi_to_grid_lonlat(
+            0.54,
+            "反射率",
+            -150000.0,
+            150000.0,
+            -150000.0,
+            150000.0,
+            0.0,
+        )
         .unwrap();
-    println!("{:?} {}  {}", ret.ni, ret.nj,ret.values.len() );
+    println!("{:?} {}  {}", ret.ni, ret.nj, ret.values.len());
 
-    grid2diamond4(&ret,"demo.diamond");
+    grid2diamond4(&ret, "d:/temp");
+
+    grid2nom(&ret, "d:/temp");
 
     // let pal = "palette/xradar.xml";
     // let output = "oklatlon.png";
