@@ -13,9 +13,9 @@ pub fn grid2nom(d: &SingleGrid, output: &str) {
     }
 
     let dd = &dd;
-    let mut datastr = format!("{}{}", dd.data_date, dd.data_time);
+    let datastr = format!("{}{}", dd.data_date, dd.data_time);
     let dt = Utc.datetime_from_str(&datastr, "%Y%m%d%H%M%S").unwrap();
-    //todo
+
     let dst_file_name = if let Some(l) = &dd.level {
         format!(
             "{}/{}/{}/{}/{}{:02}.{:03}.NOM",
@@ -33,7 +33,7 @@ pub fn grid2nom(d: &SingleGrid, output: &str) {
     if !parent.exists() {
         create_dir_all(&parent).unwrap();
     }
-    let mut file = File::create(&dst_file_name).unwrap();
+    let file = File::create(&dst_file_name).unwrap();
 
     let east;
     let west;
@@ -66,34 +66,36 @@ pub fn grid2nom(d: &SingleGrid, output: &str) {
         },
     };
 
-    let mut matrix = Vec::with_capacity(dd.nj as usize);
+    let mut matrix = vec![vec![crate::MISSING; dd.ni as usize]; dd.nj as usize];
+    // let mut matrix = Vec::with_capacity(dd.nj as usize);
 
-    for _ in 0..dd.nj {
-        let mut r = Vec::with_capacity(dd.ni as usize);
-        for _ in 0..dd.ni {
-            r.push(0f32);
-        }
-        matrix.push(r);
-    }
+    // for _ in 0..dd.nj {
+    //     let mut r = Vec::with_capacity(dd.ni as usize);
+    //     for _ in 0..dd.ni {
+    //         r.push(0f32);
+    //     }
+    //     matrix.push(r);
+    // }
 
     if dd.start_lat < dd.end_lat {
         for (i, ddd) in dd.values.iter().enumerate() {
-            let x = (i / dd.ni as usize);
-            let y = (i % dd.ni as usize);
-
+            let x = i / dd.ni as usize;
+            let y = i % dd.ni as usize;
             matrix[x][y] = *ddd as f32;
         }
     } else {
         for (i, ddd) in dd.values.iter().enumerate() {
-            let x = (dd.nj as usize - 1 - i / dd.ni as usize);
-            let y = (i % dd.ni as usize);
+            let x = (dd.nj as usize - 1 - i) / dd.ni as usize;
+            let y = i % dd.ni as usize;
             matrix[x][y] = *ddd as f32;
         }
     }
+
     let ng = NomGrid {
         res,
         bounds,
         data: matrix,
     };
+
     serde_json::to_writer(&file, &ng);
 }

@@ -6,7 +6,7 @@ use std::path::Path;
 
 /// output 是输出目录
 pub fn grid2diamond4(grid: &SingleGrid, output: &str) {
-    let mut datastr = format!("{}{}", grid.data_date, grid.data_time);
+    let datastr = format!("{}{}", grid.data_date, grid.data_time);
     let dt = Utc.datetime_from_str(&datastr, "%Y%m%d%H%M%S").unwrap();
     //todo
     let dst_file_name = if let Some(l) = &grid.level {

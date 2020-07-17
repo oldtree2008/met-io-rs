@@ -31,6 +31,10 @@ name="hdf5data"
 path="bin/hdf5data.rs"
 
 [[bin]]
+name="h5reader"
+path="bin/hdf5_reader.rs"
+
+[[bin]]
 name="xradar"
 path="bin/xradar.rs"
 

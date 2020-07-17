@@ -30,8 +30,8 @@ pub fn main() {
     //     &header.dataLengthOfCalibration
     // );
     let ret = r.to_grid().unwrap();
-    grid2diamond4(&ret, "d:/temp");
-
+    // grid2diamond4(&ret, "d:/temp");
+    grid2nom(&ret, "d:/temp");
     // dbg!(header.widthOfImage);
     // dbg!(header.heightOfImage);
     // let w = header.widthOfImage;

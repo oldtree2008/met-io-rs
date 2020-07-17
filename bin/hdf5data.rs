@@ -68,6 +68,10 @@ pub fn main() {
     let ir1 = data.unwrap().read_2d::<i16>().unwrap();
     let ir1_iter = ir1.iter();
 
+    dbg!(ir1.len());
+    dbg!(lat_iter.len());
+    dbg!(lon_iter.len());
+
     let iter = lat_iter.zip(lon_iter).zip(ir1_iter);
     let mut lat_vec = Vec::new();
     let mut lon_vec = Vec::new();
@@ -153,7 +157,6 @@ pub fn main() {
             denom += 1.0 / dist;
         }
         let v = nom / denom;
-
         // println!(" {} ret {:?} ",v, ret);
         *d = v;
     });

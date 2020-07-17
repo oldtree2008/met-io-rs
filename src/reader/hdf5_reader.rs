@@ -1,4 +1,4 @@
-use super::Hdf5Error;
+use crate::Hdf5Error;
 use hdf5;
 use hdf5::Dataset;
 

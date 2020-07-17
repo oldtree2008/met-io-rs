@@ -1,3 +1,4 @@
+#![allow(non_snake_case)]
 use crate::data_type::SingleGrid;
 use crate::interplate;
 use crate::transforms;
@@ -29,8 +30,8 @@ impl RadialData {
     }
     pub fn ppi_to_grid(
         &self,
-        ele: f32,      //仰角
-        element: &str, //物理量
+        ele: f32,       //仰角
+        _element: &str, //物理量
         xstart: f32,
         xend: f32,
         ystart: f32,
