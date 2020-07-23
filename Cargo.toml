@@ -21,9 +21,10 @@ encoding_rs = "0.8.23"
 serde = {version="1.0.111",features=["derive"]}
 chrono = "0.4.13"
 serde_json = "1.0.56"
+anyhow = "1.0.31"
 
 [[bin]]
-name="awx2img"
+name="awx"
 path="bin/awx2img.rs"
 
 [[bin]]
@@ -31,7 +32,7 @@ name="hdf5data"
 path="bin/hdf5data.rs"
 
 [[bin]]
-name="h5reader"
+name="h5"
 path="bin/hdf5_reader.rs"
 
 [[bin]]
@@ -49,3 +50,15 @@ path="bin/xradar_reader.rs"
 [[bin]]
 name="transfer"
 path="bin/transfer.rs"
+
+[[bin]]
+name="gpf"
+path="bin/gpfreader.rs"
+
+
+[[bin]]
+name="kjsat"
+path="bin/kjsatreader.rs"
+[[bin]]
+name="proj"
+path="bin/proj.rs"

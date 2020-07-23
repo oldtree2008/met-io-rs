@@ -1,6 +1,6 @@
 #![allow(non_snake_case)]
 use crate::MetError;
-use crate::SingleGrid;
+use crate::{SingleGrid, ToGrids};
 use std::fs::File;
 use std::io::Cursor;
 use std::io::Read;
@@ -147,8 +147,10 @@ impl AwxReader {
         // dbg!(product.header1.unwrap().channel);
         Ok(AwxReader(product))
     }
+}
 
-    pub fn to_grid(self) -> Option<SingleGrid> {
+impl ToGrids for AwxReader {
+    fn to_grids(&self) -> Option<Vec<SingleGrid>> {
         let p = &self.0;
         if p.productCategory == 1 {
             let header = p.header1.as_ref().unwrap();
@@ -226,11 +228,9 @@ impl AwxReader {
                 product: product.clone(),
                 data_des,
             };
-            return Some(grid);
+            return Some(vec![grid]);
         } else {
             unimplemented!();
         }
-
-        None
     }
 }

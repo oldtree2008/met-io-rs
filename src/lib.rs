@@ -8,11 +8,11 @@ mod utils;
 pub use converter::*;
 pub use data_type::*;
 use error::MetError;
+pub use hdf5_error::Hdf5Error;
 pub use reader::*;
 pub use utils::interplate;
+pub use utils::kjlocationer;
 pub use utils::transforms;
-
-pub use hdf5_error::Hdf5Error;
 
 use std::fs::File;
 use std::io::Read;

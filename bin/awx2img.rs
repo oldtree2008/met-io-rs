@@ -29,9 +29,9 @@ pub fn main() {
     //     &header.longitudeOfEast,
     //     &header.dataLengthOfCalibration
     // );
-    let ret = r.to_grid().unwrap();
-    // grid2diamond4(&ret, "d:/temp");
-    grid2nom(&ret, "d:/temp");
+    let ret = r.to_grids().unwrap();
+    grids2diamond4s(&ret, "d:/temp/awx");
+    // grid2nom(&ret, "d:/temp");
     // dbg!(header.widthOfImage);
     // dbg!(header.heightOfImage);
     // let w = header.widthOfImage;

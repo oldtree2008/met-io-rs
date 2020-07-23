@@ -1,0 +1,2 @@
+// use proj::*;
+fn main() {}

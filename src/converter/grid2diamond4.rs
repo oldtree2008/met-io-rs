@@ -1,8 +1,15 @@
 use crate::data_type::SingleGrid;
 use chrono::prelude::*;
+use rayon::prelude::*;
 use std::fs::{create_dir_all, File};
 use std::io::*;
 use std::path::Path;
+
+pub fn grids2diamond4s(grids: &Vec<SingleGrid>, output: &str) {
+    grids.par_iter().for_each(|grid| {
+        grid2diamond4(grid, output);
+    });
+}
 
 /// output 是输出目录
 pub fn grid2diamond4(grid: &SingleGrid, output: &str) {
