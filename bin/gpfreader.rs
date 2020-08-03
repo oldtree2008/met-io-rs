@@ -4,7 +4,7 @@ fn main() {
     let fname = r#"H:\data\FY2E\FY2E_2018_11_01_00_31.GPF"#;
     let pad = "palette/I-01.xml";
     let output = "d:/temp/demo4.png";
-    let rd = GpfReader::read(fname).unwrap();
+    let rd = GpfReader::new(fname).unwrap();
     // let grid = rd.to_grid_img();
     // grid2img(&grid, pad, output);
     // dbg!(

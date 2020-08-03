@@ -1,4 +1,4 @@
-use crate::Hdf5Error;
+use crate::error::MetError;
 use hdf5;
 use hdf5::Dataset;
 
@@ -6,7 +6,7 @@ use hdf5::Dataset;
 pub struct Hdf5Reader(Option<hdf5::File>);
 
 impl Hdf5Reader {
-    pub fn new(fname: &str) -> Result<Hdf5Reader, Hdf5Error> {
+    pub fn new(fname: &str) -> Result<Hdf5Reader, MetError> {
         let file = hdf5::File::open(fname)?;
         Ok(Hdf5Reader(Some(file)))
     }

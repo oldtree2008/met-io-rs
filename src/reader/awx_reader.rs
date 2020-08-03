@@ -134,13 +134,13 @@ pub struct Header1 {
 pub struct AwxReader(pub Product);
 
 impl AwxReader {
-    pub fn read(fname: &str) -> Result<AwxReader, MetError> {
+    pub fn new(fname: &str) -> Result<AwxReader, MetError> {
         let mut f = File::open(fname)?;
         let mut d = Vec::new();
         f.read_to_end(&mut d)?;
         let mut reader = Cursor::new(&d);
         dbg!(d.len());
-        let product: Product = reader.read_le().unwrap();
+        let product: Product = reader.read_le()?;
         // dbg!(product.productCategory);
         // dbg!(product.manufacturer);
         // dbg!(&product.data1.unwrap()[900..1000]);

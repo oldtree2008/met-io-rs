@@ -1,7 +1,7 @@
 use met_io_rs::*;
 fn main() {
     let fname = r##"H:\data\20200704_164546.00.002.001_R1"##;
-    let xr = XRadarReader::read(fname).unwrap();
+    let xr = XRadarReader::new(fname).unwrap();
     let rad: RadialData = xr.into();
 
     println!("eles {:?} {}  {}", rad.start_time, rad.lon, rad.lat);

@@ -1,5 +1,6 @@
 #![allow(non_snake_case)]
 use crate::data_type::RadialData;
+use crate::error::MetError;
 use binread::prelude::*;
 use binread::NullString;
 use encoding_rs::*;
@@ -8,6 +9,7 @@ use std::convert::Into;
 use std::fs::File;
 use std::io::Cursor;
 use std::io::Read;
+use std::result::Result;
 
 #[derive(Debug, BinRead)]
 #[br(little)]
@@ -170,14 +172,14 @@ pub struct Observe {
 pub struct XRadarReader(pub (Product, Vec<u8>));
 
 impl XRadarReader {
-    pub fn read(fname: &str) -> Option<Self> {
-        let mut file = File::open(fname).unwrap();
+    pub fn new(fname: &str) -> Result<Self, MetError> {
+        let mut file = File::open(fname)?;
         let mut d = Vec::new();
-        file.read_to_end(&mut d).unwrap();
+        file.read_to_end(&mut d)?;
         let mut reader = Cursor::new(&d);
-        let p: Product = reader.read_le().unwrap();
+        let p: Product = reader.read_le()?;
         // dbg!(&p.address);
-        Some(XRadarReader((p, d)))
+        Ok(XRadarReader((p, d)))
     }
 }
 
@@ -285,7 +287,7 @@ impl Into<RadialData> for XRadarReader {
             data: vol_ref,
             start_time,
             start_date,
-            end_time,
+            // end_time,
             lon: *&p.address.Longitude,
             lat: *&p.address.Latitude,
             height: *&p.address.Height as f32 / 1000.0,

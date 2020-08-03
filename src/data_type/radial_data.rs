@@ -4,6 +4,8 @@ use crate::interplate;
 use crate::transforms;
 use rayon::prelude::*;
 use std::collections::HashMap;
+use std::default::Default;
+
 #[derive(Debug)]
 pub struct RadialData {
     pub lon: f32,
@@ -12,7 +14,7 @@ pub struct RadialData {
     pub props: HashMap<String, String>,
     pub start_date: String,
     pub start_time: String,
-    pub end_time: String,
+    // pub end_time: String,
     pub eles: Vec<f32>,           //所有的仰角
     pub azs: Vec<Vec<f32>>,       //每个仰角对应的方位角
     pub rs: Vec<Vec<Vec<f64>>>,   //仰角->方位角->斜距   米为单位
@@ -173,7 +175,11 @@ impl RadialData {
                 *d = v;
             }
         });
-        let product = format!("{}/{}", &self.props["province"], &self.props["area"]);
+        let product = if self.props.contains_key("province") && self.props.contains_key("area") {
+            format!("{}/{}", &self.props["province"], &self.props["area"])
+        } else {
+            String::new()
+        };
         let data_des = format!("{}{}{}", &self.start_date, &self.start_time, product);
         let sgrid = SingleGrid {
             ni: (cols + 1) as i64,
@@ -226,7 +232,7 @@ fn find_index(azs: &Vec<f32>, az: f32) -> (usize, usize) {
         let idx1 = (az - first) / step;
         let idx1 = idx1 as usize;
         if idx1 >= az_len - 1 {
-            return (259, 0);
+            return (az_len - 1, 0);
         } else {
             return (idx1, idx1 + 1);
         }
@@ -253,4 +259,22 @@ fn find_index1(azs: &Vec<f64>, az: f64) -> Option<usize> {
         }
     }
     None
+}
+
+impl Default for RadialData {
+    fn default() -> Self {
+        Self {
+            lon: 0.0f32,
+            lat: 0f32,
+            height: 0f32,
+            props: HashMap::<String, String>::new(),
+            start_date: String::from(""),
+            start_time: String::from(""),
+            // end_time: String::from(""),
+            eles: vec![0f32],             //所有的仰角
+            azs: vec![vec![0f32]],        //每个仰角对应的方位角
+            rs: vec![vec![vec![0f64]]],   //仰角->方位角->斜距   米为单位
+            data: vec![vec![vec![0f32]]], //仰角->方位角->值
+        }
+    }
 }

@@ -1,10 +1,11 @@
 #![allow(non_snake_case)]
+use crate::error::MetError;
 use crate::SingleGrid;
 use crate::ToGrids;
-use anyhow::*;
 use binread::prelude::*;
 use std::fs::File;
 use std::io::{Cursor, Read};
+use std::result::Result;
 
 #[derive(Debug, BinRead)]
 #[br(little)]
@@ -80,12 +81,12 @@ pub struct GpfReader {
 }
 
 impl GpfReader {
-    pub fn read(fname: &str) -> Result<GpfReader> {
-        let mut f = File::open(fname).unwrap();
+    pub fn new(fname: &str) -> Result<GpfReader, MetError> {
+        let mut f = File::open(fname)?;
         let mut data = Vec::new();
         f.read_to_end(&mut data);
         let mut cursor = Cursor::new(&data);
-        let gpfreader: GpfReader = BinRead::read(&mut cursor).unwrap();
+        let gpfreader: GpfReader = BinRead::read(&mut cursor)?;
 
         //   dbg!(&gpfreader);
         dbg!(

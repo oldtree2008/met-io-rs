@@ -59,6 +59,15 @@ path="bin/gpfreader.rs"
 [[bin]]
 name="kjsat"
 path="bin/kjsatreader.rs"
+
 [[bin]]
 name="proj"
 path="bin/proj.rs"
+
+[[bin]]
+name="radar386"
+path="bin/radar386.rs"
+
+[[bin]]
+name="radarpd"
+path="bin/radarpdreader.rs"

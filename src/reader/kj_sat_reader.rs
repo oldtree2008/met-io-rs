@@ -1,10 +1,11 @@
 use super::ToGrids;
+use crate::error::MetError;
 use crate::kjlocationer::KJLocationer;
 use crate::SingleGrid;
-use anyhow::*;
 use binread::prelude::*;
 use std::fs::File;
 use std::io::{Cursor, Read, SeekFrom};
+use std::result::Result;
 
 #[derive(Debug, BinRead)]
 #[br(little)]
@@ -53,12 +54,12 @@ pub struct KJSatReader {
 }
 
 impl KJSatReader {
-    pub fn read(fname: &str) -> Result<Self> {
-        let mut f = File::open(fname).unwrap();
+    pub fn new(fname: &str) -> Result<Self, MetError> {
+        let mut f = File::open(fname)?;
         let mut buf = Vec::new();
-        f.read_to_end(&mut buf);
+        f.read_to_end(&mut buf)?;
         let mut cursor = Cursor::new(&buf);
-        let reader: KJSatReader = BinRead::read(&mut cursor).unwrap();
+        let reader: KJSatReader = BinRead::read(&mut cursor)?;
         dbg!(reader.width, reader.height, reader.values.len());
         Ok(reader)
     }

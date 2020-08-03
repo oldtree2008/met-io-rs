@@ -1,20 +1,21 @@
+use crate::error::MetError;
 use crate::Hdf5Reader;
-use crate::{ToGrids,SingleGrid};
-use anyhow::*;
+use crate::{SingleGrid, ToGrids};
 use kdtree::distance::squared_euclidean;
 use kdtree::KdTree;
 use rayon::prelude::*;
+use std::result::Result;
 
 pub struct KJH5SatReader(Hdf5Reader);
 impl KJH5SatReader {
-    pub fn read(fname: &str) -> Result<KJH5SatReader> {
-        let reader = Hdf5Reader::new(fname).unwrap();
+    pub fn new(fname: &str) -> Result<KJH5SatReader, MetError> {
+        let reader = Hdf5Reader::new(fname)?;
         Ok(KJH5SatReader(reader))
     }
 }
 
 impl ToGrids for KJH5SatReader {
-     fn to_grids(&self)->Option<Vec<SingleGrid>> {
+    fn to_grids(&self) -> Option<Vec<SingleGrid>> {
         let reader = &self.0;
         let attrs = reader.member_names();
         dbg!(attrs);
@@ -177,5 +178,5 @@ impl ToGrids for KJH5SatReader {
             sgrids.push(sgrid);
         });
         Some(sgrids)
-     }
+    }
 }

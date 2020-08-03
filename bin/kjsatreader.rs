@@ -28,7 +28,7 @@ fn main() {
     println!("x {} y {}", x, y);
     let (x, y) = loc.lbt_lat_lon_to_xy_coord_proc(12.730557, 119.4446);
     println!("x {} y {}", x, y);
-    let reader = KJSatReader::read(fname).unwrap();
+    let reader = KJSatReader::new(fname).unwrap();
     dbg!(
         &reader.east,
         &reader.west,
