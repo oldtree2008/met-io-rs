@@ -10,4 +10,6 @@ pub enum MetError {
     BinReadError(#[from] binread::Error),
     #[error("read hdf5 data error")]
     HDF5Error(#[from] hdf5::Error),
+    #[error("chrono parse error")]
+    ChronoError(#[from] chrono::ParseError),
 }

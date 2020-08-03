@@ -1,20 +1,23 @@
 use crate::data_type::SingleGrid;
+use crate::MetError;
 use chrono::prelude::*;
 use rayon::prelude::*;
 use std::fs::{create_dir_all, File};
 use std::io::*;
 use std::path::Path;
+use std::result::Result;
 
-pub fn grids2diamond4s(grids: &Vec<SingleGrid>, output: &str) {
+pub fn grids2diamond4s(grids: &Vec<SingleGrid>, output: &str) -> Result<(), MetError> {
     grids.par_iter().for_each(|grid| {
-        grid2diamond4(grid, output);
+        grid2diamond4(grid, output).unwrap();
     });
+    Ok(())
 }
 
 /// output 是输出目录
-pub fn grid2diamond4(grid: &SingleGrid, output: &str) {
+pub fn grid2diamond4(grid: &SingleGrid, output: &str) -> Result<(), MetError> {
     let datastr = format!("{}{}", grid.data_date, grid.data_time);
-    let dt = Utc.datetime_from_str(&datastr, "%Y%m%d%H%M%S").unwrap();
+    let dt = Utc.datetime_from_str(&datastr, "%Y%m%d%H%M%S")?;
     //todo
     let dst_file_name = if let Some(l) = &grid.level {
         format!(
@@ -41,11 +44,11 @@ pub fn grid2diamond4(grid: &SingleGrid, output: &str) {
     let path = Path::new(&dst_file_name);
     let parent = path.parent().unwrap();
     if !parent.exists() {
-        create_dir_all(&parent).unwrap();
+        create_dir_all(&parent)?;
     }
-    let file = File::create(&dst_file_name).unwrap();
+    let file = File::create(&dst_file_name)?;
     let mut buf = BufWriter::new(file);
-    writeln!(buf, "diamond 4 {} ", grid.data_des).unwrap();
+    writeln!(buf, "diamond 4 {} ", grid.data_des)?;
     //20200704_164546
     writeln!(
         buf,
@@ -64,8 +67,7 @@ pub fn grid2diamond4(grid: &SingleGrid, output: &str) {
         grid.end_lat,
         grid.ni,
         grid.nj
-    )
-    .unwrap();
+    )?;
 
     let mut min = f32::MAX;
     let mut max = f32::MIN;
@@ -81,12 +83,13 @@ pub fn grid2diamond4(grid: &SingleGrid, output: &str) {
     });
     let step = (max - min) / 10.0;
 
-    writeln!(buf, "{:.2} {:.2} {:.2} {} {} ", step, min, max, 0, 0).unwrap();
+    writeln!(buf, "{:.2} {:.2} {:.2} {} {} ", step, min, max, 0, 0)?;
     for (i, v) in grid.values.iter().enumerate() {
-        write!(buf, "{:.*} ", 2, v).unwrap();
+        write!(buf, "{:.*} ", 2, v)?;
         if (i + 1).rem_euclid(10usize) == 0 {
-            writeln!(buf).unwrap();
+            writeln!(buf)?;
         }
     }
     buf.flush();
+    Ok(())
 }
