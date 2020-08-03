@@ -3,7 +3,7 @@ use crate::error::MetError;
 use crate::RadialData;
 use binread::*;
 use std::collections::HashMap;
-use std::convert::Into;
+use std::convert::TryInto;
 use std::fs::File;
 use std::io::{Cursor, Read};
 use std::result::Result;
@@ -146,8 +146,9 @@ impl Radar386Reader {
     }
 }
 
-impl Into<RadialData> for Radar386Reader {
-    fn into(self) -> RadialData {
+impl TryInto<RadialData> for Radar386Reader {
+    type Error = MetError;
+    fn try_into(self) -> Result<RadialData, Self::Error> {
         let fnames: Vec<&str> = self.fname.split('.').collect();
 
         let dt: &str = &fnames[0];
@@ -190,7 +191,7 @@ impl Into<RadialData> for Radar386Reader {
             let mut az_ref = Vec::new();
 
             for layeridx in 0..rn {
-                let data_line: LineDataBlock = BinRead::read(&mut data_cursor).unwrap();
+                let data_line: LineDataBlock = BinRead::read(&mut data_cursor)?;
 
                 println!("layer idx {}   {:?}", layeridx, data_line.CorZ);
                 // lon = *&data_line.Longtitude as f32 * 0.01;
@@ -256,7 +257,7 @@ impl Into<RadialData> for Radar386Reader {
             azs.push(el_az);
         }
 
-        RadialData {
+        Ok(RadialData {
             eles: eles,
             azs: azs,
             rs: rs,
@@ -268,6 +269,6 @@ impl Into<RadialData> for Radar386Reader {
             lat: lat,
             height: 0.0,
             props,
-        }
+        })
     }
 }

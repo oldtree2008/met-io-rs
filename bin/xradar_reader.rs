@@ -1,8 +1,9 @@
 use met_io_rs::*;
+use std::convert::TryInto;
 fn main() {
     let fname = r##"H:\data\20200704_164546.00.002.001_R1"##;
     let xr = XRadarReader::new(fname).unwrap();
-    let rad: RadialData = xr.into();
+    let rad: RadialData = xr.try_into().unwrap();
 
     println!("eles {:?} {}  {}", rad.start_time, rad.lon, rad.lat);
 

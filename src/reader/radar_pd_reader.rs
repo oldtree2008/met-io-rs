@@ -4,7 +4,7 @@ use binread::prelude::*;
 use binread::NullString;
 use encoding_rs::*;
 use std::collections::HashMap;
-use std::convert::Into;
+use std::convert::TryInto;
 use std::fs::File;
 use std::io::{Cursor, Read};
 use std::result::Result;
@@ -114,8 +114,9 @@ impl RadarPDReader {
     }
 }
 
-impl Into<RadialData> for RadarPDReader {
-    fn into(self) -> RadialData {
+impl TryInto<RadialData> for RadarPDReader {
+    type Error = MetError;
+    fn try_into(self) -> Result<RadialData, Self::Error> {
         let station = &self.station;
         let lon = station.longitude as f32 * 0.01;
         let lat = station.latitude as f32 * 0.01;
@@ -140,7 +141,7 @@ impl Into<RadialData> for RadarPDReader {
             let bin_width = layer.gate_leng as f64 * 0.1;
             dbg!(bin_num, bin_width);
             for r in 0..layer.radial_count {
-                let v: RadarData = BinRead::read(&mut cursor).unwrap();
+                let v: RadarData = BinRead::read(&mut cursor)?;
                 println!("{} {}  {} {:?}", r, v.az, v.el, v.values);
                 let el = v.el as f32 * 0.01;
                 let az = v.az as f32 * 0.01;
@@ -182,6 +183,6 @@ impl Into<RadialData> for RadarPDReader {
         rdata.rs = rs;
         rdata.data = datas;
 
-        rdata
+        Ok(rdata)
     }
 }

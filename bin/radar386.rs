@@ -1,11 +1,12 @@
 use met_io_rs::*;
+use std::convert::TryInto;
 
 fn main() {
     println!("radar 386");
     let fname = r#"H:\data\346\LD20190301023857090.VT346"#;
     // let fname = r#"H:\data\382\LD20190524052637458.VT382"#;
     let reader = Radar386Reader::new(fname).unwrap();
-    let rad: RadialData = reader.into();
+    let rad: RadialData = reader.try_into().unwrap();
     dbg!(&rad.eles);
 
     //5.6099997

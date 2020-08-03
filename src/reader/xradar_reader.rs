@@ -5,7 +5,7 @@ use binread::prelude::*;
 use binread::NullString;
 use encoding_rs::*;
 use std::collections::HashMap;
-use std::convert::Into;
+use std::convert::TryInto;
 use std::fs::File;
 use std::io::Cursor;
 use std::io::Read;
@@ -183,8 +183,9 @@ impl XRadarReader {
     }
 }
 
-impl Into<RadialData> for XRadarReader {
-    fn into(self) -> RadialData {
+impl TryInto<RadialData> for XRadarReader {
+    type Error = MetError;
+    fn try_into(self) -> Result<RadialData, Self::Error> {
         let mut props = HashMap::new();
 
         let xr = self.0;
@@ -280,7 +281,7 @@ impl Into<RadialData> for XRadarReader {
         let ar = &p.address.Area;
         props.insert("province".to_string(), prov.clone());
         props.insert("area".to_string(), ar.clone());
-        RadialData {
+        Ok(RadialData {
             eles: eles,
             azs: azs,
             rs: rs,
@@ -292,6 +293,6 @@ impl Into<RadialData> for XRadarReader {
             lat: *&p.address.Latitude,
             height: *&p.address.Height as f32 / 1000.0,
             props,
-        }
+        })
     }
 }
