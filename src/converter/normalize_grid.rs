@@ -16,6 +16,7 @@ pub fn normalize_grid(d: &SingleGrid) -> SingleGrid {
     let end_lng = d.start_lng + (ni - 1) as f64 * gap;
 
     let mut values = vec![crate::MISSING; (ni * nj) as usize];
+    let data_len = values.len();
     // dbg!(&values[0]);
     values.par_iter_mut().enumerate().for_each(|(i, vv)| {
         let r = i / ni as usize;
@@ -41,28 +42,26 @@ pub fn normalize_grid(d: &SingleGrid) -> SingleGrid {
         let idx11 = oldr1 * ni as f64 + oldc1;
         let idx11 = idx11 as usize;
 
-        let data00 = d.values[idx00];
-        let data01 = d.values[idx01];
-        let data10 = d.values[idx10];
-        let data11 = d.values[idx11];
+        if idx00 < data_len && idx01 < data_len && idx10 < data_len && idx11 < data_len {
+            let data00 = d.values[idx00];
+            let data01 = d.values[idx01];
+            let data10 = d.values[idx10];
+            let data11 = d.values[idx11];
 
-        let v = interplate::interp_ppi(
-            oldr as f32,
-            oldc as f32,
-            oldr0 as f32,
-            oldr1 as f32,
-            oldc0 as f32,
-            oldc1 as f32,
-            data00,
-            data01,
-            data10,
-            data11,
-        );
-        // if i == 0 {
-        //     dbg!(data00, data01, data10, data11);
-        //     dbg!(oldc0, oldc1, oldr0, oldr1, oldc, oldr);
-        // }
-        *vv = v;
+            let v = interplate::interp_ppi(
+                oldr as f32,
+                oldc as f32,
+                oldr0 as f32,
+                oldr1 as f32,
+                oldc0 as f32,
+                oldc1 as f32,
+                data00,
+                data01,
+                data10,
+                data11,
+            );
+            *vv = v;
+        }
     });
     // dbg!(&values[0]);
     new_grid.ni = ni;

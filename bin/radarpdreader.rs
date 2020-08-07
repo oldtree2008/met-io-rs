@@ -23,4 +23,6 @@ pub fn main() {
 
     // grid2diamond4(&grid, "d:/temp/demo");
     todiamond4(&rad, "d:/temp/demo4");
+    tonompbfs(&rad, "d:/temp/demo4");
+    tonoms(&rad, "d:/temp/demo4");
 }

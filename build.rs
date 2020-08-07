@@ -8,7 +8,6 @@ fn main() {
             ..Default::default()
         })
         .out_dir("src/protos")
-        .input("src/protos/examples.proto")
         .input("src/protos/nom.proto")
         .include("src/protos")
         .run()
