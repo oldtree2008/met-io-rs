@@ -19,9 +19,8 @@ pub fn main() {
 
     // grid2img(&ret, pal, output);
 
-    let grid = rad
-        .ppi_to_grid_lonlat(1.4699999, "Z")
-        .unwrap();
+    // let grid = rad.ppi_to_grid_lonlat(1.4699999, "Z").unwrap();
 
-    grid2diamond4(&grid, "d:/temp/demo");
+    // grid2diamond4(&grid, "d:/temp/demo");
+    todiamond4(&rad, "d:/temp/demo4");
 }

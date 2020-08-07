@@ -2,6 +2,7 @@
 use crate::data_type::SingleGrid;
 use crate::interplate;
 use crate::transforms;
+use crate::ToGrids;
 use rayon::prelude::*;
 use std::collections::HashMap;
 use std::default::Default;
@@ -40,6 +41,10 @@ impl RadialData {
             }
         }
         None
+    }
+
+    pub fn set_extents(&mut self, xstart: f32, xend: f32, ystart: f32, yend: f32) {
+        self._extents = (xstart, xend, ystart, yend);
     }
 
     pub fn ppi_to_grid(
@@ -126,13 +131,13 @@ impl RadialData {
 
     pub fn ppi_to_grid_lonlat(
         &self,
-        ele: f32,      //仰角
+        ele: f32, //仰角
         element: &str, //物理量
-        // xstart: f32,
-        // xend: f32,
-        // ystart: f32,
-        // yend: f32,
-        // h: f32,
+                  // xstart: f32,
+                  // xend: f32,
+                  // ystart: f32,
+                  // yend: f32,
+                  // h: f32,
     ) -> Option<SingleGrid> {
         let xstart = self._extents.0;
         let xend = self._extents.1;
@@ -310,5 +315,19 @@ impl Default for RadialData {
             rs: vec![vec![vec![0f64]]],         //仰角->方位角->斜距   米为单位
             data: vec![vec![vec![vec![0f32]]]], //物理量->仰角->方位角->值
         }
+    }
+}
+
+impl ToGrids for RadialData {
+    fn to_grids(&self) -> Option<Vec<SingleGrid>> {
+        let mut grids = Vec::new();
+        for elv in self.eles.iter() {
+            for element in self.elements.iter() {
+                if let Some(grid) = self.ppi_to_grid_lonlat(*elv, element) {
+                    grids.push(grid);
+                }
+            }
+        }
+        Some(grids)
     }
 }

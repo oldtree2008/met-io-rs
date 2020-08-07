@@ -20,7 +20,7 @@ pub struct Product {
 }
 #[derive(Debug, BinRead)]
 #[br(little)]
-pub struct Address {
+struct Address {
     FileHeadLength: i16, //文件头长度
     #[br(pad_size_to = 20)]
     Mode: NullString, //雷达型号

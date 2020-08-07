@@ -10,11 +10,7 @@ fn main() {
     dbg!(&rad.eles);
 
     //5.6099997
-    let ret = rad
-        .ppi_to_grid(
-            4.0299997, "REF",  300.0,
-        )
-        .unwrap();
+    let ret = rad.ppi_to_grid(4.0299997, "REF", 300.0).unwrap();
     // let ret = rad
     //     .ppi_to_grid(
     //         0.42999998, "REF", -150000.0, 150000.0, -150000.0, 150000.0, 150.0, 0.0,

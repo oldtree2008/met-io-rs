@@ -16,9 +16,7 @@ fn main() {
     //     .unwrap();
     // println!("{:?} {}", ret.0, ret.1);
 
-    let ret = rad
-        .ppi_to_grid_lonlat(0.54, "反射率")
-        .unwrap();
+    let ret = rad.ppi_to_grid_lonlat(0.54, "反射率").unwrap();
     println!("{:?} {}  {}", ret.ni, ret.nj, ret.values.len());
 
     grid2diamond4(&ret, "d:/temp");

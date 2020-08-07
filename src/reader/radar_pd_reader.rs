@@ -106,6 +106,7 @@ impl RadarPDReader {
         let mut cursor = Cursor::new(&buf);
         let station: RadarStation = BinRead::read(&mut cursor)?;
         let observe: ObservationParam = BinRead::read(&mut cursor)?;
+        // dbg!(&observe);
         Ok(Self {
             station,
             observe,
