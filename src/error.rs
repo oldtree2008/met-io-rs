@@ -12,4 +12,10 @@ pub enum MetError {
     HDF5Error(#[from] hdf5::Error),
     #[error("chrono parse error")]
     ChronoError(#[from] chrono::ParseError),
+    #[error("reader to grids error")]
+    ToGridsError,
+    #[error("grids to Noms error")]
+    ToNomsError,
+    #[error("grids to NomPbfs error")]
+    ToNomPbfsError,
 }

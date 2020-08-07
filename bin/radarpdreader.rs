@@ -7,15 +7,21 @@ pub fn main() {
     let rad: RadialData = reader.try_into().unwrap();
     dbg!(&rad.eles);
 
-    let ret = rad
-        .ppi_to_grid(
-            1.4699999, "REF", -150000.0, 150000.0, -150000.0, 150000.0, 150.0, 0.0,
-        )
-        .unwrap();
-    // println!("{:?}",ret.2);
-    // dbg!(&ret.0,&ret.1);
-    let pal = "palette/xradar.xml";
-    let output = "okpd.png";
+    // let ret = rad
+    //     .ppi_to_grid(
+    //         1.4699999, "Z", -150000.0, 150000.0, -150000.0, 150000.0, 150.0,
+    //     )
+    //     .unwrap();
+    // // println!("{:?}",ret.2);
+    // // dbg!(&ret.0,&ret.1);
+    // let pal = "palette/xradar.xml";
+    // let output = "okpd.png";
 
-    grid2img(&ret, pal, output);
+    // grid2img(&ret, pal, output);
+
+    let grid = rad
+        .ppi_to_grid_lonlat(1.4699999, "Z", -150000.0, 150000.0, -150000.0, 150000.0)
+        .unwrap();
+
+    grid2diamond4(&grid, "d:/temp/demo");
 }

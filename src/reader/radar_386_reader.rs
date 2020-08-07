@@ -177,6 +177,7 @@ impl TryInto<RadialData> for Radar386Reader {
         let mut eles = Vec::new();
         let mut azs = Vec::new();
         let mut rs = Vec::new();
+        let mut data = Vec::new();
         let mut vol_ref = Vec::new();
         for info in observe.LayerInfo.iter() {
             // dbg!(info.RecodeNumber,info.BinNumber,info.BinWidth);
@@ -256,15 +257,16 @@ impl TryInto<RadialData> for Radar386Reader {
             vol_ref.push(az_ref);
             azs.push(el_az);
         }
+        data.push(vol_ref); // 反射率
 
         Ok(RadialData {
             eles: eles,
             azs: azs,
             rs: rs,
-            data: vol_ref,
+            data: data,
             start_time,
             start_date,
-            // end_time,
+            elements: vec!["Z".to_string()],
             lon: lon,
             lat: lat,
             height: 0.0,

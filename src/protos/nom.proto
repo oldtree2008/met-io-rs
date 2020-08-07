@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+message LatLng{
+    float lat = 1;
+    float lng = 2;
+}
+
+message LatLngBounds {
+    LatLng _southWest = 1;
+    LatLng _northEast = 2;
+}
+
+message NomGrid {
+    float res = 1;
+    LatLngBounds bounds = 2;
+    repeated float data = 3;
+}

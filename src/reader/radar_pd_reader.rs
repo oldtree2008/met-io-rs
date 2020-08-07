@@ -131,6 +131,7 @@ impl TryInto<RadialData> for RadarPDReader {
         let mut eles = Vec::new();
         let mut azs = Vec::new();
         let mut rs = Vec::new();
+        let mut data = Vec::new(); //所有数据
         let mut datas = Vec::new();
         for layer in &self.observe.layers {
             let mut first = true;
@@ -142,7 +143,7 @@ impl TryInto<RadialData> for RadarPDReader {
             dbg!(bin_num, bin_width);
             for r in 0..layer.radial_count {
                 let v: RadarData = BinRead::read(&mut cursor)?;
-                println!("{} {}  {} {:?}", r, v.az, v.el, v.values);
+                // println!("{} {}  {} {:?}", r, v.az, v.el, v.values);
                 let el = v.el as f32 * 0.01;
                 let az = v.az as f32 * 0.01;
                 if first {
@@ -172,6 +173,8 @@ impl TryInto<RadialData> for RadarPDReader {
             datas.push(el_linedata)
         }
 
+        data.push(datas);
+
         let mut rdata = RadialData::default();
         rdata.lon = lon;
         rdata.lat = lat;
@@ -181,7 +184,8 @@ impl TryInto<RadialData> for RadarPDReader {
         rdata.eles = eles;
         rdata.azs = azs;
         rdata.rs = rs;
-        rdata.data = datas;
+        rdata.elements = vec!["Z".to_string()];
+        rdata.data = data;
 
         Ok(rdata)
     }

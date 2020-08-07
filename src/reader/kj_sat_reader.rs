@@ -1,4 +1,4 @@
-use super::ToGrids;
+use crate::ToGrids;
 use crate::error::MetError;
 use crate::kjlocationer::KJLocationer;
 use crate::SingleGrid;

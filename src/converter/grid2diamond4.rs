@@ -1,11 +1,22 @@
 use crate::data_type::SingleGrid;
-use crate::MetError;
+use crate::{MetError, ToGrids};
 use chrono::prelude::*;
 use rayon::prelude::*;
 use std::fs::{create_dir_all, File};
 use std::io::*;
 use std::path::Path;
 use std::result::Result;
+
+pub fn todiamond4<T>(reader: &T, output: &str) -> Result<(), MetError>
+where
+    T: ToGrids,
+{
+    if let Some(grids) = reader.to_grids() {
+        grids2diamond4s(&grids, output)
+    } else {
+        Err(MetError::ToGridsError)
+    }
+}
 
 pub fn grids2diamond4s(grids: &Vec<SingleGrid>, output: &str) -> Result<(), MetError> {
     grids.par_iter().for_each(|grid| {
@@ -90,6 +101,6 @@ pub fn grid2diamond4(grid: &SingleGrid, output: &str) -> Result<(), MetError> {
             writeln!(buf)?;
         }
     }
-    buf.flush();
+    buf.flush()?;
     Ok(())
 }

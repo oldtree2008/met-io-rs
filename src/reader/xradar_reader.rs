@@ -195,6 +195,7 @@ impl TryInto<RadialData> for XRadarReader {
 
         // dbg!(_elNum);
         let radiohead_size = 64;
+        let mut data = Vec::new(); //所有物理量数据
         let mut vol_ref = Vec::new();
         let mut eles = Vec::new();
         let mut azs = Vec::new();
@@ -260,6 +261,9 @@ impl TryInto<RadialData> for XRadarReader {
             azs.push(el_az);
             rs.push(az_range)
         }
+
+        data.push(vol_ref);
+
         let start_date = format!(
             "{}{:02}{:02}",
             &p.observe.StartYear, &p.observe.StartMonth, &p.observe.StartDay,
@@ -285,9 +289,10 @@ impl TryInto<RadialData> for XRadarReader {
             eles: eles,
             azs: azs,
             rs: rs,
-            data: vol_ref,
+            data: data,
             start_time,
             start_date,
+            elements: vec!["Z".to_string()],
             // end_time,
             lon: *&p.address.Longitude,
             lat: *&p.address.Latitude,

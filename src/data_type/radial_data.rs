@@ -14,14 +14,24 @@ pub struct RadialData {
     pub props: HashMap<String, String>,
     pub start_date: String,
     pub start_time: String,
+    pub elements: Vec<String>, //物理量名称  Z,uZ,V,W等等
     // pub end_time: String,
-    pub eles: Vec<f32>,           //所有的仰角
-    pub azs: Vec<Vec<f32>>,       //每个仰角对应的方位角
-    pub rs: Vec<Vec<Vec<f64>>>,   //仰角->方位角->斜距   米为单位
-    pub data: Vec<Vec<Vec<f32>>>, //仰角->方位角->值
+    pub eles: Vec<f32>,                //所有的仰角
+    pub azs: Vec<Vec<f32>>,            //每个仰角对应的方位角
+    pub rs: Vec<Vec<Vec<f64>>>,        //仰角->方位角->斜距   米为单位
+    pub data: Vec<Vec<Vec<Vec<f32>>>>, //物理量->仰角->方位角->值
 }
 
 impl RadialData {
+    //取得物理量对应的数据的索引值
+    pub fn get_element_idx(&self, ename: &str) -> Option<usize> {
+        for (i, e) in self.elements.iter().enumerate() {
+            if e == ename {
+                return Some(i);
+            }
+        }
+        None
+    }
     pub fn get_ele_idx(&self, ele: f32) -> Option<usize> {
         for (i, v) in self.eles.iter().enumerate() {
             if *v == ele {
@@ -39,8 +49,14 @@ impl RadialData {
         ystart: f32,
         yend: f32,
         res: f32,
-        h: f32,
+        // h: f32,
     ) -> Option<(usize, usize, Vec<f32>)> {
+        let element_idx = self.get_element_idx(_element);
+        if element_idx.is_none() {
+            return None;
+        }
+        let element_idx = element_idx.unwrap();
+
         let idx = self.get_ele_idx(ele);
         if idx.is_none() {
             println!("{} not found ", ele);
@@ -62,14 +78,14 @@ impl RadialData {
         }
         let total_num = (cols + 1) * (rows + 1);
         let mut grid_value: Vec<f32> = vec![crate::MISSING; total_num];
-        let elv_values = &self.data[ele_idx];
+        let elv_values = &self.data[element_idx][ele_idx];
         grid_value.par_iter_mut().enumerate().for_each(|(i, d)| {
             let yi = i / (cols + 1);
             let xi = i % (rows + 1);
             let yv = y[yi];
             let xv = x[xi];
 
-            let (az, rang, _z) = transforms::cartesian_to_antenna_cwr(xv, -yv, ele, h);
+            let (az, rang, _z) = transforms::cartesian_to_antenna_cwr(xv, -yv, ele, self.height);
             let elv_azs = &self.azs[ele_idx];
             let az = az.to_degrees();
             let (az_idx, az_idx1) = find_index(elv_azs, az);
@@ -109,8 +125,13 @@ impl RadialData {
         xend: f32,
         ystart: f32,
         yend: f32,
-        h: f32,
+        // h: f32,
     ) -> Option<SingleGrid> {
+        let element_idx = self.get_element_idx(element);
+        if element_idx.is_none() {
+            return None;
+        }
+        let element_idx = element_idx.unwrap();
         let idx = self.get_ele_idx(ele);
         if idx.is_none() {
             println!("{} not found ", ele);
@@ -138,7 +159,7 @@ impl RadialData {
         }
         let total_num = (cols + 1) * (rows + 1);
         let mut grid_value: Vec<f32> = vec![crate::MISSING; total_num];
-        let elv_values = &self.data[ele_idx];
+        let elv_values = &self.data[element_idx][ele_idx];
 
         grid_value.par_iter_mut().enumerate().for_each(|(i, d)| {
             let yi = i / (cols + 1);
@@ -146,7 +167,7 @@ impl RadialData {
             let lat = lats[yi];
             let lon = lons[xi];
             let (xv, yv) = transforms::geographic_to_cartesian_aeqd(lon, lat, lon0, lat0);
-            let (az, rang, _z) = transforms::cartesian_to_antenna_cwr(xv, yv, ele, h);
+            let (az, rang, _z) = transforms::cartesian_to_antenna_cwr(xv, yv, ele, self.height);
             let elv_azs = &self.azs[ele_idx];
             let az = az.to_degrees();
             let (az_idx, az_idx1) = find_index(elv_azs, az);
@@ -270,11 +291,12 @@ impl Default for RadialData {
             props: HashMap::<String, String>::new(),
             start_date: String::from(""),
             start_time: String::from(""),
+            elements: vec![],
             // end_time: String::from(""),
-            eles: vec![0f32],             //所有的仰角
-            azs: vec![vec![0f32]],        //每个仰角对应的方位角
-            rs: vec![vec![vec![0f64]]],   //仰角->方位角->斜距   米为单位
-            data: vec![vec![vec![0f32]]], //仰角->方位角->值
+            eles: vec![0f32],                   //所有的仰角
+            azs: vec![vec![0f32]],              //每个仰角对应的方位角
+            rs: vec![vec![vec![0f64]]],         //仰角->方位角->斜距   米为单位
+            data: vec![vec![vec![vec![0f32]]]], //物理量->仰角->方位角->值
         }
     }
 }
