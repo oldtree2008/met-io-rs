@@ -17,7 +17,7 @@ fn main() {
     // println!("{:?} {}", ret.0, ret.1);
 
     let ret = rad
-        .ppi_to_grid_lonlat(0.54, "反射率", -150000.0, 150000.0, -150000.0, 150000.0)
+        .ppi_to_grid_lonlat(0.54, "反射率")
         .unwrap();
     println!("{:?} {}  {}", ret.ni, ret.nj, ret.values.len());
 

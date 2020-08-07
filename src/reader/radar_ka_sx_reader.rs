@@ -253,7 +253,7 @@ impl RadarKASXReader {
                 values.iter_mut().enumerate().for_each(|(_i, value)| {
                     let sd: u8 = BinRead::read(&mut cursor).unwrap();
                     if sd < 5 {
-                        *value = crate::MISSING;//sd as f32;
+                        *value = crate::MISSING; //sd as f32;
                     } else {
                         *value = (sd as f32 - offset) / scale;
                     }
@@ -262,7 +262,7 @@ impl RadarKASXReader {
                 values.iter_mut().enumerate().for_each(|(i, value)| {
                     let sd: u16 = BinRead::read(&mut cursor).unwrap();
                     if sd < 5 {
-                        *value = crate::MISSING;//sd as f32;
+                        *value = crate::MISSING; //sd as f32;
                     } else {
                         *value = (sd as f32 - offset) / scale;
                     }

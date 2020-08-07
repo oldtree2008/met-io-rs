@@ -20,7 +20,7 @@ pub fn main() {
     // grid2img(&ret, pal, output);
 
     let grid = rad
-        .ppi_to_grid_lonlat(1.4699999, "Z", -150000.0, 150000.0, -150000.0, 150000.0)
+        .ppi_to_grid_lonlat(1.4699999, "Z")
         .unwrap();
 
     grid2diamond4(&grid, "d:/temp/demo");

@@ -260,6 +260,7 @@ impl TryInto<RadialData> for Radar386Reader {
         data.push(vol_ref); // 反射率
 
         Ok(RadialData {
+            _extents: (-150000.0, 150000.0, -150000.0, 150000.0),
             eles: eles,
             azs: azs,
             rs: rs,

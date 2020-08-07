@@ -1,7 +1,7 @@
-use crate::ToGrids;
 use crate::error::MetError;
 use crate::kjlocationer::KJLocationer;
 use crate::SingleGrid;
+use crate::ToGrids;
 use binread::prelude::*;
 use std::fs::File;
 use std::io::{Cursor, Read, SeekFrom};

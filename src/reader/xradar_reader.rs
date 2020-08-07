@@ -286,6 +286,7 @@ impl TryInto<RadialData> for XRadarReader {
         props.insert("province".to_string(), prov.clone());
         props.insert("area".to_string(), ar.clone());
         Ok(RadialData {
+            _extents: (-150000.0, 150000.0, -150000.0, 150000.0),
             eles: eles,
             azs: azs,
             rs: rs,

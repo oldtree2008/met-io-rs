@@ -16,9 +16,6 @@ pub use utils::interplate;
 pub use utils::kjlocationer;
 pub use utils::transforms;
 
-use std::fs::File;
-use std::io::Read;
-
 pub const MISSING: f32 = 9999.0; //无效值
 
 use crate::SingleGrid;
@@ -26,4 +23,21 @@ use crate::SingleGrid;
 pub trait ToGrids {
     fn to_grids(&self) -> Option<Vec<SingleGrid>>;
 }
-
+// pub trait Radar :ToGrids  {
+//     fn elevations(&self)->Vec<f32>;
+//     fn elements(&self)->Vec<String>;
+//     fn set_extents(&mut self);
+//     fn extents(&self)->(f32,f32,f32,f32);
+//     fn to_grid(&self,elv:f32,element:&str)->Option<SingleGrid>;
+//     fn to_grids(&self)->Option<Vec<SingleGrid>> {
+//         let mut grids = Vec::new();
+//         for elv in self.elevations().iter() {
+//             for element in self.elements().iter() {
+//                if let Some(grid) = self.to_grid(*elv, element) {
+//                 grids.push(grid);
+//                }
+//             }
+//         }
+//         Some(grids)
+//     }
+// }

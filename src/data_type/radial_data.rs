@@ -8,6 +8,7 @@ use std::default::Default;
 
 #[derive(Debug)]
 pub struct RadialData {
+    pub _extents: (f32, f32, f32, f32),
     pub lon: f32,
     pub lat: f32,
     pub height: f32,
@@ -40,17 +41,23 @@ impl RadialData {
         }
         None
     }
+
     pub fn ppi_to_grid(
         &self,
         ele: f32,       //仰角
         _element: &str, //物理量
-        xstart: f32,
-        xend: f32,
-        ystart: f32,
-        yend: f32,
+        // xstart: f32,
+        // xend: f32,
+        // ystart: f32,
+        // yend: f32,
         res: f32,
         // h: f32,
     ) -> Option<(usize, usize, Vec<f32>)> {
+        let xstart = self._extents.0;
+        let xend = self._extents.1;
+        let ystart = self._extents.2;
+        let yend = self._extents.3;
+
         let element_idx = self.get_element_idx(_element);
         if element_idx.is_none() {
             return None;
@@ -121,12 +128,16 @@ impl RadialData {
         &self,
         ele: f32,      //仰角
         element: &str, //物理量
-        xstart: f32,
-        xend: f32,
-        ystart: f32,
-        yend: f32,
+        // xstart: f32,
+        // xend: f32,
+        // ystart: f32,
+        // yend: f32,
         // h: f32,
     ) -> Option<SingleGrid> {
+        let xstart = self._extents.0;
+        let xend = self._extents.1;
+        let ystart = self._extents.2;
+        let yend = self._extents.3;
         let element_idx = self.get_element_idx(element);
         if element_idx.is_none() {
             return None;
@@ -285,6 +296,7 @@ fn find_index1(azs: &Vec<f64>, az: f64) -> Option<usize> {
 impl Default for RadialData {
     fn default() -> Self {
         Self {
+            _extents: (-150000.0, 150000.0, -150000.0, 150000.0),
             lon: 0.0f32,
             lat: 0f32,
             height: 0f32,
