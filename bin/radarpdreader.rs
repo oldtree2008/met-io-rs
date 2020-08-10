@@ -4,7 +4,7 @@ use std::convert::TryInto;
 pub fn main() {
     let fname = r#"H:\data\单站\STANDARD_PRODUCT\LBCPZ20180614131507008.200"#;
     let reader = RadarPDReader::new(fname).unwrap();
-    let rad: RadialData = reader.try_into().unwrap();
+    let rad: RadialData = reader.0;
     dbg!(&rad.eles);
 
     // let ret = rad

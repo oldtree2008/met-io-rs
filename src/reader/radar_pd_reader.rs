@@ -1,13 +1,13 @@
 use crate::error::*;
-use crate::RadialData;
+use crate::{RadialData, SingleGrid, ToGrids};
 use binread::prelude::*;
 use binread::NullString;
 use encoding_rs::*;
 use std::collections::HashMap;
-use std::convert::TryInto;
 use std::fs::File;
 use std::io::{Cursor, Read};
 use std::result::Result;
+
 /**
  * 雷达站的信息。[85]字节。
  */
@@ -92,11 +92,7 @@ struct RadarData {
 }
 
 #[derive(Debug)]
-pub struct RadarPDReader {
-    station: RadarStation,
-    observe: ObservationParam,
-    buf: Vec<u8>,
-}
+pub struct RadarPDReader(pub RadialData);
 
 impl RadarPDReader {
     pub fn new(fname: &str) -> Result<Self, MetError> {
@@ -106,27 +102,16 @@ impl RadarPDReader {
         let mut cursor = Cursor::new(&buf);
         let station: RadarStation = BinRead::read(&mut cursor)?;
         let observe: ObservationParam = BinRead::read(&mut cursor)?;
-        // dbg!(&observe);
-        Ok(Self {
-            station,
-            observe,
-            buf,
-        })
-    }
-}
 
-impl TryInto<RadialData> for RadarPDReader {
-    type Error = MetError;
-    fn try_into(self) -> Result<RadialData, Self::Error> {
-        let station = &self.station;
+        // let station = &self.station;
         let lon = station.longitude as f32 * 0.01;
         let lat = station.latitude as f32 * 0.01;
         let height = station.height as f32 * 0.001;
-        let observe = &self.observe;
+        // let observe = &self.observe;
         let start_date = format!("{}{:02}{:02}", observe.year, observe.month, observe.day);
         let start_time = format!("{:02}{:02}{:02}", observe.hour, observe.minute, observe.sec);
 
-        let data = &self.buf[1024..];
+        let data = &buf[1024..];
         let mut cursor = Cursor::new(data);
 
         let mut eles = Vec::new();
@@ -134,7 +119,7 @@ impl TryInto<RadialData> for RadarPDReader {
         let mut rs = Vec::new();
         let mut data = Vec::new(); //所有数据
         let mut datas = Vec::new();
-        for layer in &self.observe.layers {
+        for layer in &observe.layers {
             let mut first = true;
             let mut el_az = Vec::new();
             let mut el_range = Vec::new();
@@ -188,6 +173,13 @@ impl TryInto<RadialData> for RadarPDReader {
         rdata.elements = vec!["Z".to_string()];
         rdata.data = data;
 
-        Ok(rdata)
+        Ok(Self(rdata))
+    }
+}
+
+impl ToGrids for RadarPDReader {
+    fn to_grids(&self) -> Option<Vec<SingleGrid>> {
+        let rd = &self.0;
+        rd.to_grids()
     }
 }

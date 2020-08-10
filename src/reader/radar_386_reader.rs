@@ -1,20 +1,16 @@
 #![allow(non_snake_case,non_camel_case_types)]
 use crate::error::MetError;
-use crate::RadialData;
+use crate::{RadialData, SingleGrid, ToGrids};
 use binread::*;
 use std::collections::HashMap;
-use std::convert::TryInto;
+
 use std::fs::File;
 use std::io::{Cursor, Read};
 use std::result::Result;
 use std::str::FromStr;
 
 #[derive(Debug)]
-pub struct Radar386Reader {
-    fname: String,
-    info: Radar386Info,
-    data: Vec<u8>,
-}
+pub struct Radar386Reader(pub RadialData);
 
 #[derive(Debug, BinRead)]
 pub struct Radar386Info {
@@ -134,22 +130,12 @@ impl Radar386Reader {
         let mut cursor = Cursor::new(&mut buf);
         let rad: Radar386Info = BinRead::read(&mut cursor)?;
 
-        dbg!(
-            &rad.observe.LayerInfo[0].BinNumber,
-            &rad.observe.LayerInfo[0].BinWidth
-        );
-        Ok(Self {
-            info: rad,
-            data: buf,
-            fname: String::from(fname),
-        })
-    }
-}
+        // dbg!(
+        //     &rad.observe.LayerInfo[0].BinNumber,
+        //     &rad.observe.LayerInfo[0].BinWidth
+        // );
 
-impl TryInto<RadialData> for Radar386Reader {
-    type Error = MetError;
-    fn try_into(self) -> Result<RadialData, Self::Error> {
-        let fnames: Vec<&str> = self.fname.split('.').collect();
+        let fnames: Vec<&str> = fname.split('.').collect();
 
         let dt: &str = &fnames[0];
         let dt = &dt[2..];
@@ -166,8 +152,8 @@ impl TryInto<RadialData> for Radar386Reader {
         props.insert(String::from("province"), "UNKNOWN".to_string());
         props.insert("area".to_string(), "UNKNOWN".to_string());
 
-        let observe = &self.info.observe;
-        let mut data = &self.data[54 + 65 + 475..];
+        let observe = &rad.observe;
+        let mut data = &buf[54 + 65 + 475..];
         let mut data_cursor = Cursor::new(&mut data);
 
         dbg!(&observe.LayerNum);
@@ -259,7 +245,7 @@ impl TryInto<RadialData> for Radar386Reader {
         }
         data.push(vol_ref); // 反射率
 
-        Ok(RadialData {
+        let radial_data = RadialData {
             _extents: (-150000.0, 150000.0, -150000.0, 150000.0),
             eles: eles,
             azs: azs,
@@ -272,6 +258,15 @@ impl TryInto<RadialData> for Radar386Reader {
             lat: lat,
             height: 0.0,
             props,
-        })
+        };
+
+        Ok(Self(radial_data))
+    }
+}
+
+impl ToGrids for Radar386Reader {
+    fn to_grids(&self) -> Option<Vec<SingleGrid>> {
+        let rd = &self.0;
+        rd.to_grids()
     }
 }

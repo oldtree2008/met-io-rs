@@ -1,16 +1,15 @@
 #![allow(non_snake_case)]
 use crate::data_type::RadialData;
 use crate::error::MetError;
+use crate::{SingleGrid, ToGrids};
 use binread::prelude::*;
 use binread::NullString;
 use encoding_rs::*;
 use std::collections::HashMap;
-use std::convert::TryInto;
 use std::fs::File;
 use std::io::Cursor;
 use std::io::Read;
 use std::result::Result;
-
 #[derive(Debug, BinRead)]
 #[br(little)]
 pub struct Product {
@@ -169,7 +168,7 @@ pub struct Observe {
     reserve: Vec<i8>,
 }
 #[derive(Debug)]
-pub struct XRadarReader(pub (Product, Vec<u8>));
+pub struct XRadarReader(pub (RadialData));
 
 impl XRadarReader {
     pub fn new(fname: &str) -> Result<Self, MetError> {
@@ -179,18 +178,12 @@ impl XRadarReader {
         let mut reader = Cursor::new(&d);
         let p: Product = reader.read_le()?;
         // dbg!(&p.address);
-        Ok(XRadarReader((p, d)))
-    }
-}
 
-impl TryInto<RadialData> for XRadarReader {
-    type Error = MetError;
-    fn try_into(self) -> Result<RadialData, Self::Error> {
         let mut props = HashMap::new();
 
-        let xr = self.0;
-        let p: Product = xr.0;
-        let d: Vec<u8> = xr.1;
+        // let xr = self.0;
+        // let p: Product = xr.0;
+        // let d: Vec<u8> = xr.1;
         let _elNum = &p.observe.SSLayerNumber;
 
         // dbg!(_elNum);
@@ -285,7 +278,7 @@ impl TryInto<RadialData> for XRadarReader {
         let ar = &p.address.Area;
         props.insert("province".to_string(), prov.clone());
         props.insert("area".to_string(), ar.clone());
-        Ok(RadialData {
+        let radial_data = RadialData {
             _extents: (-150000.0, 150000.0, -150000.0, 150000.0),
             eles: eles,
             azs: azs,
@@ -299,6 +292,15 @@ impl TryInto<RadialData> for XRadarReader {
             lat: *&p.address.Latitude,
             height: *&p.address.Height as f32 / 1000.0,
             props,
-        })
+        };
+
+        Ok(XRadarReader(radial_data))
+    }
+}
+
+impl ToGrids for XRadarReader {
+    fn to_grids(&self) -> Option<Vec<SingleGrid>> {
+        let radial_data = &self.0;
+        radial_data.to_grids()
     }
 }
