@@ -1,7 +1,6 @@
 mod converter;
 mod data_type;
 mod error;
-mod hdf5_error;
 mod protos;
 mod reader;
 mod utils;
@@ -9,7 +8,7 @@ mod utils;
 pub use converter::*;
 pub use data_type::*;
 use error::MetError;
-pub use hdf5_error::Hdf5Error;
+// pub use hdf5_error::Hdf5Error;
 pub use protos::nom;
 pub use reader::*;
 pub use utils::interplate;

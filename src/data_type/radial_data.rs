@@ -288,10 +288,11 @@ fn find_index1(azs: &Vec<f64>, az: f64) -> Option<usize> {
         let idx1 = (az - first) / step;
         let idx2 = idx1.floor();
         let idx3 = idx2 as usize;
-        if idx3 > az_len {
+        if idx3 >= az_len - 1 {
             println!("az {}  az_len {}", az, az_len);
-            return Some(az_len - 1);
+            return Some(az_len - 2);
         } else {
+            // println!("az {}  az_len {}", idx3, az_len);
             return Some(idx3);
         }
     }

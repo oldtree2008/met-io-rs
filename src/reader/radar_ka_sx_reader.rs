@@ -1,7 +1,6 @@
 use crate::MetError;
 use binread::prelude::*;
 use serde::Serialize;
-use serde_json::*;
 use std::fs::File;
 use std::io::{Cursor, Read};
 

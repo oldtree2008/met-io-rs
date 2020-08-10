@@ -9,6 +9,7 @@ mod radar_ka_sx_reader;
 mod radar_pd_reader;
 mod radar_pt_reader;
 mod xradar_reader;
+mod grib_reader;
 
 pub use awx_reader::*;
 pub use gpf_reader::*;
@@ -21,3 +22,4 @@ pub use radar_ka_sx_reader::*;
 pub use radar_pd_reader::*;
 pub use radar_pt_reader::*;
 pub use xradar_reader::*;
+pub use grib_reader::*;

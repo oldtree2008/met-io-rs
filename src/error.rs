@@ -1,5 +1,5 @@
 use thiserror::Error;
-
+use eccodes_rs;
 #[derive(Error, Debug)]
 pub enum MetError {
     #[error("read satlite error `{0}`")]
@@ -18,4 +18,6 @@ pub enum MetError {
     ToNomsError,
     #[error("grids to NomPbfs error")]
     ToNomPbfsError,
+    #[error("eccode-rs error")]
+    ECCodesError(#[from] eccodes_rs::errors::EccodesError),
 }

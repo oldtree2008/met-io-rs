@@ -472,10 +472,6 @@ pub fn main() {
         // }
         // let mut az_found = false;
         if rang < 500.0 * res {
-        /*&& x>-50.0 && x<50.0  && y>-50.0 && y<50.0*/
-        // {
-            // println!("elv {} az {} range {} x {} y {}",elv,az,rang,x,y);
-           
             let rang_idx = rang / res;
             let elv_idx = find_index(&elvs, elv);
             if let Some(elv_idx) = elv_idx {
@@ -485,8 +481,6 @@ pub fn main() {
                 //     "elv_idx {:?}   elv {}  az {}  rang {} x {} y {}",
                 //     elv_idx, elv, az, rang, x, y
                 // );
-
-               
                 let idx = find_index(&elv_azs, az);
                 let mut v1 = 0.0;
                 let mut v2 = 0.0;
@@ -498,7 +492,6 @@ pub fn main() {
                         //     elv_idx, elv, az0,az, az1,rang, x, y
                         // );
                     // }
-                  
                     let rang0 = rang_idx.floor() as usize;
                     let rang1 = rang_idx.ceil() as usize;
                     let mut v00 = elv_values[ii][rang0] as f32;
@@ -550,89 +543,6 @@ pub fn main() {
                 );
                 *d = v;
                 }
-                // // *d = v;
-
-                // let elv_azs1 = &elv_az[elv_idx+1];
-                // let elv_values1 = &elv_az_range_value[elv_idx+1];
-                // // println!(
-                // //     "elv_idx {:?}   elv {}  az {}  rang {} x {} y {}",
-                // //     elv_idx, elv, az, rang, x, y
-                // // );
-
-                // // let az = az.to_degrees();
-                // let idx = find_index(&elv_azs1, az);
-                // if let Some(ii) = idx {
-                //     let az0 = elv_azs1[ii];
-                //     let az1 = elv_azs1[ii + 1];
-                //         // println!(
-                //         //     "elv_idx {:?}   elv {} az0 {} az {} az1 {} rang {} x {} y {}",
-                //         //     elv_idx, elv, az0,az, az1,rang, x, y
-                //         // );
-                //     // }
-                //     // let rang = rang / res;
-                //     let rang0 = rang.floor() as usize;
-                //     let rang1 = rang.ceil() as usize;
-                //     let mut v00 = elv_values1[ii][rang0] as f32;
-                //     let mut v01 = elv_values1[ii][rang1] as f32;
-                //     let mut v10 = elv_values1[ii + 1][rang0] as f32;
-                //     let mut v11 = elv_values1[ii + 1][rang1] as f32;
-                //     if v00 == 255.0 {
-                //         v00 = 999.0
-                //     }
-                //     if v01 == 255.0 {
-                //         v01 = 999.0
-                //     }
-                //     if v10 == 255.0 {
-                //         v10 = 999.0
-                //     }
-                //     if v11 == 255.0 {
-                //         v11 = 999.0
-                //     }
-                //     let v = radar_grid::interp_ppi(
-                //         az,
-                //         rang,
-                //         az0,
-                //         az1,
-                //         rang0 as f32,
-                //         rang1 as f32,
-                //         v00 as f32,
-                //         v01 as f32,
-                //         v10 as f32,
-                //         v11 as f32,
-                //     );
-                //     let v2 = (v - 64.0) / 2.0;
-                //     println!("elv {} az {} x {} y {} v {}", elv, az, x, y, v2);
-                // }
-
-                // if v1 <75.0 && v2 <75.0 {
-                //     let v = (v1 + v2) / 2.0;
-                //     *d = v;
-                // }else if v1<75.0 {
-                //     *d = v1;
-                // }else if v2<75.0 {
-                //     *d =v2;
-                // }
-               
-                // if v <75.0 {
-                // println!(
-                //     "x {} y {} elv {} az {} az0 {} az1 {} range {} range0 {} range1 {}  v00 {}  v01 {} v10 {} v11 {} v {}",
-                //     x,
-                //     y,
-                //     elv,
-                //     az,
-                //     &elv_azs[ii],
-                //     &elv_azs[ii + 1],
-                //     rang_idx,
-                //     rang0,
-                //     rang1,
-                //     v00,
-                //     v01,
-                //     v10,
-                //     v11,
-                //     v1
-                // );
-                // }
-                // println!("elv {} az {} x {} y {} v {}", elv, az, x, y, v1);
             }
         }
     });
