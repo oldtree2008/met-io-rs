@@ -161,77 +161,12 @@ pub fn main() {
         *d = v;
     });
 
-    // (0..rows*cols).into_par_iter().for_each(|i| {
-    //             let v = point_value(
-    //             grid_lons[i],
-    //             grid_lats[i],
-    //             &lon_vec,
-    //             &lat_vec,
-    //             &ir1_vec,
-    //         );
-    //         grid_value[i] = v;
-    // })
 
-    // for i in 0..rows {
-    //     for j in 0..cols {
-    //         let v = point_value(
-    //             grid_lons[j],
-    //             grid_lats[i],
-    //             &lon_vec,
-    //             &lat_vec,
-    //             &ir1_vec,
-    //         );
-    //         grid_value.push(v);
-    //         // println!("{}",v);
-
-    //         println!("{}  {}  {}",grid_lons[j], grid_lats[i],v);
-    //     }
-    // }
-    // let v = point_value(110.0, 40.0, &lon_vec, &lat_vec,&ir1_vec);
-    // println!("{}",v);
-
-    // println!("{:?} ",grid_value);
-
-    // println!("gridvalue len {}",grid_value.len());
-
-    // dbg!(dataset);
-    // let shape = reader.as_ref().unwrap().shape("Latitude");
-    // dbg!(shape);
-    // let w = 2291;
-    // let h = 2291;
-
-    // let mut values = Vec::new();
-    // data.mapv(|d| {
-    //     values.push(d)
-    // });
-
-    // let ret:Vec<_> = values.iter().filter(|d| **d!=32765).collect();
-    // // let ret:Vec<_> = values.iter().filter(|d| **d!=10745).collect();
-    // // let mut iter = ret.iter();
-
-    // println!("{}  {:?}  {:?}",ret.len(),ret.iter().min(),ret.iter().max());
-
-    // let d = data.slice(s![0..2206,60..2231]);
-
-    // println!("{:?}",d);
-    // let mut value = Vec::new();
-    // d.mapv(|aa|{
-    //     println!("{}",aa);
-    //     value.push(aa);
-    // });
-    // println!("{:?}",value.iter().min());
     let mut imgbuf = ImageBuffer::new(cols as u32, rows as u32);
     // // // // let dd = &data/100;
 
     for (x, y, pixel) in imgbuf.enumerate_pixels_mut() {
         let index = y * cols as u32 + x;
-        // let v = point_value(
-        //     grid_lons[x as usize],
-        //     grid_lats[y as usize],
-        //     &lon_vec,
-        //     &lat_vec,
-        //     &ir1_vec,
-        // );
         let v = grid_value[index as usize];
         let c = pal.get_color(v as f64).unwrap();
         *pixel = image::Rgba([c.r, c.g, c.b, c.a]);

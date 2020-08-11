@@ -8,3 +8,4 @@ fn main() {
 
     todiamond4(&reader,output);
 }
+ 
