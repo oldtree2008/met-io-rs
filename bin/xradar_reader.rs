@@ -5,5 +5,4 @@ fn main() {
     let output = "/mnt/d/temp/xradar";
     let xr = XRadarReader::new(fname).unwrap();
     todiamond4(&xr, output);
-
 }

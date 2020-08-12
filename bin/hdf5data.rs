@@ -161,7 +161,6 @@ pub fn main() {
         *d = v;
     });
 
-
     let mut imgbuf = ImageBuffer::new(cols as u32, rows as u32);
     // // // // let dd = &data/100;
 

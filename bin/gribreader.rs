@@ -6,6 +6,5 @@ fn main() {
     let output = r##"/mnt/d/temp/grib2"##;
     let reader = GribReader::new(fname).unwrap();
 
-    todiamond4(&reader,output);
+    todiamond4(&reader, output);
 }
- 

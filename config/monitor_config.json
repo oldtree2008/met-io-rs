@@ -1,0 +1,16 @@
+{
+    "source":[
+        {
+            "path":"/mnt/d/demo"
+        },
+        {
+            "path":"/mnt/d/demo1"
+        }
+    ],
+    "destination": {
+        "path":"/mnt/d/temp/output",
+        "data_type":[
+            "NOMGrid"
+        ]
+    }
+}
