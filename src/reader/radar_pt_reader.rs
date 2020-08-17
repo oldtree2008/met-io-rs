@@ -128,6 +128,7 @@ impl ToGrids for RadarPTReader {
         let start_lng = prod.x_lu as f64 * 0.001;
         let end_lat = start_lat + (nj - 1) as f64 * lat_gap;
         let end_lng = start_lng + (ni - 1) as f64 * lng_gap;
+        let heigh = prod.heigh as f32;
         let values = self.datas.clone();
         let product = if prod.production == 1 {
             String::from("回波强度等高PPI")
@@ -152,7 +153,7 @@ impl ToGrids for RadarPTReader {
             start_lng,
             end_lat,
             end_lng,
-            level: None,
+            level: Some(heigh),
             element: String::from("Z"),
             values,
             data_date,
