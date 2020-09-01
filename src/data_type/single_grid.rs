@@ -16,5 +16,5 @@ pub struct SingleGrid<T = f32, L = f32> {
     pub forecast_time: i64, //时效
     pub center: String,
     pub product: String,
-    pub data_des: String,
+    pub station: Option<String>,
 }

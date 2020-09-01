@@ -208,7 +208,7 @@ impl ToGrids for AwxReader {
 
             let data_date = format!("{}{:02}{:02}", header.year, header.month, header.day);
             let data_time = format!("{:02}{:02}00", header.hour, header.minute);
-            let data_des = format!("{}{}{}{}", data_date, data_time, project, product);
+
             let grid = SingleGrid {
                 ni: width as i64,
                 nj: height as i64,
@@ -226,7 +226,7 @@ impl ToGrids for AwxReader {
                 forecast_time: 0,     //时效
                 center: String::from("satelite"),
                 product: product.clone(),
-                data_des,
+                station: None,
             };
             return Some(vec![grid]);
         } else {

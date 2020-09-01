@@ -101,3 +101,11 @@ path="bin/gribreader.rs"
 [[bin]]
 name="app"
 path="bin/app.rs"
+
+[[bin]]
+name="testbin"
+path="bin/testbin.rs"
+
+[[bin]]
+name="vbtgs"
+path="bin/vbtgsradar.rs"

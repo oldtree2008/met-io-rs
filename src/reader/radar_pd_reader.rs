@@ -103,6 +103,38 @@ impl RadarPDReader {
         let station: RadarStation = BinRead::read(&mut cursor)?;
         let observe: ObservationParam = BinRead::read(&mut cursor)?;
 
+        let mut st = Vec::new();
+        for b in &station.station_ {
+            if *b == 0 {
+                break;
+            }
+            st.push(*b);
+        }
+        let st = GBK.decode(&st).0;
+        let st = st.to_string();
+        // dbg!(st);
+
+        let mut props = HashMap::new();
+        props.insert(String::from("product"), String::from("单站雷达"));
+        props.insert(String::from("station"), st);
+
+        let elements = if observe.physical_type == 1 {
+            vec!["uZ".to_string(), "Z".to_string()] //, "uZ".to_string()
+        } else if observe.physical_type == 2 {
+            vec!["V".to_string()]
+        } else if observe.physical_type == 3 {
+            vec!["W".to_string()]
+        } else if observe.physical_type == 4 {
+            vec![
+                "uZ".to_string(),
+                "Z".to_string(),
+                "V".to_string(),
+                "W".to_string(),
+            ]
+        } else {
+            println!("unkown physical type {}", observe.physical_type);
+            vec![String::from("UNKNOWN")]
+        };
         // let station = &self.station;
         let lon = station.longitude as f32 * 0.01;
         let lat = station.latitude as f32 * 0.01;
@@ -119,17 +151,20 @@ impl RadarPDReader {
         let mut rs = Vec::new();
         let mut data = Vec::new(); //所有数据
         let mut datas = Vec::new();
+        let mut datas1 = Vec::new();
+        let mut datas2 = Vec::new();
+        let mut datas3 = Vec::new();
         for layer in &observe.layers {
             let mut first = true;
             let mut el_az = Vec::new();
             let mut el_range = Vec::new();
             let mut el_linedata = Vec::new();
+
             let bin_num = layer.gate_count;
             let bin_width = layer.gate_leng as f64 * 0.1;
             dbg!(bin_num, bin_width);
             for r in 0..layer.radial_count {
                 let v: RadarData = BinRead::read(&mut cursor)?;
-                // println!("{} {}  {} {:?}", r, v.az, v.el, v.values);
                 let el = v.el as f32 * 0.01;
                 let az = v.az as f32 * 0.01;
                 if first {
@@ -143,10 +178,14 @@ impl RadarPDReader {
                 for i in 0..bin_num {
                     let r = i as f64 * bin_width;
                     let mut ld = v.values[i as usize] as f32;
-                    // if ld != 0.0 {
-                    ld = (ld - 64.0) * 0.5;
-                    // } else {
-                    //     ld = crate::MISSING;
+
+                    if ld != 0.0 {
+                        ld = (ld - 64.0) * 0.5;
+                    } else {
+                        ld = crate::MISSING;
+                    }
+                    // if (ld >100.0 || ld< -100.0) && ld!=crate::MISSING {
+                    //     println!("wield {} ",v.values[i as usize] );
                     // }
                     line_data.push(ld);
                     ranges.push(r);
@@ -154,13 +193,102 @@ impl RadarPDReader {
                 el_range.push(ranges);
                 el_linedata.push(line_data);
             }
+            if observe.physical_type == 4 {
+                let mut el_linedata1 = Vec::new();
+                for r in 0..layer.radial_count {
+                    let v1: RadarData = BinRead::read(&mut cursor)?;
+                    let mut line_data = Vec::new();
+                    for i in 0..bin_num {
+                        let r = i as f64 * bin_width;
+                        let mut ld = v1.values[i as usize] as f32;
+                        if ld != 0.0 {
+                            ld = (ld - 64.0) * 0.5;
+                        } else {
+                            ld = crate::MISSING;
+                        }
+                        line_data.push(ld);
+                    }
+                    el_linedata1.push(line_data);
+                }
+                datas1.push(el_linedata1);
+
+                let mut el_linedata2 = Vec::new();
+                for r in 0..layer.radial_count {
+                    let v2: RadarData = BinRead::read(&mut cursor)?;
+                    let mut line_data = Vec::new();
+                    for i in 0..bin_num {
+                        let r = i as f64 * bin_width;
+                        let mut ld = v2.values[i as usize] as f32;
+                        if ld != 0.0 {
+                            ld = (ld - 64.0) * 0.5;
+                        } else {
+                            ld = crate::MISSING;
+                        }
+                        line_data.push(ld);
+                    }
+                    el_linedata2.push(line_data);
+                }
+                datas2.push(el_linedata2);
+
+                let mut el_linedata3 = Vec::new();
+                for r in 0..layer.radial_count {
+                    let v3: RadarData = BinRead::read(&mut cursor)?;
+                    let mut line_data = Vec::new();
+                    for i in 0..bin_num {
+                        let r = i as f64 * bin_width;
+                        let mut ld = v3.values[i as usize] as f32;
+                        if ld != 0.0 {
+                            ld = (ld - 64.0) * 0.5;
+                        } else {
+                            ld = crate::MISSING;
+                        }
+                        line_data.push(ld);
+                    }
+                    el_linedata3.push(line_data);
+                }
+                datas3.push(el_linedata3);
+            }
+            if observe.physical_type == 1 {
+                let mut el_linedata1 = Vec::new();
+                for r in 0..layer.radial_count {
+                    let v1: RadarData = BinRead::read(&mut cursor)?;
+                    let mut line_data = Vec::new();
+                    for i in 0..bin_num {
+                        let r = i as f64 * bin_width;
+                        let mut ld = v1.values[i as usize] as f32;
+                        if ld != 0.0 {
+                            ld = (ld - 64.0) * 0.5;
+                        } else {
+                            ld = crate::MISSING;
+                        }
+                        line_data.push(ld);
+                    }
+                    el_linedata1.push(line_data);
+                }
+                datas1.push(el_linedata1);
+            }
+
             azs.push(el_az);
             rs.push(el_range);
-            datas.push(el_linedata)
+            datas.push(el_linedata);
         }
 
         data.push(datas);
-
+        if observe.physical_type == 1 {
+            data.push(datas1);
+        } else if observe.physical_type == 4 {
+            data.push(datas1);
+            data.push(datas2);
+            data.push(datas3);
+        }
+        dbg!(
+            &data.len(),
+            &data[0].len(),
+            &data[0][0].len(),
+            &data[0][0][0].len()
+        );
+        println!("{:#?}  {} ", &azs.len(), &azs[0].len());
+        println!("{:#?}  {}  {}", &rs.len(), &rs[0].len(), &rs[0][0].len());
         let mut rdata = RadialData::default();
         rdata.lon = lon;
         rdata.lat = lat;
@@ -170,9 +298,12 @@ impl RadarPDReader {
         rdata.eles = eles;
         rdata.azs = azs;
         rdata.rs = rs;
-        rdata.elements = vec!["Z".to_string()];
+        rdata.elements = elements;
         rdata.data = data;
+        rdata.props = props;
 
+        dbg!(buf.len());
+        dbg!(cursor.position());
         Ok(Self(rdata))
     }
 }

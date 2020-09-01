@@ -48,7 +48,7 @@ pub fn normalize_grid(d: &SingleGrid) -> SingleGrid {
             let data10 = d.values[idx10];
             let data11 = d.values[idx11];
 
-            let v = interplate::interp_ppi(
+            let mut v = interplate::interp_ppi(
                 oldr as f32,
                 oldc as f32,
                 oldr0 as f32,
@@ -60,6 +60,9 @@ pub fn normalize_grid(d: &SingleGrid) -> SingleGrid {
                 data10,
                 data11,
             );
+            if v.is_nan() {
+                v = crate::MISSING;
+            }
             *vv = v;
         }
     });

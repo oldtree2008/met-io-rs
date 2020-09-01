@@ -43,7 +43,6 @@ impl ToGrids for GribReader {
                     let level = d.level;
                     let values = d.values.iter().map(|v| *v as f32).collect::<Vec<f32>>();
 
-                    let data_des = format!("{}{}{}{}", data_date, data_time, element, level);
                     let sgrid = SingleGrid {
                         ni,
                         nj,
@@ -61,7 +60,7 @@ impl ToGrids for GribReader {
                         forecast_time, //时效
                         center: String::from(""),
                         product: String::from(product),
-                        data_des,
+                        station: None, // data_des,
                     };
                     grids.push(sgrid);
                 }

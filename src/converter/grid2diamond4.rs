@@ -19,7 +19,7 @@ where
 }
 
 pub fn grids2diamond4s(grids: &Vec<SingleGrid>, output: &str) -> Result<(), MetError> {
-    grids.par_iter().for_each(|grid| {
+    grids.iter().for_each(|grid| {
         grid2diamond4(grid, output).unwrap();
     });
     Ok(())
@@ -31,26 +31,53 @@ pub fn grid2diamond4(grid: &SingleGrid, output: &str) -> Result<(), MetError> {
     let dt = Utc.datetime_from_str(&datastr, "%Y%m%d%H%M%S")?;
     //todo
     let dst_file_name = if let Some(l) = &grid.level {
-        format!(
-            "{}/{}/{}/{}/{}{:02}.{:03}",
-            output,
-            &grid.product,
-            &grid.element,
-            l,
-            &grid.data_date,
-            &grid.data_time,
-            &grid.forecast_time
-        )
+        if grid.station.is_none() {
+            format!(
+                "{}/{}/{}/{}/{}{:02}.{:03}",
+                output,
+                &grid.product,
+                &grid.element,
+                l,
+                &grid.data_date,
+                &grid.data_time,
+                &grid.forecast_time
+            )
+        } else {
+            format!(
+                "{}/{}/{}/{}/{}/{}{:02}.{:03}",
+                output,
+                &grid.product,
+                &grid.station.as_ref().unwrap(),
+                &grid.element,
+                l,
+                &grid.data_date,
+                &grid.data_time,
+                &grid.forecast_time
+            )
+        }
     } else {
-        format!(
-            "{}/{}/{}/{}{:02}.{:03}",
-            output,
-            &grid.product,
-            &grid.element,
-            &grid.data_date,
-            &grid.data_time,
-            &grid.forecast_time
-        )
+        if grid.station.is_none() {
+            format!(
+                "{}/{}/{}/{}{:02}.{:03}",
+                output,
+                &grid.product,
+                &grid.element,
+                &grid.data_date,
+                &grid.data_time,
+                &grid.forecast_time
+            )
+        } else {
+            format!(
+                "{}/{}/{}/{}/{}{:02}.{:03}",
+                output,
+                &grid.product,
+                grid.station.as_ref().unwrap(),
+                &grid.element,
+                &grid.data_date,
+                &grid.data_time,
+                &grid.forecast_time
+            )
+        }
     };
     let path = Path::new(&dst_file_name);
     let parent = path.parent().unwrap();
@@ -59,7 +86,17 @@ pub fn grid2diamond4(grid: &SingleGrid, output: &str) -> Result<(), MetError> {
     }
     let file = File::create(&dst_file_name)?;
     let mut buf = BufWriter::new(file);
-    writeln!(buf, "diamond 4 {} ", grid.data_des)?;
+
+    let data_des = if let Some(station) = &grid.station {
+        format!(
+            "{}{}{}{}",
+            &grid.data_date, &grid.data_time, station, grid.product
+        )
+    } else {
+        format!("{}{}{}", &grid.data_date, &grid.data_time, grid.product)
+    };
+
+    writeln!(buf, "diamond 4 {} ", data_des)?;
     //20200704_164546
     writeln!(
         buf,
@@ -96,6 +133,9 @@ pub fn grid2diamond4(grid: &SingleGrid, output: &str) -> Result<(), MetError> {
 
     writeln!(buf, "{:.2} {:.2} {:.2} {} {} ", step, min, max, 0, 0)?;
     for (i, v) in grid.values.iter().enumerate() {
+        // if (*v >100.0 || *v< -100.0) && *v!=crate::MISSING {
+        //     println!("wield {} ",v );
+        // }
         write!(buf, "{:.*} ", 2, v)?;
         if (i + 1).rem_euclid(10usize) == 0 {
             writeln!(buf)?;

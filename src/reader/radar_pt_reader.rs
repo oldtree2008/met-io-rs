@@ -77,8 +77,20 @@ impl RadarPTReader {
         let count = (pt_product.count_x * pt_product.count_y) as usize;
         let is_grid = buf.len() == 1281 + count;
 
-        dbg!(&pt_product);
+        dbg!(&pt_info);
         dbg!(is_grid);
+        let radar_count = &pt_info.radar_count;
+        let radar_ids = &pt_info.station_ids;
+
+        for i in 0..*radar_count {
+            let index = i * 5;
+            let index = index as usize;
+            let dd = &radar_ids[index..index + 5];
+            let dd = String::from_utf8_lossy(&dd);
+            // let dd = ANSCI.decode(&dd);
+            println!("{}", dd);
+        }
+
         cursor.set_position(1281);
 
         let mut datas = vec![crate::MISSING; count];
@@ -86,7 +98,7 @@ impl RadarPTReader {
             datas.iter_mut().enumerate().for_each(|(_, d)| {
                 let b: u8 = BinRead::read(&mut cursor).unwrap();
                 if b == 0 {
-                    *d = 0 as f32;
+                    *d = crate::MISSING;
                 } else {
                     *d = (b - 64) as f32 * 0.5;
                 }
@@ -161,7 +173,7 @@ impl ToGrids for RadarPTReader {
             forecast_time: 0, //时效
             center: String::new(),
             product,
-            data_des,
+            station: None,
         };
         Some(vec![sgrid])
     }

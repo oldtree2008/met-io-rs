@@ -214,10 +214,18 @@ impl RadialData {
         });
         let product = if self.props.contains_key("province") && self.props.contains_key("area") {
             format!("{}/{}", &self.props["province"], &self.props["area"])
+        } else if self.props.contains_key("product") {
+            self.props["product"].clone()
         } else {
             String::new()
         };
-        let data_des = format!("{}{}{}", &self.start_date, &self.start_time, product);
+
+        let station = if self.props.contains_key("station") {
+            Some(self.props["station"].clone())
+        } else {
+            None
+        };
+
         let sgrid = SingleGrid {
             ni: (cols + 1) as i64,
             nj: (rows + 1) as i64,
@@ -235,7 +243,7 @@ impl RadialData {
             forecast_time: 0,                   //时效
             center: String::from("radar"),
             product,
-            data_des,
+            station,
         };
         Some(sgrid)
     }

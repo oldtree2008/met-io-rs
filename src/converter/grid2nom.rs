@@ -37,15 +37,48 @@ pub fn grid2nom(d: &SingleGrid, output: &str) {
     // let dt = Utc.datetime_from_str(&datastr, "%Y%m%d%H%M%S").unwrap();
 
     let dst_file_name = if let Some(l) = &dd.level {
-        format!(
-            "{}/{}/{}/{}/{}{:02}.{:03}.NOM",
-            output, &dd.product, &dd.element, l, &dd.data_date, &dd.data_time, &dd.forecast_time
-        )
+        if dd.station.is_none() {
+            format!(
+                "{}/{}/{}/{}/{}{:02}.{:03}.NOM",
+                output,
+                &dd.product,
+                &dd.element,
+                l,
+                &dd.data_date,
+                &dd.data_time,
+                &dd.forecast_time
+            )
+        } else {
+            format!(
+                "{}/{}/{}/{}/{}/{}{:02}.{:03}.NOM",
+                output,
+                &dd.product,
+                &dd.station.as_ref().unwrap(),
+                &dd.element,
+                l,
+                &dd.data_date,
+                &dd.data_time,
+                &dd.forecast_time
+            )
+        }
     } else {
-        format!(
-            "{}/{}/{}/{}{:02}.{:03}.NOM",
-            output, &dd.product, &dd.element, &dd.data_date, &dd.data_time, &dd.forecast_time
-        )
+        if dd.station.is_none() {
+            format!(
+                "{}/{}/{}/{}{:02}.{:03}.NOM",
+                output, &dd.product, &dd.element, &dd.data_date, &dd.data_time, &dd.forecast_time
+            )
+        } else {
+            format!(
+                "{}/{}/{}/{}/{}{:02}.{:03}.NOM",
+                output,
+                &dd.product,
+                &dd.station.as_ref().unwrap(),
+                &dd.element,
+                &dd.data_date,
+                &dd.data_time,
+                &dd.forecast_time
+            )
+        }
     };
 
     let path = Path::new(&dst_file_name);

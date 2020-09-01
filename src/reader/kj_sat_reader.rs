@@ -196,7 +196,7 @@ impl ToGrids for KJSatReader {
             product: prod_el.0,
             element: prod_el.1,
             center: String::from("center"),
-            data_des: String::from("kjsat"),
+            station: None,
             values,
         };
         Some(vec![sgrid])

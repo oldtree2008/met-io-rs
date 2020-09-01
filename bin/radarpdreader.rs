@@ -2,7 +2,10 @@ use log::*;
 use met_io_rs::*;
 use std::convert::TryInto;
 pub fn main() {
-    let fname = r#"/mnt/h/data/单站/STANDARD_PRODUCT/LBCPZ20180614131507008.200"#;
+    let fname = r#"/mnt/e/data/单站/STANDARD_PRODUCT/LGCPZ20160610135814014.000"#;
+    let fname = r#"/mnt/e/data/单站/STANDARD_PRODUCT/LBCPZ20180614135631008.200"#;
+    let fname = r#"/mnt/e/data/单站/STANDARD_PRODUCT/LGCRW20160610164007015.000"#;
+
     let reader = RadarPDReader::new(fname).unwrap();
     // let rad: RadialData = reader.0;
     // dbg!(&rad.eles);
@@ -24,6 +27,6 @@ pub fn main() {
     // grid2diamond4(&grid, "d:/temp/demo");
     let output = "/mnt/d/temp/demo4";
     todiamond4(&reader, output);
-    tonompbfs(&reader, output);
-    tonoms(&reader, output);
+    // tonompbfs(&reader, output);
+    // tonoms(&reader, output);
 }
