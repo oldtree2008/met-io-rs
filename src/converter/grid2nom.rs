@@ -25,13 +25,15 @@ pub fn grids2noms(d: &Vec<SingleGrid>, output: &str) {
 }
 
 pub fn grid2nom(d: &SingleGrid, output: &str) {
+    // println!("start_lat {}  end_lat {}  start_lng {} end_lng {}  step {} {}   {}  {} ",d.start_lat,d.end_lat,d.start_lng,d.end_lng,d.lng_gap,d.lat_gap,d.ni,d.nj);
     let dd;
     if f64::abs(d.lng_gap) != f64::abs(d.lat_gap) {
         dd = crate::normalize_grid(&d);
     } else {
         dd = d.clone();
     }
-
+    // println!("start_lat {}  end_lat {}  start_lng {} end_lng {}  step {} {}   {}  {}",dd.start_lat,dd.end_lat,dd.start_lng,dd.end_lng,dd.lng_gap,dd.lat_gap,dd.ni,dd.nj);
+    // crate::grid2diamond4(&dd,"/mnt/d/temp/demo").unwrap();
     let dd = &dd;
     let datastr = format!("{}{}", dd.data_date, dd.data_time);
     // let dt = Utc.datetime_from_str(&datastr, "%Y%m%d%H%M%S").unwrap();

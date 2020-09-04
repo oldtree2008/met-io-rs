@@ -17,6 +17,7 @@ fn main() {
             if *d == 9999.0 {
                 *d = 0.0
             }
+            *d = 10.0 % 2.0;
             let bs = d.to_le_bytes();
             f.write_all(&bs).unwrap();
         }

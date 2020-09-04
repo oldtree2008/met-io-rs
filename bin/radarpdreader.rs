@@ -1,32 +1,26 @@
 use log::*;
 use met_io_rs::*;
+use serde_json::*;
 use std::convert::TryInto;
+use std::fs::File;
+use std::io::BufReader;
+use std::path::Path;
+
 pub fn main() {
-    let fname = r#"/mnt/e/data/单站/STANDARD_PRODUCT/LGCPZ20160610135814014.000"#;
+    // let fname = r#"/mnt/e/data/单站/STANDARD_PRODUCT/LGCPZ20160610135814014.000"#;
     let fname = r#"/mnt/e/data/单站/STANDARD_PRODUCT/LBCPZ20180614135631008.200"#;
-    let fname = r#"/mnt/e/data/单站/STANDARD_PRODUCT/LGCRW20160610164007015.000"#;
-
+    // // let fname = r#"/mnt/e/data/单站/STANDARD_PRODUCT/LGCRW20160610164007015.000"#;
+    let p = Path::new("palette/xradar.xml");
     let reader = RadarPDReader::new(fname).unwrap();
-    // let rad: RadialData = reader.0;
-    // dbg!(&rad.eles);
-
-    // let ret = rad
-    //     .ppi_to_grid(
-    //         1.4699999, "Z", -150000.0, 150000.0, -150000.0, 150000.0, 150.0,
-    //     )
-    //     .unwrap();
-    // // println!("{:?}",ret.2);
-    // // dbg!(&ret.0,&ret.1);
-    // let pal = "palette/xradar.xml";
-    // let output = "okpd.png";
-
-    // grid2img(&ret, pal, output);
-
-    // let grid = rad.ppi_to_grid_lonlat(1.4699999, "Z").unwrap();
-
-    // grid2diamond4(&grid, "d:/temp/demo");
     let output = "/mnt/d/temp/demo4";
-    todiamond4(&reader, output);
-    // tonompbfs(&reader, output);
-    // tonoms(&reader, output);
+    // todiamond4(&reader, output);
+    // // tonompbfs(&reader, output);
+    tonoms(&reader, output);
+
+    let fname = r##"/mnt/d/temp/demo4/单站雷达/大校场/Z/1.49/20180614135631.000.NOM"##;
+    let reader = File::open(fname).unwrap();
+    let bufrd = BufReader::new(&reader);
+    let grid: NomGrid = serde_json::from_reader(bufrd).unwrap();
+
+    nom2img(&grid, "palette/xradar.xml", r#"/mnt/d/temp/demo.png"#)
 }

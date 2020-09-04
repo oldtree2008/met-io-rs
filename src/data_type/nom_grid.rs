@@ -7,13 +7,13 @@ pub struct NomGrid {
     pub data: Vec<Vec<f32>>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct LatLng {
     pub lat: f32,
     pub lng: f32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct LatLngBounds {
     pub _southWest: LatLng,
     pub _northEast: LatLng,
