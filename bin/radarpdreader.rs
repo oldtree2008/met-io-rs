@@ -9,9 +9,9 @@ use std::path::Path;
 pub fn main() {
     //LGDPV20160610135814014.000
     let fname = r#"/mnt/e/data/单站/STANDARD_PRODUCT/LGCPZ20160610135814014.000"#;
-    let fname = r#"/mnt/e/data/RADAR_STANDARD_PRODUCT   雷达产品/LGDPV20160610135814014.000"#;
-    // let fname = r#"/mnt/e/data/单站/STANDARD_PRODUCT/LBCPZ20180614135631008.200"#;
-    // // let fname = r#"/mnt/e/data/单站/STANDARD_PRODUCT/LGCRW20160610164007015.000"#;
+    // let fname = r#"/mnt/e/data/RADAR_STANDARD_PRODUCT   雷达产品/LGDPV20160610135814014.000"#;
+    let fname = r#"/mnt/e/data/单站/STANDARD_PRODUCT/LBCPZ20180614135631008.200"#;
+    let fname = r#"/mnt/e/data/单站/STANDARD_PRODUCT/LGCRW20160610164007015.000"#;
     let p = Path::new("palette/xradar.xml");
     let reader = RadarPDReader::new(fname).unwrap();
     let output = "/mnt/d/temp/demo4";

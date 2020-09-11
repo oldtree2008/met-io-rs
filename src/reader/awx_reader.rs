@@ -141,8 +141,8 @@ impl AwxReader {
         let mut reader = Cursor::new(&d);
         dbg!(d.len());
         let product: Product = reader.read_le()?;
-        // dbg!(product.productCategory);
-        // dbg!(product.manufacturer);
+        dbg!(&product.productCategory);
+        dbg!(&product.manufacturer);
         // dbg!(&product.data1.unwrap()[900..1000]);
         // dbg!(product.header1.unwrap().channel);
         Ok(AwxReader(product))
