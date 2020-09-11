@@ -46,7 +46,6 @@ pub fn nom2img(grid: &NomGrid, palfile: &str, output: &str) {
         h
     );
 
-
     // let grid_value = &grid.data;
 
     let mut imgbuf = ImageBuffer::new(w, h);

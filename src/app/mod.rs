@@ -1,5 +1,6 @@
 use crate::*;
 use anyhow::*;
+use log::*;
 use std::path::Path;
 mod monitor_config;
 mod output_type;
@@ -37,93 +38,129 @@ pub fn convert_data(
 
     match rt {
         AWX => {
-            let reader = AwxReader::new(fname).unwrap();
-            for o in ot {
-                match o {
-                    Diamond4 => todiamond4(&reader, output).unwrap(),
-                    NomGrid => tonoms(&reader, output).unwrap(),
-                    NOMProto => tonompbfs(&reader, output).unwrap(),
+            let reader = AwxReader::new(fname);
+            if let Ok(reader) = reader {
+                for o in ot {
+                    match o {
+                        Diamond4 => todiamond4(&reader, output).unwrap(),
+                        NomGrid => tonoms(&reader, output).unwrap(),
+                        NOMProto => tonompbfs(&reader, output).unwrap(),
+                    }
                 }
+            } else {
+                println!("AwxReader {}  {}", fname, reader.err().unwrap());
             }
         }
         GPF => {
-            let reader = GpfReader::new(fname).unwrap();
-            for o in ot {
-                match o {
-                    Diamond4 => todiamond4(&reader, output).unwrap(),
-                    NomGrid => tonoms(&reader, output).unwrap(),
-                    NOMProto => tonompbfs(&reader, output).unwrap(),
+            let reader = GpfReader::new(fname);
+            if let Ok(reader) = reader {
+                for o in ot {
+                    match o {
+                        Diamond4 => todiamond4(&reader, output).unwrap(),
+                        NomGrid => tonoms(&reader, output).unwrap(),
+                        NOMProto => tonompbfs(&reader, output).unwrap(),
+                    }
                 }
+            } else {
+                println!("GpfReader {}  {}", fname, reader.err().unwrap());
             }
         }
         GRIB => {
-            let reader = GribReader::new(fname).unwrap();
-            for o in ot {
-                match o {
-                    Diamond4 => todiamond4(&reader, output).unwrap(),
-                    NomGrid => tonoms(&reader, output).unwrap(),
-                    NOMProto => tonompbfs(&reader, output).unwrap(),
+            let reader = GribReader::new(fname);
+            if let Ok(reader) = reader {
+                for o in ot {
+                    match o {
+                        Diamond4 => todiamond4(&reader, output).unwrap(),
+                        NomGrid => tonoms(&reader, output).unwrap(),
+                        NOMProto => tonompbfs(&reader, output).unwrap(),
+                    }
                 }
+            } else {
+                println!("GribReader {}  {}", fname, reader.err().unwrap());
             }
         }
         KJSAT => {
-            let reader = KJSatReader::new(fname).unwrap();
-            for o in ot {
-                match o {
-                    Diamond4 => todiamond4(&reader, output).unwrap(),
-                    NomGrid => tonoms(&reader, output).unwrap(),
-                    NOMProto => tonompbfs(&reader, output).unwrap(),
+            let reader = KJSatReader::new(fname);
+            if let Ok(reader) = reader {
+                for o in ot {
+                    match o {
+                        Diamond4 => todiamond4(&reader, output).unwrap(),
+                        NomGrid => tonoms(&reader, output).unwrap(),
+                        NOMProto => tonompbfs(&reader, output).unwrap(),
+                    }
                 }
+            } else {
+                println!("KJSatReader {}  {}", fname, reader.err().unwrap());
             }
         }
         KJH5 => {
-            let reader = KJH5SatReader::new(fname).unwrap();
-            for o in ot {
-                match o {
-                    Diamond4 => todiamond4(&reader, output).unwrap(),
-                    NomGrid => tonoms(&reader, output).unwrap(),
-                    NOMProto => tonompbfs(&reader, output).unwrap(),
+            let reader = KJH5SatReader::new(fname);
+            if let Ok(reader) = reader {
+                for o in ot {
+                    match o {
+                        Diamond4 => todiamond4(&reader, output).unwrap(),
+                        NomGrid => tonoms(&reader, output).unwrap(),
+                        NOMProto => tonompbfs(&reader, output).unwrap(),
+                    }
                 }
+            } else {
+                println!("KJH5SatReader {}  {}", fname, reader.err().unwrap());
             }
         }
         RAD386 => {
-            let reader = Radar386Reader::new(fname).unwrap();
-            for o in ot {
-                match o {
-                    Diamond4 => todiamond4(&reader, output).unwrap(),
-                    NomGrid => tonoms(&reader, output).unwrap(),
-                    NOMProto => tonompbfs(&reader, output).unwrap(),
+            let reader = Radar386Reader::new(fname);
+            if let Ok(reader) = reader {
+                for o in ot {
+                    match o {
+                        Diamond4 => todiamond4(&reader, output).unwrap(),
+                        NomGrid => tonoms(&reader, output).unwrap(),
+                        NOMProto => tonompbfs(&reader, output).unwrap(),
+                    }
                 }
+            } else {
+                println!("Radar386Reader {}  {}", fname, reader.err().unwrap());
             }
         }
         RADPD => {
-            let reader = RadarPDReader::new(fname).unwrap();
-            for o in ot {
-                match o {
-                    Diamond4 => todiamond4(&reader, output).unwrap(),
-                    NomGrid => tonoms(&reader, output).unwrap(),
-                    NOMProto => tonompbfs(&reader, output).unwrap(),
+            let reader = RadarPDReader::new(fname);
+            if let Ok(reader) = reader {
+                for o in ot {
+                    match o {
+                        Diamond4 => todiamond4(&reader, output).unwrap(),
+                        NomGrid => tonoms(&reader, output).unwrap(),
+                        NOMProto => tonompbfs(&reader, output).unwrap(),
+                    }
                 }
+            } else {
+                println!("RadarPDReader {}  {}", fname, reader.err().unwrap());
             }
         }
         RADPT => {
-            let reader = RadarPTReader::new(fname).unwrap();
-            for o in ot {
-                match o {
-                    Diamond4 => todiamond4(&reader, output).unwrap(),
-                    NomGrid => tonoms(&reader, output).unwrap(),
-                    NOMProto => tonompbfs(&reader, output).unwrap(),
+            let reader = RadarPTReader::new(fname);
+            if let Ok(reader) = reader {
+                for o in ot {
+                    match o {
+                        Diamond4 => todiamond4(&reader, output).unwrap(),
+                        NomGrid => tonoms(&reader, output).unwrap(),
+                        NOMProto => tonompbfs(&reader, output).unwrap(),
+                    }
                 }
+            } else {
+                println!("RadarPTReader {}  {}", fname, reader.err().unwrap());
             }
         }
         XRAD => {
-            let reader = XRadarReader::new(fname).unwrap();
-            for o in ot {
-                match o {
-                    Diamond4 => todiamond4(&reader, output).unwrap(),
-                    NomGrid => tonoms(&reader, output).unwrap(),
-                    NOMProto => tonompbfs(&reader, output).unwrap(),
+            let reader = XRadarReader::new(fname);
+            if let Ok(reader) = reader {
+                for o in ot {
+                    match o {
+                        Diamond4 => todiamond4(&reader, output).unwrap(),
+                        NomGrid => tonoms(&reader, output).unwrap(),
+                        NOMProto => tonompbfs(&reader, output).unwrap(),
+                    }
                 }
+            } else {
+                println!("XRadarReader {}  {}", fname, reader.err().unwrap());
             }
         }
     }

@@ -10,10 +10,10 @@ pub fn main() {
     let pal = Palette::new_with_file(&p).unwrap();
     let c = pal.get_color(2.0);
     //B03_20200715_1640_HMW8
-    let r = AwxReader::new(r##"D:\BaiduNetdiskDownload\ANI_IR1_R04_20200509_0900_FY2G.AWX"##);
+    let r = AwxReader::new(r##"/mnt/e/data/awx/EIEU052C.AWX"##);
     // let r = AwxReader::read(r##"h:\data\B03_20200715_1640_HMW8.AWX"##);
     let r = r.unwrap();
 
     let ret = r.to_grids().unwrap();
-    grids2diamond4s(&ret, "d:/temp/awx");
+    grids2diamond4s(&ret, "/mnt/d/temp/awx");
 }

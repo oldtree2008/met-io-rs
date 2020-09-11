@@ -112,7 +112,7 @@ impl RadarPDReader {
         }
         let st = GBK.decode(&st).0;
         let st = st.to_string();
-        // dbg!(st);
+        dbg!(&observe.physical_type, &observe.product_style);
 
         let mut props = HashMap::new();
         props.insert(String::from("product"), String::from("单站雷达"));
@@ -162,7 +162,7 @@ impl RadarPDReader {
 
             let bin_num = layer.gate_count;
             let bin_width = layer.gate_leng as f64 * 0.1;
-            dbg!(bin_num, bin_width);
+            // dbg!(bin_num, bin_width);
             for r in 0..layer.radial_count {
                 let v: RadarData = BinRead::read(&mut cursor)?;
                 let el = v.el as f32 * 0.01;

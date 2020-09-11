@@ -168,7 +168,7 @@ impl ToGrids for KJH5SatReader {
                 level: None,
                 element: String::from(*e),
                 center: String::new(),
-                product: String::from("FY2E"),
+                product: String::from("ku/FY2E"),
                 station: None,
                 values: last_values[i].clone(),
                 data_date: String::from("20181101"),

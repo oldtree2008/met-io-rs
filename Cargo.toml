@@ -109,3 +109,7 @@ path="bin/testbin.rs"
 [[bin]]
 name="vbtgs"
 path="bin/vbtgsradar.rs"
+
+[[bin]]
+name="rgba2float"
+path="bin/rgba2float.rs"

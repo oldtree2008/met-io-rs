@@ -7,7 +7,7 @@ use rayon::prelude::*;
 pub fn normalize_grid(d: &SingleGrid) -> SingleGrid {
     let mut new_grid = d.clone();
     // let gap = (d.lat_gap + d.lng_gap) / 2.0;
-    let gap =  f64::min(d.lat_gap,d.lng_gap);
+    let gap = f64::min(d.lat_gap, d.lng_gap);
     let nj = (d.end_lat - d.start_lat) / gap;
     let nj = nj as i64 + 1;
     let ni = (d.end_lng - d.start_lng) / gap;
@@ -15,10 +15,16 @@ pub fn normalize_grid(d: &SingleGrid) -> SingleGrid {
 
     let end_lat = d.start_lat + (nj - 1) as f64 * gap;
     let end_lng = d.start_lng + (ni - 1) as f64 * gap;
-    
+
     let mut values = vec![crate::MISSING; (ni * nj) as usize];
     let data_len = d.values.len();
     // dbg!(&values[0]);
+    // d.values.iter().for_each(|d| {
+    //     if d.is_nan() {
+    //         println!("IS nan");
+    //     }
+    // });
+
     values.iter_mut().enumerate().for_each(|(i, vv)| {
         let r = i / ni as usize;
         let c = i % ni as usize;
@@ -69,7 +75,10 @@ pub fn normalize_grid(d: &SingleGrid) -> SingleGrid {
             );
             if v.is_nan() {
                 v = crate::MISSING;
-                println!("MISSING");
+                println!(
+                    "MISSING {} {} {} {}  {} {} {} {}",
+                    data00, data01, data10, data11, oldr0, oldr1, oldc0, oldc1
+                );
             }
             *vv = v;
         }

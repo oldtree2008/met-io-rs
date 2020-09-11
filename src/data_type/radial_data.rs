@@ -154,8 +154,8 @@ impl RadialData {
             return None;
         }
         let ele_idx = idx.unwrap();
-        let cols = 1000;
-        let rows = 1000;
+        let cols = 1024;
+        let rows = 1024;
 
         let lon0 = self.lon;
         let lat0 = self.lat;
@@ -190,7 +190,11 @@ impl RadialData {
             let elv_rs = &self.rs[ele_idx][az_idx];
             if let Some(range_idx) = find_index1(elv_rs, rang as f64) {
                 let az0 = elv_azs[az_idx];
-                let az1 = elv_azs[az_idx1];
+                let mut az1 = elv_azs[az_idx1];
+                //hack
+                if az0 == az1 {
+                    az1 = 0.0001;
+                }
                 let rang0 = elv_rs[range_idx];
                 let rang1 = elv_rs[range_idx + 1];
                 let v00 = elv_values[az_idx][range_idx];
@@ -209,6 +213,13 @@ impl RadialData {
                     v10 as f32,
                     v11 as f32,
                 );
+                if v.is_nan() {
+                    println!("is_nan");
+                    // println!(
+                    //     "IS nan az{} rang {} az0 {} az1 {} rang0 {} rang1 {}  elv_azs {:#?}  az_indx {} az_index1 {}",
+                    //     az, rang, az0, az1, rang0, rang1,elv_azs,az_idx,az_idx1
+                    // );
+                }
                 *d = v;
             }
         });

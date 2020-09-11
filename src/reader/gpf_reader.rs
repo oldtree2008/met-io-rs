@@ -151,7 +151,10 @@ impl ToGrids for GpfReader {
         let lng_gap = 0.05;
         let lat_gap = -0.05;
 
-        let prod_name = self.prod_name().unwrap_or(String::from("UNKNOWN"));
+        let prod_name = format!(
+            "gpf/{}",
+            self.prod_name().unwrap_or(String::from("UNKNOWN"))
+        );
         let data_date = format!("{}{:02}{:02}", self.wYear, self.wMonth, self.wDay);
         let data_time = format!("{:02}{:02}00", self.wHour, self.wMinute);
         let data_des = format!("{}{}{}", data_date, data_time, prod_name);

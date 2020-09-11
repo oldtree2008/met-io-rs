@@ -1,4 +1,4 @@
-#[derive(Clone,Debug)]
+#[derive(Clone, Debug)]
 pub struct SingleGrid<T = f32, L = f32> {
     pub ni: i64, //列数，lon的个数
     pub nj: i64,
