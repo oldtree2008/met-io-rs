@@ -80,7 +80,7 @@ pub fn main() {
         if let Ok(r) = r {
             let ret = r.to_grids().unwrap();
             grids2diamond4s(&ret, "/mnt/d/temp/awx");
-        }else {
+        } else {
             println!("error reader {}", r.err().unwrap());
         }
     }
