@@ -156,7 +156,8 @@ impl RadialData {
         let ele_idx = idx.unwrap();
         let cols = 1024;
         let rows = 1024;
-
+        let cols = 256;
+        let rows = 256;
         let lon0 = self.lon;
         let lat0 = self.lat;
 

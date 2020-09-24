@@ -1,4 +1,5 @@
 #![allow(non_snake_case)]
+use crate::kjlocationer::KJLocationer;
 use crate::MetError;
 use crate::{SingleGrid, ToGrids};
 use std::fs::File;
@@ -151,6 +152,15 @@ impl AwxReader {
 
 impl ToGrids for AwxReader {
     fn to_grids(&self) -> Option<Vec<SingleGrid>> {
+        // let (lng1,lat1) = loc.lbt_grid_ij_to_lat_and_longitude_proc(0f32,0f32);
+        // let (lng2,lat2) = loc.lbt_grid_ij_to_lat_and_longitude_proc(0f32,512f32);
+
+        // let (lng3,lat3) = loc.lbt_grid_ij_to_lat_and_longitude_proc(512f32,0f32);
+        // let (lng4,lat4) = loc.lbt_grid_ij_to_lat_and_longitude_proc(512f32,512f32);
+
+        // println!("lng1 {} lat1 {}   lng2 {} lat2 {}",lng1,lat1,lng2,lat2);
+        // println!("lng3 {} lat3 {}   lng4 {} lat4 {}",lng3,lat3,lng4,lat4);
+
         let p = &self.0;
         if p.productCategory == 1 {
             let header = p.header1.as_ref().unwrap();
@@ -187,24 +197,85 @@ impl ToGrids for AwxReader {
             } else {
                 "未投影".to_string()
             };
-            let width = header.widthOfImage;
-            let height = header.heightOfImage;
-            let end_lat = header.latitudeOfNorth;
-            let start_lat = header.latitudeOfSouth;
-            let start_lng = header.longitudeOfWest;
-            let end_lng = header.longitudeOfEast;
-            let lat_gap = (end_lat - start_lat) / (height - 1) as f32;
-            let lng_gap = (end_lng - start_lng) / (width - 1) as f32;
+
+            println!("proj {}", project);
+            println!(
+                "res {}  {}",
+                header.horizontalResolution, header.verticalResolution
+            );
+            println!(
+                "center {}  {}",
+                header.centerLatitudeOfProjection, header.centerLongitudeOfProjection
+            );
+            println!(
+                "lats {}  {}",
+                header.standardLatitude1, header.standardLatitude2
+            );
+            let lat0 = header.centerLatitudeOfProjection as f32 * 0.01;
+            let lon0 = header.centerLongitudeOfProjection as f32 * 0.01;
+            let xres = header.horizontalResolution as f32 * 0.01;
+            let yres = header.verticalResolution  as f32* 0.01;
+            let mut width = header.widthOfImage;
+            let mut height = header.heightOfImage;
+            let image_width = width;
+            let image_height = height;
+            let mut end_lat = header.latitudeOfNorth;
+            let mut start_lat = header.latitudeOfSouth;
+            let mut start_lng = header.longitudeOfWest;
+            let mut end_lng = header.longitudeOfEast;
+            let mut lat_gap = (end_lat - start_lat) / (height - 1) as f32;
+            let mut lng_gap = (end_lng - start_lng) / (width - 1) as f32;
             let data = p.data1.as_ref().unwrap();
+
             // println!("data_len {}  {}",data.len(),(width as usize * height as usize));
+            let data_size = width as usize * height as usize;
+            // println!("width {}  height {}  datasize {} ",width,height,data_size);
+            if proj == 1 {
+                start_lng = 60.0;
+                end_lng = 160.0;
+                start_lat = -0.5;
+                end_lat = 60.5;
+
+                lng_gap = 0.05;
+                lat_gap = 0.05;
+
+                width = ((end_lng - start_lng) / lng_gap) as i16 + 1;
+                height = ((end_lat - start_lat) / lat_gap) as i16 + 1;
+
+                // width = f32::ab
+            }
+            // println!("width {}  height {}",width,height);
             let mut values = vec![0f32; width as usize * height as usize];
-            values.iter_mut().enumerate().for_each(|(indx, v)| {
-                let r = indx / width as usize;
-                let c = indx % width as usize;
-                let r1 = height as usize - 1 - r;
-                let dindx = r1 * width as usize + c;
-                *v = data[dindx] as f32;
-            });
+            if proj == 1 {
+                let loc =
+                    KJLocationer::with_params(lat0, lon0, image_width as i32, image_height as i32, xres, yres);
+                let ni = width;
+                let nj = height;
+                values.iter_mut().enumerate().for_each(|(idx, v)| {
+                    let r = idx / ni as usize;
+                    let c = idx % ni as usize;
+                    let lon = start_lng + c as f32 * lng_gap;
+                    let lat = start_lat + r as f32 * lat_gap;
+                    let (x, y) = loc.lbt_lat_lon_to_xy_coord_proc(lat, lon);
+                    if x >= 0.0 && y >= 0.0 && x < image_width as f64 && y < image_height as f64 {
+                        let ix = x as usize;
+                        let iy = y as usize;
+                        // let index = (height as usize - 1 - iy) * width as usize + ix;
+                        let index = iy * image_width as usize + ix;
+                        if index < data_size {
+                            *v = data[index] as f32;
+                        }
+                    }
+                });
+            } else {
+                values.iter_mut().enumerate().for_each(|(indx, v)| {
+                    let r = indx / width as usize;
+                    let c = indx % width as usize;
+                    let r1 = height as usize - 1 - r;
+                    let dindx = r1 * width as usize + c;
+                    *v = data[dindx] as f32;
+                });
+            }
 
             let data_date = format!("{}{:02}{:02}", header.year, header.month, header.day);
             let data_time = format!("{:02}{:02}00", header.hour, header.minute);
@@ -228,6 +299,10 @@ impl ToGrids for AwxReader {
                 product: product.clone(),
                 station: None,
             };
+            // println!(
+            //     "ni {} nj {} lat_gap {} lng_gap {} start_lat {} start lng {}",
+            //     width, height, lat_gap, lng_gap, start_lat, start_lng
+            // );
             return Some(vec![grid]);
         } else {
             unimplemented!();

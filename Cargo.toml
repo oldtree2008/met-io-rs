@@ -29,6 +29,7 @@ notify = {path="notify"}
 crossbeam-channel = "0.4.3"
 env_logger = "0.7.1"
 dotenv = "0.15.0"
+bitvec = "0.18"
 
 [build-dependencies]
 protobuf-codegen-pure="*"
@@ -113,3 +114,7 @@ path="bin/vbtgsradar.rs"
 [[bin]]
 name="rgba2float"
 path="bin/rgba2float.rs"
+
+[[bin]]
+name="awsreader"
+path="bin/awsreader.rs"

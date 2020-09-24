@@ -9,6 +9,16 @@ pub struct KJLocationer {
 }
 
 impl KJLocationer {
+    pub fn with_params(lat0: f32, lon0: f32, with: i32, height: i32, xres: f32, yres: f32) -> Self {
+        Self {
+            GWT_LAT0: lat0,
+            GWT_LON0: lon0,
+            GWT_NXL: with/2,
+            GWT_NYD: height/2,
+            GWT_XGD: xres,
+            GWT_YGD: yres,
+        }
+    }
     pub fn new(type1: i32) -> Option<Self> {
         let GWT_LAT0;
         let GWT_LON0;
@@ -60,6 +70,24 @@ impl KJLocationer {
             GWT_NYD = 575 / 2;
             GWT_XGD = 13.42; //12.71 ;
             GWT_YGD = 13.11; //12.55 ;
+            Some({
+                KJLocationer {
+                    GWT_LAT0,
+                    GWT_LON0,
+                    GWT_NXL,
+                    GWT_NYD,
+                    GWT_XGD,
+                    GWT_YGD,
+                }
+            })
+        } else if type1 == 4 {
+            //  国家卫星气象中心AWX格式兰勃托投影参数
+            GWT_LAT0 = 30.0;
+            GWT_LON0 = 110.0;
+            GWT_NXL = 512 / 2;
+            GWT_NYD = 512 / 2;
+            GWT_XGD = 13.0;
+            GWT_YGD = 13.0;
             Some({
                 KJLocationer {
                     GWT_LAT0,
