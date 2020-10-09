@@ -131,7 +131,8 @@ fn main() {
         "KWWWC2020010200800024.grb",
         "KWWWC2020010200900003.grb",
     ];
-    let fname = r##"/mnt/j/kj/data/T511/GRB/KTDIA2018013112925003.grb"##;
+    // let fname = r##"/mnt/j/kj/data/T511/GRB/KTDIA2018013112925003.grb"##;
+    let fname = r##"/mnt/i/grib/ECMWF/C1D/2019/20190603/"##;
     // let fname = format!("/mnt/j/kj/data/WRF/GRB/{}", f);
     let reader = GribReader::new(&fname).unwrap();
 

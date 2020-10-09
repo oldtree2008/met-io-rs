@@ -1,5 +1,6 @@
 use crate::error::MetError;
 use crate::kjlocationer::KJLocationer;
+use crate::mercator_trans::MercatorTrans;
 use crate::SingleGrid;
 use crate::ToGrids;
 use binread::prelude::*;
@@ -156,27 +157,60 @@ impl ToGrids for KJSatReader {
         let nj = -(end_lat - start_lat) / step;
         let nj = nj as i16 + 1;
 
-        dbg!(ni, nj);
         let data_size = ni as usize * nj as usize;
 
         dbg!(ni, nj, data_size);
         let mut values = vec![crate::MISSING; data_size];
-        values.iter_mut().enumerate().for_each(|(idx, v)| {
-            let r = idx / ni as usize;
-            let c = idx % ni as usize;
-            let lon = start_lng + c as f32 * step;
-            let lat = start_lat - r as f32 * step;
-            let (x, y) = loc.lbt_lat_lon_to_xy_coord_proc(lat, lon);
-            if x >= 0.0 && y >= 0.0 && x < width as f64 && y < height as f64 {
-                let ix = x as usize;
-                let iy = y as usize;
-                // let index = (height as usize - 1 - iy) * width as usize + ix;
-                let index = iy * width as usize + ix;
-                if index < data_size {
-                    *v = self.values[index] as f32;
+
+        let proj = self.proj();
+        if proj == String::from("兰伯特投影坐标系") {
+            dbg!(&proj);
+            values.iter_mut().enumerate().for_each(|(idx, v)| {
+                let r = idx / ni as usize;
+                let c = idx % ni as usize;
+                let lon = start_lng + c as f32 * step;
+                let lat = start_lat - r as f32 * step;
+                let (x, y) = loc.lbt_lat_lon_to_xy_coord_proc(lat, lon);
+                if x >= 0.0 && y >= 0.0 && x < width as f64 && y < height as f64 {
+                    let ix = x as usize;
+                    let iy = y as usize;
+                    // let index = (height as usize - 1 - iy) * width as usize + ix;
+                    let index = iy * width as usize + ix;
+                    if index < data_size {
+                        *v = self.values[index] as f32;
+                    }
                 }
-            }
-        });
+            });
+        } else if proj == String::from("墨卡托投影坐标系") {
+            dbg!(&proj);
+            dbg!(&self.east, &self.south, &self.west, &self.north);
+            let trans = MercatorTrans::new(
+                self.east as f32,
+                self.south as f32,
+                self.west as f32,
+                self.north as f32,
+                self.res,
+                self.width as usize,
+                self.height as usize,
+            );
+            values.iter_mut().enumerate().for_each(|(idx, v)| {
+                let r = idx / ni as usize;
+                let c = idx % ni as usize;
+                let lon = start_lng + c as f32 * step;
+                let lat = start_lat - r as f32 * step;
+                let (x, y) = trans.latlon2xycoords(lat as f64, lon as f64);
+                if x >= 0 && y >= 0 {
+                    // dbg!(x,y);
+                    let ix = x as usize;
+                    let iy = y as usize;
+                    // let index = (height as usize - 1 - iy) * width as usize + ix;
+                    let index = iy * width as usize + ix;
+                    if index < data_size {
+                        *v = self.values[index] as f32;
+                    }
+                }
+            });
+        }
 
         let date_time = self.data_date_time();
         let prod_el = self.data_prod_ele();

@@ -15,6 +15,7 @@ pub use protos::nom;
 pub use reader::*;
 pub use utils::interplate;
 pub use utils::kjlocationer;
+pub use utils::mercator_trans;
 pub use utils::transforms;
 
 pub const MISSING: f32 = 9999.0; //无效值

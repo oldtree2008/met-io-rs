@@ -214,7 +214,7 @@ impl ToGrids for AwxReader {
             let lat0 = header.centerLatitudeOfProjection as f32 * 0.01;
             let lon0 = header.centerLongitudeOfProjection as f32 * 0.01;
             let xres = header.horizontalResolution as f32 * 0.01;
-            let yres = header.verticalResolution  as f32* 0.01;
+            let yres = header.verticalResolution as f32 * 0.01;
             let mut width = header.widthOfImage;
             let mut height = header.heightOfImage;
             let image_width = width;
@@ -247,8 +247,14 @@ impl ToGrids for AwxReader {
             // println!("width {}  height {}",width,height);
             let mut values = vec![0f32; width as usize * height as usize];
             if proj == 1 {
-                let loc =
-                    KJLocationer::with_params(lat0, lon0, image_width as i32, image_height as i32, xres, yres);
+                let loc = KJLocationer::with_params(
+                    lat0,
+                    lon0,
+                    image_width as i32,
+                    image_height as i32,
+                    xres,
+                    yres,
+                );
                 let ni = width;
                 let nj = height;
                 values.iter_mut().enumerate().for_each(|(idx, v)| {

@@ -118,3 +118,7 @@ path="bin/rgba2float.rs"
 [[bin]]
 name="awsreader"
 path="bin/awsreader.rs"
+
+[[bin]]
+name="mercatortrans"
+path="bin/mercatortrans.rs"

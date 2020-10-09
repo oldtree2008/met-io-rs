@@ -4,8 +4,8 @@ fn main() {
     // let fname = "/mnt/e/data/201805311031_ch4_lbt_fy2e.kj";
     let fname = "/mnt/e/data/kj/202001191259_ch6_mkt_fy2g.kj";
     //202001191329_ch1_lbt_fy2g.kj
-    let fname = "/mnt/e/data/kj/202001191329_ch1_lbt_fy2g.kj";
-    let fname = "/mnt/e/data/kj/202001191329_ch3_lbt_fy2g.kj";
+    // let fname = "/mnt/e/data/kj/202001191329_ch1_lbt_fy2g.kj";
+    // let fname = "/mnt/e/data/kj/202001191329_ch3_lbt_fy2g.kj";
     // let fname = "/mnt/e/data/kj/202001191329_ch3_mkt_fy2g.kj";
     let pad = "palette/I-01.xml";
     // let pad = "palette/v-05.xml";//V-01_x
@@ -51,13 +51,13 @@ fn main() {
 
     dbg!(&reader.data_date_time());
     dbg!(&reader.data_prod_ele());
-    dbg!(&reader.proj());
+    // dbg!(&reader.proj());
 
     let grids = reader.to_grids();
     let grids = grids.unwrap();
     for grid in grids.iter() {
         grid2diamond4(grid, "/mnt/d/temp/demo");
-        grid2nom(grid, "/mnt/d/temp/demo");
+        // grid2nom(grid, "/mnt/d/temp/demo");
     }
 
     // dbg!(&reader.values);

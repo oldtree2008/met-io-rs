@@ -13,8 +13,8 @@ impl KJLocationer {
         Self {
             GWT_LAT0: lat0,
             GWT_LON0: lon0,
-            GWT_NXL: with/2,
-            GWT_NYD: height/2,
+            GWT_NXL: with / 2,
+            GWT_NYD: height / 2,
             GWT_XGD: xres,
             GWT_YGD: yres,
         }
