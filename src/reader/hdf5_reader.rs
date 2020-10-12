@@ -1,6 +1,6 @@
 use crate::error::MetError;
 use hdf5;
-use hdf5::{Attribute,Dataset};
+use hdf5::{Attribute, Dataset};
 
 #[derive(Debug)]
 pub struct Hdf5Reader(Option<hdf5::File>);
@@ -12,12 +12,12 @@ impl Hdf5Reader {
     }
 
     pub fn member_names(&self) -> hdf5::Result<Vec<String>> {
-        let f = &self.0.as_ref().unwrap();        
+        let f = &self.0.as_ref().unwrap();
         let ms = f.member_names();
         ms
     }
     pub fn attribute_names(&self) -> hdf5::Result<Vec<String>> {
-        let f = &self.0.as_ref().unwrap();        
+        let f = &self.0.as_ref().unwrap();
         let ms = f.attribute_names();
         ms
     }
@@ -35,5 +35,4 @@ impl Hdf5Reader {
         let d = f.dataset(name).unwrap();
         d.shape()
     }
-
 }

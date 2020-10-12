@@ -4,8 +4,8 @@ fn main() {
     // let (x, y) = trans.latlon2xycoords(40.0, 85.0);
 
     // dbg!(x, y);
-    let (x,y) = trans.latlon_to_pixels(40.0, 85.0, 1.7);
+    let (x, y) = trans.latlon_to_pixels(40.0, 85.0, 1.7);
     dbg!(x, y);
-    let (x1,y1) = trans.latlon_to_pixels(-4.0, 155.0, 1.7);
-    dbg!(x1-x, y-y1);
+    let (x1, y1) = trans.latlon_to_pixels(-4.0, 155.0, 1.7);
+    dbg!(x1 - x, y - y1);
 }

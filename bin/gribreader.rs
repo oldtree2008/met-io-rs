@@ -133,17 +133,19 @@ fn main() {
     ];
     // let fname = r##"/mnt/j/kj/data/T511/GRB/KTDIA2018013112925003.grb"##;
     let fname = r##"/mnt/i/grib/ECMWF/C1D/2019/20190603/"##;
+    let fname = r##"/mnt/e/kjdata/0930to东华/5.NCEP样例数据FNL/FNL/fnl_20200201_00_00.grib2"##;
     // let fname = format!("/mnt/j/kj/data/WRF/GRB/{}", f);
     let reader = GribReader::new(&fname).unwrap();
 
     // let fname = r##"/mnt/j/kj/data/WRF/GRB/KWUTC2018090612999048.grb"##;
+    // /mnt/e/kjdata/0930to东华/5.NCEP样例数据FNL/FNL/fnl_20200201_00_00.grib2
     let output = r##"/mnt/d/temp/grib2"##;
     todiamond4(&reader, output);
 
-    for f in files.iter() {
-        let fname = format!("/mnt/j/kj/data/WRF/GRB/{}", f);
-        let reader = GribReader::new(&fname).unwrap();
-        todiamond4(&reader, output);
-        tonoms(&reader, output);
-    }
+    // for f in files.iter() {
+    //     let fname = format!("/mnt/j/kj/data/WRF/GRB/{}", f);
+    //     let reader = GribReader::new(&fname).unwrap();
+    //     todiamond4(&reader, output);
+    //     tonoms(&reader, output);
+    // }
 }

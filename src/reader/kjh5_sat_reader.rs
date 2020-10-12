@@ -17,8 +17,33 @@ impl KJH5SatReader {
 impl ToGrids for KJH5SatReader {
     fn to_grids(&self) -> Option<Vec<SingleGrid>> {
         let reader = &self.0;
-        let attrs = reader.member_names();
+        let vars = reader.member_names();
+        dbg!(vars);
+        let attrs = reader.attribute_names();
         dbg!(attrs);
+
+        let sat_name = reader.attribute("Sat_Name");
+        let sat_name = sat_name.as_ref().unwrap();
+        let sat_name = sat_name
+            .read_scalar::<hdf5::types::FixedAscii<[u8; 16]>>()
+            .unwrap();
+
+        let start_date = reader.attribute("Start_Date");
+        let start_date = start_date.as_ref().unwrap();
+        let start_date = start_date
+            .read_scalar::<hdf5::types::FixedAscii<[u8; 16]>>()
+            .unwrap();
+
+        let start_time = reader.attribute("Start_Time");
+        let start_time = start_time.as_ref().unwrap();
+        let start_time = start_time
+            .read_scalar::<hdf5::types::FixedAscii<[u8; 16]>>()
+            .unwrap();
+        let start_date = start_date.replace("-", "");
+        let start_time = start_time.replace(":", "");
+
+        dbg!(&sat_name, &start_date, &start_time);
+
         let dataset = reader.dataset("Latitude");
         let data = dataset.as_ref();
         let lat = data.unwrap().read_2d::<i16>().unwrap();
@@ -168,11 +193,11 @@ impl ToGrids for KJH5SatReader {
                 level: None,
                 element: String::from(*e),
                 center: String::new(),
-                product: String::from("ku/FY2E"),
+                product: format!("ku/{}", sat_name),
                 station: None,
                 values: last_values[i].clone(),
-                data_date: String::from("20181101"),
-                data_time: String::from("010031"),
+                data_date: format!("{}", start_date),
+                data_time: format!("{}00", start_time),
                 forecast_time: 0,
             };
             sgrids.push(sgrid);

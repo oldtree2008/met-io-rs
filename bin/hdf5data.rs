@@ -46,8 +46,8 @@ fn point_value(lon: f32, lat: f32, lons: &[i16], lats: &[i16], values: &[i16]) -
 }
 
 pub fn main() {
-    let fname = r##"/mnt/e/data/FY2E/FY2E_2018_11_01_00_31.HDF"##;
-    // let fname = r##"/mnt/e/kjdata/FY2G-0916-17/FY2G-0916-17/FY2G_2020_09_16_00_01.HDF"##;
+    // let fname = r##"/mnt/e/data/FY2E/FY2E_2018_11_01_00_31.HDF"##;
+    let fname = r##"/mnt/e/kjdata/FY2G-0916-17/FY2G-0916-17/FY2G_2020_09_16_00_01.HDF"##;
     // let fname = r##"/mnt/e/kjdata/FY2G-0916-17/FY2G-0916-17/FY2G_CBT_2020_09_16_00_01.HDF5"##;
     // let fname = r##"/mnt/e/kjdata/FY2G-0916-17/FY2G-0916-17/FY2G_CHE_2020_09_16_20_00.HDF5"##;
     // let fname = r##"/mnt/e/kjdata/FY2G-0916-17/FY2G-0916-17/FY2G_CLC_2020_09_16_20_00.HDF5"##;
@@ -70,9 +70,13 @@ pub fn main() {
     let attr = reader.attribute("Column").unwrap();
     let attr = reader.attribute("Default").unwrap();
     let attr = reader.attribute("End_Date").unwrap();
+    let attr = reader.attribute("Start_Time").unwrap();
+    let attr = reader.attribute("Sat_Name").unwrap();
     let shape = attr.shape();
     // let attr = attr.read_1d::<u16>().unwrap();
-    let attr = attr.read_scalar::<hdf5::types::FixedAscii<[u8;16]>>().unwrap();
+    let attr = attr
+        .read_scalar::<hdf5::types::FixedAscii<[u8; 16]>>()
+        .unwrap();
     // let attr = attr.read_scalar::<hdf5::types::VarLenAscii>().unwrap();
     dbg!(attrs);
     dbg!(shape);
@@ -87,7 +91,6 @@ pub fn main() {
     // let data = dataset.read_1d::<i16>().unwrap();
     // dbg!(data);
     // let lat_iter = lat.iter();
-
 
     // let dataset = reader.as_ref().unwrap().dataset("Latitude");
     // let data = dataset.as_ref();
