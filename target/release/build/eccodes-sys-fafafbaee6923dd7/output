@@ -1,2 +1,0 @@
-cargo:rustc-link-search=native=/mnt/g/eccodes/lib
-cargo:rustc-link-lib=static=eccodes

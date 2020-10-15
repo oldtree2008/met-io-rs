@@ -1,1 +1,0 @@
-/usr/bin/cc  -std=c99  -ffunction-sections -fdata-sections -fPIC -m64 -fstdarg-opt -pedantic -Wall -Wextra -fmessage-length=0 -O3 -DNDEBUG CMakeFiles/H5make_libsettings.dir/H5make_libsettings.c.o -o ../bin/H5make_libsettings  -Wl,-rpath,"\$ORIGIN/../lib:\$ORIGIN/" 
