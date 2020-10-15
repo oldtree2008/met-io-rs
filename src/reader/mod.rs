@@ -11,6 +11,7 @@ mod radar_ka_sx_reader;
 mod radar_pd_reader;
 mod radar_pt_reader;
 mod radar_vbt_gs_reader;
+mod warn_h5_reader;
 mod xradar_reader;
 
 pub use aws_reader::*;
@@ -26,4 +27,5 @@ pub use radar_ka_sx_reader::*;
 pub use radar_pd_reader::*;
 pub use radar_pt_reader::*;
 pub use radar_vbt_gs_reader::*;
+pub use warn_h5_reader::*;
 pub use xradar_reader::*;

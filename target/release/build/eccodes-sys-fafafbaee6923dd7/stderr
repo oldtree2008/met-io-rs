@@ -1,0 +1,2 @@
+error: toolchain 'nightly-x86_64-unknown-linux-gnu' is not installed
+Custom { kind: Other, error: "Internal rustfmt error" }

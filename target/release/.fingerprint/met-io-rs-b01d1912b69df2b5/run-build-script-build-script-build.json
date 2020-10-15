@@ -1,0 +1,1 @@
+{"rustc":66165631676752942,"features":"","target":0,"profile":0,"path":0,"deps":[[2875463272722023393,"build_script_build",false,11903817545143278086]],"local":[{"RerunIfChanged":{"output":"release/build/met-io-rs-b01d1912b69df2b5/output","paths":["build.rs"]}}],"rustflags":[],"metadata":0,"config":0}

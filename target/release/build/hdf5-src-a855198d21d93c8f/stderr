@@ -1,0 +1,1207 @@
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_ASM_COMPILER
+    CMAKE_ASM_FLAGS
+
+
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c: In function ‘H5_checksum_lookup3’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:409:19: warning: this statement may fall through [-Wimplicit-fallthrough=]
+         case 12: c+=((uint32_t)k[11])<<24;
+                  ~^~~~~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:410:9: note: here
+         case 11: c+=((uint32_t)k[10])<<16;
+         ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:410:19: warning: this statement may fall through [-Wimplicit-fallthrough=]
+         case 11: c+=((uint32_t)k[10])<<16;
+                  ~^~~~~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:411:9: note: here
+         case 10: c+=((uint32_t)k[9])<<8;
+         ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:411:19: warning: this statement may fall through [-Wimplicit-fallthrough=]
+         case 10: c+=((uint32_t)k[9])<<8;
+                  ~^~~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:412:9: note: here
+         case 9 : c+=k[8];
+         ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:412:19: warning: this statement may fall through [-Wimplicit-fallthrough=]
+         case 9 : c+=k[8];
+                  ~^~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:413:9: note: here
+         case 8 : b+=((uint32_t)k[7])<<24;
+         ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:413:19: warning: this statement may fall through [-Wimplicit-fallthrough=]
+         case 8 : b+=((uint32_t)k[7])<<24;
+                  ~^~~~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:414:9: note: here
+         case 7 : b+=((uint32_t)k[6])<<16;
+         ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:414:19: warning: this statement may fall through [-Wimplicit-fallthrough=]
+         case 7 : b+=((uint32_t)k[6])<<16;
+                  ~^~~~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:415:9: note: here
+         case 6 : b+=((uint32_t)k[5])<<8;
+         ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:415:19: warning: this statement may fall through [-Wimplicit-fallthrough=]
+         case 6 : b+=((uint32_t)k[5])<<8;
+                  ~^~~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:416:9: note: here
+         case 5 : b+=k[4];
+         ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:416:19: warning: this statement may fall through [-Wimplicit-fallthrough=]
+         case 5 : b+=k[4];
+                  ~^~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:417:9: note: here
+         case 4 : a+=((uint32_t)k[3])<<24;
+         ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:417:19: warning: this statement may fall through [-Wimplicit-fallthrough=]
+         case 4 : a+=((uint32_t)k[3])<<24;
+                  ~^~~~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:418:9: note: here
+         case 3 : a+=((uint32_t)k[2])<<16;
+         ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:418:19: warning: this statement may fall through [-Wimplicit-fallthrough=]
+         case 3 : a+=((uint32_t)k[2])<<16;
+                  ~^~~~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:419:9: note: here
+         case 2 : a+=((uint32_t)k[1])<<8;
+         ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:419:19: warning: this statement may fall through [-Wimplicit-fallthrough=]
+         case 2 : a+=((uint32_t)k[1])<<8;
+                  ~^~~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5checksum.c:420:9: note: here
+         case 1 : a+=k[0];
+         ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Adense.c: In function ‘H5A__dense_fnd_cb’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Adense.c:331:27: warning: initialization discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+         H5A_t *old_attr = *user_attr;
+                           ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Aint.c: In function ‘H5A__create’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Aint.c:200:45: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     if(NULL == (attr->shared->dt = H5T_copy(type, H5T_COPY_ALL)))
+                                             ^~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oprivate.h:45:0,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Aprivate.h:25,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Apkg.h:37,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Aint.c:37:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tprivate.h:108:15: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5_DLL H5T_t *H5T_copy(H5T_t *old_dt, H5T_copy_t method);
+               ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Aint.c: In function ‘H5A__read’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Aint.c:638:71: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+                         (dst_id = H5I_register(H5I_DATATYPE, H5T_copy(mem_type, H5T_COPY_ALL), FALSE)) < 0)
+                                                                       ^~~~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oprivate.h:45:0,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Aprivate.h:25,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Apkg.h:37,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Aint.c:37:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tprivate.h:108:15: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5_DLL H5T_t *H5T_copy(H5T_t *old_dt, H5T_copy_t method);
+               ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Aint.c: In function ‘H5A__write’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Aint.c:738:62: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+             if((src_id = H5I_register(H5I_DATATYPE, H5T_copy(mem_type, H5T_COPY_ALL), FALSE)) < 0 ||
+                                                              ^~~~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oprivate.h:45:0,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Aprivate.h:25,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Apkg.h:37,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Aint.c:37:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tprivate.h:108:15: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5_DLL H5T_t *H5T_copy(H5T_t *old_dt, H5T_copy_t method);
+               ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Aint.c: In function ‘H5A__attr_copy_file’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Aint.c:2059:17: warning: unused parameter ‘cpy_info’ [-Wunused-parameter]
+     H5O_copy_t *cpy_info)
+                 ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5B.c: In function ‘H5B_valid’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5B.c:2022:26: warning: variable ‘shared’ set but not used [-Wunused-but-set-variable]
+     H5B_shared_t        *shared;                /* Pointer to shared B-tree info */
+                          ^~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5B2dbg.c: In function ‘H5B2__hdr_debug’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5B2dbg.c:90:25: warning: unused parameter ‘type’ [-Wunused-parameter]
+     const H5B2_class_t *type, haddr_t obj_addr)
+                         ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5B2dbg.c:90:39: warning: unused parameter ‘obj_addr’ [-Wunused-parameter]
+     const H5B2_class_t *type, haddr_t obj_addr)
+                                       ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5B2dbg.c: In function ‘H5B2__int_debug’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5B2dbg.c:185:88: warning: unused parameter ‘obj_addr’ [-Wunused-parameter]
+     const H5B2_class_t *type, haddr_t hdr_addr, unsigned nrec, unsigned depth, haddr_t obj_addr)
+                                                                                        ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5B2dbg.c: In function ‘H5B2__leaf_debug’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5B2dbg.c:297:72: warning: unused parameter ‘obj_addr’ [-Wunused-parameter]
+     const H5B2_class_t *type, haddr_t hdr_addr, unsigned nrec, haddr_t obj_addr)
+                                                                        ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5C.c: In function ‘H5C_flush_cache’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5C.c:1056:14: warning: variable ‘ignore_protected’ set but not used [-Wunused-but-set-variable]
+     hbool_t  ignore_protected;
+              ^~~~~~~~~~~~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5C.c:82:0:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5C.c: In function ‘H5C__unpin_entry_real’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2032:13: warning: unused variable ‘err_occurred’ [-Wunused-variable]
+     hbool_t err_occurred = FALSE;                                             \
+             ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2237:5: note: in expansion of macro ‘FUNC_ENTER_COMMON’
+     FUNC_ENTER_COMMON(H5_IS_PKG(FUNC));                                       \
+     ^~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5C.c:3856:5: note: in expansion of macro ‘FUNC_ENTER_STATIC’
+     FUNC_ENTER_STATIC
+     ^~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5C.c:3873:1: warning: label ‘done’ defined but not used [-Wunused-label]
+ done:
+ ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Clog_json.c: In function ‘H5C__json_write_set_cache_config_log_msg’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Clog_json.c:1284:82: warning: unused parameter ‘config’ [-Wunused-parameter]
+ H5C__json_write_set_cache_config_log_msg(void *udata, const H5AC_cache_config_t *config,
+                                                                                  ^~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5CX.c: In function ‘H5CX_set_loc’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5CX.c:1148:19: warning: unused variable ‘head’ [-Wunused-variable]
+     H5CX_node_t **head = H5CX_get_my_context();  /* Get the pointer to the head of the API context, for this thread */
+                   ^~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5CX.c:34:0:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5CX.c: In function ‘H5CX__pop_common’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2032:13: warning: unused variable ‘err_occurred’ [-Wunused-variable]
+     hbool_t err_occurred = FALSE;                                             \
+             ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2237:5: note: in expansion of macro ‘FUNC_ENTER_COMMON’
+     FUNC_ENTER_COMMON(H5_IS_PKG(FUNC));                                       \
+     ^~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5CX.c:3119:5: note: in expansion of macro ‘FUNC_ENTER_STATIC’
+     FUNC_ENTER_STATIC
+     ^~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5CX.c:3145:1: warning: label ‘done’ defined but not used [-Wunused-label]
+ done:
+ ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5CX.c: At top level:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5CX.c:394:22: warning: ‘H5CX__get_context’ declared ‘static’ but never defined [-Wunused-function]
+ static H5CX_node_t **H5CX__get_context(void);
+                      ^~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dbtree.c: In function ‘H5D__btree_new_node’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dbtree.c:255:28: warning: unused parameter ‘f’ [-Wunused-parameter]
+ H5D__btree_new_node(H5F_t *f, H5B_ins_t op, void *_lt_key, void *_udata,
+                            ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dbtree.c: In function ‘H5D__btree_insert’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dbtree.c:538:26: warning: unused parameter ‘f’ [-Wunused-parameter]
+ H5D__btree_insert(H5F_t *f, haddr_t addr, void *_lt_key, hbool_t *lt_key_changed,
+                          ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dbtree.c:538:37: warning: unused parameter ‘addr’ [-Wunused-parameter]
+ H5D__btree_insert(H5F_t *f, haddr_t addr, void *_lt_key, hbool_t *lt_key_changed,
+                                     ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c: In function ‘H5D__chunk_init’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:932:26: warning: unused variable ‘sc’ [-Wunused-variable]
+     H5O_storage_chunk_t *sc = &(dset->shared->layout.storage.u.chunk);
+                          ^~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c: In function ‘H5D__chunk_is_space_alloc’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:1033:32: warning: unused variable ‘sc’ [-Wunused-variable]
+     const H5O_storage_chunk_t *sc = &(storage->u.chunk);
+                                ^~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c: In function ‘H5D__chunk_dest’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:2605:26: warning: unused variable ‘sc’ [-Wunused-variable]
+     H5O_storage_chunk_t *sc = &(dset->shared->layout.storage.u.chunk);
+                          ^~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c: In function ‘H5D__chunk_create’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:2811:26: warning: unused variable ‘sc’ [-Wunused-variable]
+     H5O_storage_chunk_t *sc = &(dset->shared->layout.storage.u.chunk);
+                          ^~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c: In function ‘H5D__chunk_lookup’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:2906:26: warning: unused variable ‘sc’ [-Wunused-variable]
+     H5O_storage_chunk_t *sc = &(dset->shared->layout.storage.u.chunk);
+                          ^~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c: In function ‘H5D__chunk_flush_entry’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:3050:26: warning: unused variable ‘sc’ [-Wunused-variable]
+     H5O_storage_chunk_t *sc = &(dset->shared->layout.storage.u.chunk);
+                          ^~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c: In function ‘H5D__chunk_allocated’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:3967:26: warning: unused variable ‘sc’ [-Wunused-variable]
+     H5O_storage_chunk_t *sc = &(dset->shared->layout.storage.u.chunk);
+                          ^~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c: In function ‘H5D__chunk_allocate’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:4050:32: warning: unused variable ‘sc’ [-Wunused-variable]
+     const H5O_storage_chunk_t *sc = &(layout->storage.u.chunk);
+                                ^~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c: In function ‘H5D__chunk_update_old_edge_chunks’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:4493:32: warning: unused variable ‘sc’ [-Wunused-variable]
+     const H5O_storage_chunk_t *sc = &(layout->storage.u.chunk);
+                                ^~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:4482:24: warning: unused variable ‘pline’ [-Wunused-variable]
+     const H5O_pline_t *pline = &(dset->shared->dcpl_cache.pline); /* I/O pipeline info */
+                        ^~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c: In function ‘H5D__chunk_prune_by_extent’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:5041:32: warning: unused variable ‘sc’ [-Wunused-variable]
+     const H5O_storage_chunk_t *sc = &(layout->storage.u.chunk);
+                                ^~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c: In function ‘H5D__chunk_delete’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:5444:26: warning: unused variable ‘sc’ [-Wunused-variable]
+     H5O_storage_chunk_t *sc = &(storage->u.chunk);
+                          ^~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c: In function ‘H5D__chunk_copy_cb’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:5830:95: warning: passing argument 5 of ‘H5D__chunk_file_alloc’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     if(H5D__chunk_file_alloc(udata->idx_info_dst, NULL, &udata_dst.chunk_block, &need_insert, udata_dst.common.scaled) < 0)
+                                                                                               ^~~~~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:56:0:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dpkg.h:655:15: note: expected ‘hsize_t * {aka long long unsigned int *}’ but argument is of type ‘const hsize_t * {aka const long long unsigned int *}’
+ H5_DLL herr_t H5D__chunk_file_alloc(const H5D_chk_idx_info_t *idx_info, const H5F_block_t *old_chunk,
+               ^~~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c: In function ‘H5D__chunk_copy’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:5967:39: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+         if(NULL == (dt_mem = H5T_copy(dt_src, H5T_COPY_TRANSIENT)))
+                                       ^~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zprivate.h:28:0,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5CXprivate.h:30,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:55:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tprivate.h:108:15: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5_DLL H5T_t *H5T_copy(H5T_t *old_dt, H5T_copy_t method);
+               ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:5975:39: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+         if(NULL == (dt_dst = H5T_copy(dt_src, H5T_COPY_TRANSIENT)))
+                                       ^~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zprivate.h:28:0,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5CXprivate.h:30,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:55:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tprivate.h:108:15: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5_DLL H5T_t *H5T_copy(H5T_t *old_dt, H5T_copy_t method);
+               ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c: In function ‘H5D__chunk_bh_info’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:6158:26: warning: unused variable ‘sc’ [-Wunused-variable]
+     H5O_storage_chunk_t *sc = &(layout->storage.u.chunk);
+                          ^~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c: In function ‘H5D__chunk_dump_index’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dchunk.c:6280:26: warning: unused variable ‘sc’ [-Wunused-variable]
+     H5O_storage_chunk_t *sc = &(dset->shared->layout.storage.u.chunk);
+                          ^~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dint.c:117:1: warning: ‘static’ is not at beginning of declaration [-Wold-style-declaration]
+ const static char *H5D_prefix_ext_env = NULL;
+ ^~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dint.c:118:1: warning: ‘static’ is not at beginning of declaration [-Wold-style-declaration]
+ const static char *H5D_prefix_vds_env = NULL;
+ ^~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dint.c: In function ‘H5D__init_type’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dint.c:534:43: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+         if((dset->shared->type = H5T_copy(type, H5T_COPY_ALL)) == NULL)
+                                           ^~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oprivate.h:45:0,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dprivate.h:25,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dpkg.h:30,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dint.c:25:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tprivate.h:108:15: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5_DLL H5T_t *H5T_copy(H5T_t *old_dt, H5T_copy_t method);
+               ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dint.c: In function ‘H5D__use_minimized_dset_headers’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dint.c:669:21: warning: unused variable ‘plist’ [-Wunused-variable]
+     H5P_genplist_t *plist     = NULL;
+                     ^~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dint.c:667:53: warning: unused parameter ‘dset’ [-Wunused-parameter]
+ H5D__use_minimized_dset_headers(H5F_t *file, H5D_t *dset, hbool_t *minimize)
+                                                     ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dfill.c: In function ‘H5D__fill’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dfill.c:239:62: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+             if((src_id = H5I_register(H5I_DATATYPE, H5T_copy(fill_type, H5T_COPY_ALL), FALSE)) < 0)
+                                                              ^~~~~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zprivate.h:28:0,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5CXprivate.h:30,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dfill.c:36:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tprivate.h:108:15: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5_DLL H5T_t *H5T_copy(H5T_t *old_dt, H5T_copy_t method);
+               ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dfill.c:242:62: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+             if((dst_id = H5I_register(H5I_DATATYPE, H5T_copy(buf_type, H5T_COPY_ALL), FALSE)) < 0)
+                                                              ^~~~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zprivate.h:28:0,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5CXprivate.h:30,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dfill.c:36:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tprivate.h:108:15: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5_DLL H5T_t *H5T_copy(H5T_t *old_dt, H5T_copy_t method);
+               ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dint.c: In function ‘H5D__build_file_prefix’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dint.c:1079:22: warning: unused variable ‘plist’ [-Wunused-variable]
+     H5P_genplist_t  *plist = NULL;        /* Property list pointer                          */
+                      ^~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dfill.c: In function ‘H5D__fill_init’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dfill.c:408:54: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+             if(NULL == (fb_info->mem_type = H5T_copy(dset_type, H5T_COPY_TRANSIENT)))
+                                                      ^~~~~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zprivate.h:28:0,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5CXprivate.h:30,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dfill.c:36:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tprivate.h:108:15: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5_DLL H5T_t *H5T_copy(H5T_t *old_dt, H5T_copy_t method);
+               ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dnone.c: In function ‘H5D__none_idx_copy_setup’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dnone.c:380:52: warning: unused parameter ‘idx_info_src’ [-Wunused-parameter]
+ H5D__none_idx_copy_setup(const H5D_chk_idx_info_t *idx_info_src,
+                                                    ^~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dsingle.c: In function ‘H5D__single_idx_copy_setup’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dsingle.c:440:54: warning: unused parameter ‘idx_info_src’ [-Wunused-parameter]
+ H5D__single_idx_copy_setup(const H5D_chk_idx_info_t *idx_info_src,
+                                                      ^~~~~~~~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Eint.c:35:0:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Eint.c: In function ‘H5E_walk’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2032:13: warning: unused variable ‘err_occurred’ [-Wunused-variable]
+     hbool_t err_occurred = FALSE;                                             \
+             ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2150:5: note: in expansion of macro ‘FUNC_ENTER_COMMON’
+     FUNC_ENTER_COMMON(!H5_IS_API(FUNC));                                      \
+     ^~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Eint.c:516:5: note: in expansion of macro ‘FUNC_ENTER_NOAPI_NOINIT’
+     FUNC_ENTER_NOAPI_NOINIT
+     ^~~~~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Eint.c:585:1: warning: label ‘done’ defined but not used [-Wunused-label]
+ done:
+ ^~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5EAcache.c:40:0:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5EAcache.c: In function ‘H5EA__cache_dblock_deserialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5EAcache.c:1542:59: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5EA__cache_dblock_deserialize(const void *_image, size_t len,
+                                                           ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2492:1: note: in definition of macro ‘BEGIN_FUNC’
+ func                                                                          \
+ ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5EAcache.c: In function ‘H5EA__cache_dblk_page_serialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5EAcache.c:2078:46: warning: unused parameter ‘f’ [-Wunused-parameter]
+ H5EA__cache_dblk_page_serialize(const H5F_t *f, void *_image, size_t H5_ATTR_UNUSED len,
+                                              ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2492:1: note: in definition of macro ‘BEGIN_FUNC’
+ func                                                                          \
+ ^~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5EAtest.c:37:0:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5EAtest.c: In function ‘H5EA__test_decode’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5EAtest.c:282:71: warning: unused parameter ‘_ctx’ [-Wunused-parameter]
+ H5EA__test_decode(const void *_raw, void *_elmt, size_t nelmts, void *_ctx))
+                                                                       ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2492:1: note: in definition of macro ‘BEGIN_FUNC’
+ func                                                                          \
+ ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Fsuper.c: In function ‘H5F__super_init’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Fsuper.c:1397:16: warning: implicit declaration of function ‘H5O__fsinfo_set_version’; did you mean ‘H5O_pline_set_version’? [-Wimplicit-function-declaration]
+             if(H5O__fsinfo_set_version(f, &fsinfo) < 0)
+                ^~~~~~~~~~~~~~~~~~~~~~~
+                H5O_pline_set_version
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Fsuper_cache.c: In function ‘H5F__cache_superblock_get_final_load_size’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Fsuper_cache.c:348:70: warning: unused parameter ‘image_len’ [-Wunused-parameter]
+ H5F__cache_superblock_get_final_load_size(const void *_image, size_t image_len,
+                                                                      ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Fsuper_cache.c: In function ‘H5F__cache_superblock_deserialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Fsuper_cache.c:438:62: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5F__cache_superblock_deserialize(const void *_image, size_t len, void *_udata,
+                                                              ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Fsuper_cache.c: In function ‘H5F__cache_drvrinfo_get_final_load_size’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Fsuper_cache.c:871:68: warning: unused parameter ‘image_len’ [-Wunused-parameter]
+ H5F__cache_drvrinfo_get_final_load_size(const void *_image, size_t image_len,
+                                                                    ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Fsuper_cache.c: In function ‘H5F__cache_drvrinfo_deserialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Fsuper_cache.c:915:60: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5F__cache_drvrinfo_deserialize(const void *_image, size_t len, void *_udata,
+                                                            ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Fsuper_cache.c: In function ‘H5F__cache_drvrinfo_serialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Fsuper_cache.c:1010:68: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5F__cache_drvrinfo_serialize(const H5F_t *f, void *_image, size_t len,
+                                                                    ^~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FAcache.c:40:0:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FAcache.c: In function ‘H5FA__cache_hdr_deserialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FAcache.c:255:56: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5FA__cache_hdr_deserialize(const void *_image, size_t len,
+                                                        ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2492:1: note: in definition of macro ‘BEGIN_FUNC’
+ func                                                                          \
+ ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FAcache.c: In function ‘H5FA__cache_dblock_deserialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FAcache.c:652:59: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5FA__cache_dblock_deserialize(const void *_image, size_t len,
+                                                           ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2492:1: note: in definition of macro ‘BEGIN_FUNC’
+ func                                                                          \
+ ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FAcache.c: In function ‘H5FA__cache_dblk_page_serialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FAcache.c:1178:46: warning: unused parameter ‘f’ [-Wunused-parameter]
+ H5FA__cache_dblk_page_serialize(const H5F_t *f, void *_image, size_t H5_ATTR_UNUSED len,
+                                              ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2492:1: note: in definition of macro ‘BEGIN_FUNC’
+ func                                                                          \
+ ^~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FDdirect.c:26:0:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FDdrvr_module.h:27:25: warning: ‘H5FD__init_package’ declared ‘static’ but never defined [-Wunused-function]
+ #define H5_MY_PKG       H5FD
+                         ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:1572:28: note: in definition of macro ‘H5_GLUE’
+ #define H5_GLUE(x,y)       x##y
+                            ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2375:52: note: in expansion of macro ‘H5_PACKAGE_INIT_FUNC’
+ #define H5_PKG_DECLARE_YES_FUNC(pkg) static herr_t H5_PACKAGE_INIT_FUNC(pkg)(void);
+                                                    ^~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:1573:28: note: in expansion of macro ‘H5_PKG_DECLARE_YES_FUNC’
+ #define H5_GLUE3(x,y,z)    x##y##z
+                            ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2390:1: note: in expansion of macro ‘H5_PKG_DECLARE_FUNC’
+ H5_PKG_DECLARE_FUNC(H5_MY_PKG_INIT, H5_MY_PKG)
+ ^~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2390:37: note: in expansion of macro ‘H5_MY_PKG’
+ H5_PKG_DECLARE_FUNC(H5_MY_PKG_INIT, H5_MY_PKG)
+                                     ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FDhdfs.c: In function ‘H5FD_hdfs_init’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FDhdfs.c:584:18: warning: unused variable ‘bin_i’ [-Wunused-variable]
+     unsigned int bin_i;
+                  ^~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FDmpio.c:25:0:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FDdrvr_module.h:27:25: warning: ‘H5FD__init_package’ declared ‘static’ but never defined [-Wunused-function]
+ #define H5_MY_PKG       H5FD
+                         ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:1572:28: note: in definition of macro ‘H5_GLUE’
+ #define H5_GLUE(x,y)       x##y
+                            ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2375:52: note: in expansion of macro ‘H5_PACKAGE_INIT_FUNC’
+ #define H5_PKG_DECLARE_YES_FUNC(pkg) static herr_t H5_PACKAGE_INIT_FUNC(pkg)(void);
+                                                    ^~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:1573:28: note: in expansion of macro ‘H5_PKG_DECLARE_YES_FUNC’
+ #define H5_GLUE3(x,y,z)    x##y##z
+                            ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2390:1: note: in expansion of macro ‘H5_PKG_DECLARE_FUNC’
+ H5_PKG_DECLARE_FUNC(H5_MY_PKG_INIT, H5_MY_PKG)
+ ^~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2390:37: note: in expansion of macro ‘H5_MY_PKG’
+ H5_PKG_DECLARE_FUNC(H5_MY_PKG_INIT, H5_MY_PKG)
+                                     ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FDlog.c: In function ‘H5FD_log_open’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FDlog.c:630:95: warning: ‘stat_timeval_diff.tv_usec’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+             HDfprintf(file->logfp, "Stat took: (%f s)\n", (double)stat_timeval_diff.tv_sec + ((double)stat_timeval_diff.tv_usec / (double)1000000.0f));
+                                                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FDlog.c:630:59: warning: ‘stat_timeval_diff.tv_sec’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+             HDfprintf(file->logfp, "Stat took: (%f s)\n", (double)stat_timeval_diff.tv_sec + ((double)stat_timeval_diff.tv_usec / (double)1000000.0f));
+                                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FDlog.c:628:95: warning: ‘open_timeval_diff.tv_usec’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+             HDfprintf(file->logfp, "Open took: (%f s)\n", (double)open_timeval_diff.tv_sec + ((double)open_timeval_diff.tv_usec / (double)1000000.0f));
+                                                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FDlog.c:628:59: warning: ‘open_timeval_diff.tv_sec’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+             HDfprintf(file->logfp, "Open took: (%f s)\n", (double)open_timeval_diff.tv_sec + ((double)open_timeval_diff.tv_usec / (double)1000000.0f));
+                                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FDros3.c:28:0:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FDdrvr_module.h:27:25: warning: ‘H5FD__init_package’ declared ‘static’ but never defined [-Wunused-function]
+ #define H5_MY_PKG       H5FD
+                         ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:1572:28: note: in definition of macro ‘H5_GLUE’
+ #define H5_GLUE(x,y)       x##y
+                            ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2375:52: note: in expansion of macro ‘H5_PACKAGE_INIT_FUNC’
+ #define H5_PKG_DECLARE_YES_FUNC(pkg) static herr_t H5_PACKAGE_INIT_FUNC(pkg)(void);
+                                                    ^~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:1573:28: note: in expansion of macro ‘H5_PKG_DECLARE_YES_FUNC’
+ #define H5_GLUE3(x,y,z)    x##y##z
+                            ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2390:1: note: in expansion of macro ‘H5_PKG_DECLARE_FUNC’
+ H5_PKG_DECLARE_FUNC(H5_MY_PKG_INIT, H5_MY_PKG)
+ ^~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2390:37: note: in expansion of macro ‘H5_MY_PKG’
+ H5_PKG_DECLARE_FUNC(H5_MY_PKG_INIT, H5_MY_PKG)
+                                     ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FDdrvr_module.h:27:25: warning: ‘H5FD_init_g’ defined but not used [-Wunused-variable]
+ #define H5_MY_PKG       H5FD
+                         ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:1572:28: note: in definition of macro ‘H5_GLUE’
+ #define H5_GLUE(x,y)       x##y
+                            ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2383:56: note: in expansion of macro ‘H5_PACKAGE_INIT_VAR’
+ #define H5_PKG_DECLARE_VAR(pkg)         static hbool_t H5_PACKAGE_INIT_VAR(pkg);
+                                                        ^~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2389:1: note: in expansion of macro ‘H5_PKG_DECLARE_VAR’
+ H5_PKG_DECLARE_VAR(H5_MY_PKG)
+ ^~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2389:20: note: in expansion of macro ‘H5_MY_PKG’
+ H5_PKG_DECLARE_VAR(H5_MY_PKG)
+                    ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FS.c: In function ‘H5FS_size’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FS.c:667:24: warning: unused parameter ‘f’ [-Wunused-parameter]
+ H5FS_size(const H5F_t *f, const H5FS_t *fspace, hsize_t *meta_size)
+                        ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c: In function ‘H5FS__cache_hdr_deserialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c:243:56: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5FS__cache_hdr_deserialize(const void *_image, size_t len, void *_udata,
+                                                        ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c: In function ‘H5FS__cache_hdr_pre_serialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c:406:55: warning: unused parameter ‘new_addr’ [-Wunused-parameter]
+     haddr_t addr, size_t H5_ATTR_UNUSED len, haddr_t *new_addr, size_t *new_len,
+                                                       ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c:406:73: warning: unused parameter ‘new_len’ [-Wunused-parameter]
+     haddr_t addr, size_t H5_ATTR_UNUSED len, haddr_t *new_addr, size_t *new_len,
+                                                                         ^~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c: In function ‘H5FS__cache_hdr_serialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c:675:64: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5FS__cache_hdr_serialize(const H5F_t *f, void *_image, size_t len,
+                                                                ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c: In function ‘H5FS__cache_sinfo_deserialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c:1009:17: warning: variable ‘old_tot_space’ set but not used [-Wunused-but-set-variable]
+         hsize_t old_tot_space;          /* Total space managed from header */
+                 ^~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c:1008:17: warning: variable ‘old_ghost_sect_count’ set but not used [-Wunused-but-set-variable]
+         hsize_t old_ghost_sect_count;   /* Total ghost section count from header */
+                 ^~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c:1007:17: warning: variable ‘old_serial_sect_count’ set but not used [-Wunused-but-set-variable]
+         hsize_t old_serial_sect_count;  /* Total serializable section count from header */
+                 ^~~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c:1006:17: warning: variable ‘old_tot_sect_count’ set but not used [-Wunused-but-set-variable]
+         hsize_t old_tot_sect_count;     /* Total section count from header */
+                 ^~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c:961:58: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5FS__cache_sinfo_deserialize(const void *_image, size_t len, void *_udata,
+                                                          ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c:962:14: warning: unused parameter ‘dirty’ [-Wunused-parameter]
+     hbool_t *dirty)
+              ^~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c: In function ‘H5FS__cache_sinfo_image_len’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c:1115:19: warning: variable ‘fspace’ set but not used [-Wunused-but-set-variable]
+     const H5FS_t *fspace;               /* Free space header */
+                   ^~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c: In function ‘H5FS__cache_sinfo_pre_serialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c:1154:12: warning: unused parameter ‘len’ [-Wunused-parameter]
+     size_t len, haddr_t *new_addr, size_t *new_len, unsigned *flags)
+            ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c:1154:44: warning: unused parameter ‘new_len’ [-Wunused-parameter]
+     size_t len, haddr_t *new_addr, size_t *new_len, unsigned *flags)
+                                            ^~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c: In function ‘H5FS__cache_sinfo_serialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c:1245:26: warning: variable ‘fspace’ set but not used [-Wunused-but-set-variable]
+     H5FS_t              *fspace;            /* Free space header */
+                          ^~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c:1241:66: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5FS__cache_sinfo_serialize(const H5F_t *f, void *_image, size_t len,
+                                                                  ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c: In function ‘H5FS__cache_sinfo_free_icr’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5FScache.c:1392:26: warning: variable ‘fspace’ set but not used [-Wunused-but-set-variable]
+     H5FS_t              *fspace;                /* Free space header */
+                          ^~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Gnode.c: In function ‘H5G_node_remove’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Gnode.c:770:22: warning: unused variable ‘lt_key’ [-Wunused-variable]
+     H5G_node_key_t  *lt_key = (H5G_node_key_t *)_lt_key;
+                      ^~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFcache.c: In function ‘H5HF__cache_hdr_get_final_load_size’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFcache.c:406:64: warning: unused parameter ‘image_len’ [-Wunused-parameter]
+ H5HF__cache_hdr_get_final_load_size(const void *_image, size_t image_len,
+                                                                ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFcache.c: In function ‘H5HF__cache_hdr_serialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFcache.c:772:12: warning: assignment discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     hdr->f = f;
+            ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFcache.c:752:64: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5HF__cache_hdr_serialize(const H5F_t *f, void *_image, size_t len,
+                                                                ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFcache.c: In function ‘H5HF__cache_iblock_deserialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFcache.c:982:59: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5HF__cache_iblock_deserialize(const void *_image, size_t len, void *_udata,
+                                                           ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFcache.c: In function ‘H5HF__cache_iblock_serialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFcache.c:1362:12: warning: assignment discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     hdr->f = f;
+            ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFcache.c:1329:67: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5HF__cache_iblock_serialize(const H5F_t *f, void *_image, size_t len,
+                                                                   ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFcache.c: In function ‘H5HF__cache_iblock_notify’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFcache.c:1475:18: warning: variable ‘indir_idx’ set but not used [-Wunused-but-set-variable]
+         unsigned indir_idx;  /* Index in parent's child iblock pointer array */
+                  ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFcache.c:1474:26: warning: unused variable ‘par_iblock’ [-Wunused-variable]
+         H5HF_indirect_t *par_iblock = iblock->parent;
+                          ^~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFcache.c: In function ‘H5HF__cache_dblock_serialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFcache.c:2441:43: warning: unused parameter ‘f’ [-Wunused-parameter]
+ H5HF__cache_dblock_serialize(const H5F_t *f, void *image, size_t len,
+                                           ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFcache.c:2441:66: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5HF__cache_dblock_serialize(const H5F_t *f, void *image, size_t len,
+                                                                  ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFsection.c: In function ‘H5HF__sect_single_valid’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFsection.c:1190:20: warning: variable ‘status’ set but not used [-Wunused-but-set-variable]
+             herr_t status;              /* Generic status value */
+                    ^~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFsection.c:1188:20: warning: variable ‘dblock_overhead’ set but not used [-Wunused-but-set-variable]
+             size_t dblock_overhead;     /* Direct block's overhead */
+                    ^~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFsection.c: In function ‘H5HF__sect_row_valid’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFsection.c:2041:14: warning: variable ‘indir_idx’ set but not used [-Wunused-but-set-variable]
+     unsigned indir_idx;         /* Index of row in underlying indirect section's row array */
+              ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFsection.c: In function ‘H5HF_sect_indirect_valid’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFsection.c:4136:44: warning: variable ‘tmp_row_sect2’ set but not used [-Wunused-but-set-variable]
+                 const H5HF_free_section_t *tmp_row_sect2;    /* Pointer to row section */
+                                            ^~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFsection.c:4128:40: warning: variable ‘tmp_row_sect’ set but not used [-Wunused-but-set-variable]
+             const H5HF_free_section_t *tmp_row_sect;    /* Pointer to row section */
+                                        ^~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFsection.c:4163:44: warning: variable ‘tmp_child_sect2’ set but not used [-Wunused-but-set-variable]
+                 const H5HF_free_section_t *tmp_child_sect2;    /* Pointer to child indirect section */
+                                            ^~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFhuge.c: In function ‘H5HF__huge_write’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HFhuge.c:894:8: warning: ‘obj_size’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+     if(H5F_block_write(hdr->f, H5FD_MEM_FHEAP_HUGE_OBJ, obj_addr, obj_size, obj) < 0)
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HGcache.c: In function ‘H5HG__cache_heap_get_final_load_size’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HGcache.c:205:64: warning: unused parameter ‘image_len’ [-Wunused-parameter]
+ H5HG__cache_heap_get_final_load_size(const void *image, size_t image_len,
+                                                                ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HGcache.c: In function ‘H5HG__cache_heap_serialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HGcache.c:435:41: warning: unused parameter ‘f’ [-Wunused-parameter]
+ H5HG__cache_heap_serialize(const H5F_t *f, void *image, size_t len,
+                                         ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HGcache.c: In function ‘H5HG__cache_heap_get_final_load_size’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HGcache.c:225:17: warning: ‘*((void *)&heap+264)’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+     *actual_len = heap.size;
+     ~~~~~~~~~~~~^~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HLcache.c: In function ‘H5HL__cache_prefix_get_final_load_size’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HLcache.c:366:67: warning: unused parameter ‘image_len’ [-Wunused-parameter]
+ H5HL__cache_prefix_get_final_load_size(const void *_image, size_t image_len,
+                                                                   ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HLcache.c: In function ‘H5HL__cache_prefix_deserialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HLcache.c:417:59: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5HL__cache_prefix_deserialize(const void *_image, size_t len, void *_udata,
+                                                           ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HLcache.c: In function ‘H5HL__cache_prefix_serialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HLcache.c:557:43: warning: unused parameter ‘f’ [-Wunused-parameter]
+ H5HL__cache_prefix_serialize(const H5F_t *f, void *_image, size_t len,
+                                           ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HLcache.c: In function ‘H5HL__cache_datablock_serialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HLcache.c:828:46: warning: unused parameter ‘f’ [-Wunused-parameter]
+ H5HL__cache_datablock_serialize(const H5F_t *f, void *image, size_t len,
+                                              ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5HLcache.c:828:69: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5HL__cache_datablock_serialize(const H5F_t *f, void *image, size_t len,
+                                                                     ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5I.c: In function ‘H5Iregister_type’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5I.c:199:25: warning: unused parameter ‘hash_size’ [-Wunused-parameter]
+ H5Iregister_type(size_t hash_size, unsigned reserved, H5I_free_t free_func)
+                         ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5I.c: At top level:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5I.c:125:12: warning: ‘H5I__debug_cb’ declared ‘static’ but never defined [-Wunused-function]
+ static int H5I__debug_cb(void *_item, void *_key, void *_udata);
+            ^~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oainfo.c: In function ‘H5O__ainfo_delete’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oainfo.c:337:36: warning: unused parameter ‘open_oh’ [-Wunused-parameter]
+ H5O__ainfo_delete(H5F_t *f, H5O_t *open_oh, void *_mesg)
+                                    ^~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oainfo.c: In function ‘H5O__ainfo_copy_file’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oainfo.c:408:29: warning: unused parameter ‘file_src’ [-Wunused-parameter]
+ H5O__ainfo_copy_file(H5F_t *file_src, void *mesg_src, H5F_t *file_dst,
+                             ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oainfo.c:410:17: warning: unused parameter ‘cpy_info’ [-Wunused-parameter]
+     H5O_copy_t *cpy_info, void H5_ATTR_UNUSED *udata)
+                 ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5O.c: In function ‘H5Oget_info_by_idx’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5O.c:1165:17: warning: unused variable ‘obj_oloc’ [-Wunused-variable]
+     H5O_loc_t   obj_oloc;               /* Opened object object location */
+                 ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5O.c:1164:17: warning: unused variable ‘obj_path’ [-Wunused-variable]
+     H5G_name_t  obj_path;               /* Opened object group hier. path */
+                 ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oalloc.c: In function ‘H5O_add_gap’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oalloc.c:113:20: warning: unused parameter ‘f’ [-Wunused-parameter]
+ H5O_add_gap(H5F_t *f, H5O_t *oh, unsigned chunkno, hbool_t *chk_dirtied,
+                    ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ocache_image.c: In function ‘H5O__mdci_delete’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ocache_image.c:278:35: warning: unused parameter ‘open_oh’ [-Wunused-parameter]
+ H5O__mdci_delete(H5F_t *f, H5O_t *open_oh, void *_mesg)
+                                   ^~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ocache.c: In function ‘H5O__cache_get_final_load_size’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ocache.c:203:58: warning: unused parameter ‘image_len’ [-Wunused-parameter]
+ H5O__cache_get_final_load_size(const void *image, size_t image_len,
+                                                          ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ocache.c: In function ‘H5O__cache_deserialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ocache.c:308:50: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5O__cache_deserialize(const void *image, size_t len, void *_udata,
+                                                  ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ocache.c: In function ‘H5O__cache_chk_deserialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ocache.c:765:54: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5O__cache_chk_deserialize(const void *image, size_t len, void *_udata,
+                                                      ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ocache.c: In function ‘H5O__prefix_deserialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ocache.c:1224:57: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         if(udata->chunk0_size > 0 && udata->chunk0_size < H5O_SIZEOF_MSGHDR_OH(oh))
+                                                         ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ocache.c:1254:60: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         if((udata->v1_pfx_nmesgs > 0 && udata->chunk0_size < H5O_SIZEOF_MSGHDR_OH(oh)) ||
+                                                            ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ocopy.c: In function ‘H5O__copy_header_real’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ocopy.c:687:18: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         if(delta < H5O_SIZEOF_MSGHDR_OH(oh_dst))
+                  ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Odeprec.c: In function ‘H5Oget_info_by_name1’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Odeprec.c:141:8: warning: implicit declaration of function ‘H5CX_set_apl’; did you mean ‘H5T_set_loc’? [-Wimplicit-function-declaration]
+     if(H5CX_set_apl(&lapl_id, H5P_CLS_LACC, loc_id, FALSE) < 0)
+        ^~~~~~~~~~~~
+        H5T_set_loc
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Odeprec.c: In function ‘H5Oget_info_by_idx1’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Odeprec.c:174:17: warning: unused variable ‘obj_oloc’ [-Wunused-variable]
+     H5O_loc_t   obj_oloc;               /* Opened object object location */
+                 ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Odeprec.c:173:17: warning: unused variable ‘obj_path’ [-Wunused-variable]
+     H5G_name_t  obj_path;               /* Opened object group hier. path */
+                 ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Odtype.c: In function ‘H5O_dtype_copy’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Odtype.c:1190:32: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     if(NULL == (dst = H5T_copy(src, H5T_COPY_ALL)))
+                                ^~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oprivate.h:45:0,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dprivate.h:25,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Odtype.c:19:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tprivate.h:108:15: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5_DLL H5T_t *H5T_copy(H5T_t *old_dt, H5T_copy_t method);
+               ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Odtype.c: In function ‘H5O_dtype_pre_copy_file’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Odtype.c:1544:49: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+         if(NULL == (udata->src_dtype = H5T_copy(dt_src, H5T_COPY_TRANSIENT)))
+                                                 ^~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oprivate.h:45:0,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Dprivate.h:25,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Odtype.c:19:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tprivate.h:108:15: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5_DLL H5T_t *H5T_copy(H5T_t *old_dt, H5T_copy_t method);
+               ^~~~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ofill.c:70:0:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oshared.h: In function ‘H5O_fill_shared_post_copy_file’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oshared.h:384:44: warning: unused parameter ‘oloc_src’ [-Wunused-parameter]
+ H5O_SHARED_POST_COPY_FILE(const H5O_loc_t *oloc_src, const void *mesg_src,
+                                            ^~~~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ofill.c:106:0:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oshared.h: In function ‘H5O_fill_new_shared_post_copy_file’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oshared.h:384:44: warning: unused parameter ‘oloc_src’ [-Wunused-parameter]
+ H5O_SHARED_POST_COPY_FILE(const H5O_loc_t *oloc_src, const void *mesg_src,
+                                            ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ofill.c: In function ‘H5O_fill_old_decode’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ofill.c:347:71: warning: ordered comparison of pointer with integer zero [-Wpedantic]
+             if((dt = H5O_msg_read_oh(f, open_oh, H5O_DTYPE_ID, NULL)) < 0)
+                                                                       ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ofill.c:350:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+             if(fill->size != H5T_GET_SIZE(dt))
+                           ^~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ofsinfo.c: In function ‘H5O_fsinfo_decode’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Ofsinfo.c:130:35: warning: ‘threshold’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+                 fsinfo->threshold = threshold;
+                 ~~~~~~~~~~~~~~~~~~^~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oint.c: In function ‘H5O_create’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oint.c:288:17: warning: unused variable ‘store_msg_crt_idx’ [-Wunused-variable]
+     hbool_t     store_msg_crt_idx;      /* Whether to always store message crea tion indices for this file */
+                 ^~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oint.c:287:17: warning: unused variable ‘insert_flags’ [-Wunused-variable]
+     unsigned    insert_flags = H5AC__NO_FLAGS_SET; /* Flags for inserting objec t header into cache */
+                 ^~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oint.c:286:16: warning: unused variable ‘oh_flags’ [-Wunused-variable]
+     uint8_t    oh_flags;               /* Object header's initial status flags */
+                ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oint.c:285:17: warning: unused variable ‘oh_size’ [-Wunused-variable]
+     size_t      oh_size;                /* Size of initial object header */
+                 ^~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oint.c:284:17: warning: unused variable ‘oh_addr’ [-Wunused-variable]
+     haddr_t     oh_addr;                /* Address of initial object header */
+                 ^~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oint.c:281:22: warning: unused variable ‘oc_plist’ [-Wunused-variable]
+     H5P_genplist_t  *oc_plist;          /* Object creation property list */
+                      ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oint.c: In function ‘H5O__create_ohdr’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oint.c:358:12: warning: implicit declaration of function ‘H5CX_get_ohdr_flags’; did you mean ‘H5O_get_oh_flags’? [-Wimplicit-function-declaration]
+         if(H5CX_get_ohdr_flags(&oh_flags) < 0)
+            ^~~~~~~~~~~~~~~~~~~
+            H5O_get_oh_flags
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Olayout.c: In function ‘H5O__layout_decode’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Olayout.c:417:90: warning: ‘tmp_hsize’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+                     if(NULL == (mesg->storage.u.virt.list = (H5O_storage_virtual_ent_t *)H5MM_calloc((size_t)tmp_hsize * sizeof(H5O_storage_virtual_ent_t))))
+                                                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Omessage.c: In function ‘H5O_msg_reset_share’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Omessage.c:1691:28: warning: variable ‘type’ set but not used [-Wunused-but-set-variable]
+     const H5O_msg_class_t *type;        /* Actual H5O class type for the ID */
+                            ^~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Opline.c:66:0:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oshared.h: In function ‘H5O_pline_shared_post_copy_file’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oshared.h:384:44: warning: unused parameter ‘oloc_src’ [-Wunused-parameter]
+ H5O_SHARED_POST_COPY_FILE(const H5O_loc_t *oloc_src, const void *mesg_src,
+                                            ^~~~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Osdspace.c:59:0:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oshared.h: In function ‘H5O_sdspace_shared_post_copy_file’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oshared.h:384:44: warning: unused parameter ‘oloc_src’ [-Wunused-parameter]
+ H5O_SHARED_POST_COPY_FILE(const H5O_loc_t *oloc_src, const void *mesg_src,
+                                            ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oshared.c: In function ‘H5O__shared_copy_file’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oshared.c:588:30: warning: unused parameter ‘file_src’ [-Wunused-parameter]
+ H5O__shared_copy_file(H5F_t *file_src, H5F_t *file_dst,
+                              ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Oshared.c:590:79: warning: unused parameter ‘cpy_info’ [-Wunused-parameter]
+     hbool_t H5_ATTR_UNUSED *recompute_size, unsigned *mesg_flags, H5O_copy_t *cpy_info,
+                                                                               ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Pdcpl.c: In function ‘H5P_get_fill_value’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Pdcpl.c:3339:54: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     if((dst_id = H5I_register(H5I_DATATYPE, H5T_copy(type, H5T_COPY_TRANSIENT), FALSE)) < 0)
+                                                      ^~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zprivate.h:28:0,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5CXprivate.h:30,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Pdcpl.c:35:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tprivate.h:108:15: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5_DLL H5T_t *H5T_copy(H5T_t *old_dt, H5T_copy_t method);
+               ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Pint.c: In function ‘H5P__poke_plist_cb’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Pint.c:2700:36: warning: unused parameter ‘plist’ [-Wunused-parameter]
+ H5P__poke_plist_cb(H5P_genplist_t *plist, const char *name, H5P_genprop_t *prop,
+                                    ^~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Pint.c:2700:55: warning: unused parameter ‘name’ [-Wunused-parameter]
+ H5P__poke_plist_cb(H5P_genplist_t *plist, const char *name, H5P_genprop_t *prop,
+                                                       ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Pint.c: In function ‘H5P__poke_pclass_cb’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Pint.c:2747:56: warning: unused parameter ‘name’ [-Wunused-parameter]
+ H5P__poke_pclass_cb(H5P_genplist_t *plist, const char *name, H5P_genprop_t *prop,
+                                                        ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Pint.c: In function ‘H5P__iterate_pclass_cb’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Pint.c:4073:11: warning: unused variable ‘key’ [-Wunused-variable]
+     char *key = (char *)_key;                           /* Pointer to the property's name */
+           ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Pint.c: In function ‘H5P__peek_cb’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Pint.c:4207:30: warning: unused parameter ‘plist’ [-Wunused-parameter]
+ H5P__peek_cb(H5P_genplist_t *plist, const char *name, H5P_genprop_t *prop,
+                              ^~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Pint.c:4207:49: warning: unused parameter ‘name’ [-Wunused-parameter]
+ H5P__peek_cb(H5P_genplist_t *plist, const char *name, H5P_genprop_t *prop,
+                                                 ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Plapl.c: In function ‘H5P__lacc_elink_fapl_cmp’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Plapl.c:570:16: warning: variable ‘status’ set but not used [-Wunused-but-set-variable]
+         herr_t status;
+                ^~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Rint.c: In function ‘H5R__create’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Rint.c:246:5: warning: implicit declaration of function ‘H5CX_set_libver_bounds’; did you mean ‘H5Pset_libver_bounds’? [-Wimplicit-function-declaration]
+     H5CX_set_libver_bounds(loc->oloc->file);
+     ^~~~~~~~~~~~~~~~~~~~~~
+     H5Pset_libver_bounds
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Rint.c: In function ‘H5R__get_name’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Rint.c:700:31: warning: unused parameter ‘id’ [-Wunused-parameter]
+ H5R__get_name(H5F_t *f, hid_t id, H5R_type_t ref_type, const void *_ref,
+                               ^~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Sall.c: In function ‘H5S__all_project_simple’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Sall.c:882:38: warning: unused parameter ‘base_space’ [-Wunused-parameter]
+ H5S__all_project_simple(const H5S_t *base_space, H5S_t *new_space, hsize_t *offset)
+                                      ^~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Sall.c:882:77: warning: unused parameter ‘offset’ [-Wunused-parameter]
+ H5S__all_project_simple(const H5S_t *base_space, H5S_t *new_space, hsize_t *offset)
+                                                                             ^~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Snone.c: In function ‘H5S_none_project_simple’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Snone.c:836:38: warning: unused parameter ‘base_space’ [-Wunused-parameter]
+ H5S_none_project_simple(const H5S_t *base_space, H5S_t *new_space, hsize_t *offset)
+                                      ^~~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Snone.c:836:77: warning: unused parameter ‘offset’ [-Wunused-parameter]
+ H5S_none_project_simple(const H5S_t *base_space, H5S_t *new_space, hsize_t *offset)
+                                                                             ^~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c: In function ‘H5S__hyper_get_seq_list_opt’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8788:5: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ loc += fast_dim_buf_off;
+ ~~~~^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8810:25: note: in expansion of macro ‘DUFF_GUTS’
+                         DUFF_GUTS
+                         ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8811:17: note: here
+                 case 7:
+                 ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8788:5: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ loc += fast_dim_buf_off;
+ ~~~~^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8812:25: note: in expansion of macro ‘DUFF_GUTS’
+                         DUFF_GUTS
+                         ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8813:17: note: here
+                 case 6:
+                 ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8788:5: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ loc += fast_dim_buf_off;
+ ~~~~^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8814:25: note: in expansion of macro ‘DUFF_GUTS’
+                         DUFF_GUTS
+                         ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8815:17: note: here
+                 case 5:
+                 ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8788:5: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ loc += fast_dim_buf_off;
+ ~~~~^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8816:25: note: in expansion of macro ‘DUFF_GUTS’
+                         DUFF_GUTS
+                         ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8817:17: note: here
+                 case 4:
+                 ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8788:5: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ loc += fast_dim_buf_off;
+ ~~~~^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8818:25: note: in expansion of macro ‘DUFF_GUTS’
+                         DUFF_GUTS
+                         ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8819:17: note: here
+                 case 3:
+                 ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8788:5: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ loc += fast_dim_buf_off;
+ ~~~~^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8820:25: note: in expansion of macro ‘DUFF_GUTS’
+                         DUFF_GUTS
+                         ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8821:17: note: here
+                 case 2:
+                 ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8788:5: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ loc += fast_dim_buf_off;
+ ~~~~^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8822:25: note: in expansion of macro ‘DUFF_GUTS’
+                         DUFF_GUTS
+                         ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:8823:17: note: here
+                 case 1:
+                 ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c: In function ‘H5S_select_hyperslab’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:6893:15: warning: this statement may fall through [-Wimplicit-fallthrough=]
+             if(op == H5S_SELECT_SET)      /* Allow only "set" operation to proceed */
+               ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Shyper.c:6897:9: note: here
+         case H5S_SEL_ERROR:
+         ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SL.c: In function ‘H5SL_term_package’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SL.c:655:21: warning: variable ‘ret’ set but not used [-Wunused-but-set-variable]
+             herr_t  ret;
+                     ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SM.c: In function ‘H5SM_try_share’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SM.c:1306:34: warning: ‘list_pos’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+                 if(list->messages[list_pos].location == H5SM_IN_OH) {
+                                  ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SM.c:1280:16: note: ‘list_pos’ was declared here
+         size_t list_pos;        /* Position in a list index */
+                ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SMcache.c: In function ‘H5SM__cache_table_deserialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SMcache.c:215:58: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5SM__cache_table_deserialize(const void *_image, size_t len, void *_udata,
+                                                          ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SMcache.c: In function ‘H5SM__cache_table_serialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SMcache.c:367:66: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5SM__cache_table_serialize(const H5F_t *f, void *_image, size_t len,
+                                                                  ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SMcache.c: In function ‘H5SM__cache_list_deserialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SMcache.c:571:57: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5SM__cache_list_deserialize(const void *_image, size_t len, void *_udata,
+                                                         ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SMcache.c: In function ‘H5SM__cache_list_serialize’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SMcache.c:690:65: warning: unused parameter ‘len’ [-Wunused-parameter]
+ H5SM__cache_list_serialize(const H5F_t *f, void *_image, size_t len,
+                                                                 ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SM.c: In function ‘H5SM_delete’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SM.c:1844:26: warning: ‘list_pos’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+         if(list->messages[list_pos].location == H5SM_IN_HEAP)
+                          ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SM.c:1828:16: note: ‘list_pos’ was declared here
+         size_t list_pos;        /* Position of the message in the list */
+                ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SM.c: In function ‘H5SM_get_refcount’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SM.c:2230:33: warning: ‘list_pos’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+         message = list->messages[list_pos];
+                                 ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5T.c: In function ‘H5T__path_find_real’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5T.c:4681:42: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+         if(NULL == (path->src = H5T_copy(src, H5T_COPY_ALL)))
+                                          ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5T.c:3213:1: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5T_copy(H5T_t *old_dt, H5T_copy_t method)
+ ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5T.c:4683:42: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+         if(NULL == (path->dst = H5T_copy(dst, H5T_COPY_ALL)))
+                                          ^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5T.c:3213:1: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5T_copy(H5T_t *old_dt, H5T_copy_t method)
+ ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tcompound.c: In function ‘H5T__insert’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tcompound.c:464:56: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     parent->shared->u.compnd.memb[idx].type = H5T_copy(member, H5T_COPY_ALL);
+                                                        ^~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zprivate.h:28:0,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5CXprivate.h:30,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tcompound.c:30:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tprivate.h:108:15: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5_DLL H5T_t *H5T_copy(H5T_t *old_dt, H5T_copy_t method);
+               ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tconv.c: In function ‘H5T_conv_struct_free’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tconv.c:1849:17: warning: variable ‘status’ set but not used [-Wunused-but-set-variable]
+             int status;
+                 ^~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tenum.c: In function ‘H5T__enum_create’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tenum.c:111:42: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     ret_value->shared->parent = H5T_copy(parent, H5T_COPY_ALL);
+                                          ^~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tpkg.h:37:0,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tenum.c:26:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tprivate.h:108:15: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5_DLL H5T_t *H5T_copy(H5T_t *old_dt, H5T_copy_t method);
+               ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tenum.c: In function ‘H5T_enum_nameof’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tenum.c:412:38: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     if(NULL == (copied_dt = H5T_copy(dt, H5T_COPY_ALL)))
+                                      ^~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tpkg.h:37:0,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tenum.c:26:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tprivate.h:108:15: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5_DLL H5T_t *H5T_copy(H5T_t *old_dt, H5T_copy_t method);
+               ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tenum.c: In function ‘H5T_enum_valueof’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tenum.c:551:35: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     if (NULL==(copied_dt=H5T_copy(dt, H5T_COPY_ALL)))
+                                   ^~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tpkg.h:37:0,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tenum.c:26:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tprivate.h:108:15: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5_DLL H5T_t *H5T_copy(H5T_t *old_dt, H5T_copy_t method);
+               ^~~~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SL.c:64:0:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SL.c: In function ‘H5SL_search’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2314:11: warning: ‘ret_value’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+     return(ret_value);                                                        \
+           ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SL.c:1397:11: note: ‘ret_value’ was declared here
+     void *ret_value;                            /* Return value */
+           ^~~~~~~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SL.c:64:0:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SL.c: In function ‘H5SL_find’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5private.h:2314:11: warning: ‘ret_value’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+     return(ret_value);                                                        \
+           ^
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5SL.c:1698:18: note: ‘ret_value’ was declared here
+     H5SL_node_t *ret_value;                     /* Return value */
+                  ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tvlen.c: In function ‘H5T__vlen_create’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tvlen.c:135:47: warning: passing argument 1 of ‘H5T_copy’ discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+     if(NULL == (dt->shared->parent = H5T_copy(base, H5T_COPY_ALL)))
+                                               ^~~~
+In file included from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zprivate.h:28:0,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5CXprivate.h:30,
+                 from /home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tvlen.c:23:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Tprivate.h:108:15: note: expected ‘H5T_t * {aka struct H5T_t *}’ but argument is of type ‘const H5T_t * {aka const struct H5T_t *}’
+ H5_DLL H5T_t *H5T_copy(H5T_t *old_dt, H5T_copy_t method);
+               ^~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Z.c: In function ‘H5Zregister’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Z.c:218:25: warning: unused variable ‘cls_new’ [-Wunused-variable]
+     H5Z_class2_t        cls_new;                  /* Translated class struct */
+                         ^~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Z.c: In function ‘H5Z__flush_file_cb’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Z.c:583:22: warning: unused variable ‘object’ [-Wunused-variable]
+     H5Z_object_t    *object = (H5Z_object_t *)key;
+                      ^~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c: In function ‘H5Z_filter_shuffle’:
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:167:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+     _dest+=bytesoftype;
+     ~~~~~^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:187:29: note: in expansion of macro ‘DUFF_GUTS’
+                             DUFF_GUTS
+                             ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:188:21: note: here
+                     case 7:
+                     ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:167:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+     _dest+=bytesoftype;
+     ~~~~~^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:189:29: note: in expansion of macro ‘DUFF_GUTS’
+                             DUFF_GUTS
+                             ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:190:21: note: here
+                     case 6:
+                     ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:167:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+     _dest+=bytesoftype;
+     ~~~~~^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:191:29: note: in expansion of macro ‘DUFF_GUTS’
+                             DUFF_GUTS
+                             ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:192:21: note: here
+                     case 5:
+                     ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:167:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+     _dest+=bytesoftype;
+     ~~~~~^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:193:29: note: in expansion of macro ‘DUFF_GUTS’
+                             DUFF_GUTS
+                             ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:194:21: note: here
+                     case 4:
+                     ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:167:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+     _dest+=bytesoftype;
+     ~~~~~^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:195:29: note: in expansion of macro ‘DUFF_GUTS’
+                             DUFF_GUTS
+                             ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:196:21: note: here
+                     case 3:
+                     ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:167:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+     _dest+=bytesoftype;
+     ~~~~~^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:197:29: note: in expansion of macro ‘DUFF_GUTS’
+                             DUFF_GUTS
+                             ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:198:21: note: here
+                     case 2:
+                     ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:167:10: warning: this statement may fall through [-Wimplicit-fallthrough=]
+     _dest+=bytesoftype;
+     ~~~~~^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:199:29: note: in expansion of macro ‘DUFF_GUTS’
+                             DUFF_GUTS
+                             ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:200:21: note: here
+                     case 1:
+                     ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:225:9: warning: this statement may fall through [-Wimplicit-fallthrough=]
+     _src+=bytesoftype;
+     ~~~~^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:245:29: note: in expansion of macro ‘DUFF_GUTS’
+                             DUFF_GUTS
+                             ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:246:21: note: here
+                     case 7:
+                     ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:225:9: warning: this statement may fall through [-Wimplicit-fallthrough=]
+     _src+=bytesoftype;
+     ~~~~^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:247:29: note: in expansion of macro ‘DUFF_GUTS’
+                             DUFF_GUTS
+                             ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:248:21: note: here
+                     case 6:
+                     ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:225:9: warning: this statement may fall through [-Wimplicit-fallthrough=]
+     _src+=bytesoftype;
+     ~~~~^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:249:29: note: in expansion of macro ‘DUFF_GUTS’
+                             DUFF_GUTS
+                             ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:250:21: note: here
+                     case 5:
+                     ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:225:9: warning: this statement may fall through [-Wimplicit-fallthrough=]
+     _src+=bytesoftype;
+     ~~~~^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:251:29: note: in expansion of macro ‘DUFF_GUTS’
+                             DUFF_GUTS
+                             ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:252:21: note: here
+                     case 4:
+                     ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:225:9: warning: this statement may fall through [-Wimplicit-fallthrough=]
+     _src+=bytesoftype;
+     ~~~~^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:253:29: note: in expansion of macro ‘DUFF_GUTS’
+                             DUFF_GUTS
+                             ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:254:21: note: here
+                     case 3:
+                     ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:225:9: warning: this statement may fall through [-Wimplicit-fallthrough=]
+     _src+=bytesoftype;
+     ~~~~^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:255:29: note: in expansion of macro ‘DUFF_GUTS’
+                             DUFF_GUTS
+                             ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:256:21: note: here
+                     case 2:
+                     ^~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:225:9: warning: this statement may fall through [-Wimplicit-fallthrough=]
+     _src+=bytesoftype;
+     ~~~~^~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:257:29: note: in expansion of macro ‘DUFF_GUTS’
+                             DUFF_GUTS
+                             ^~~~~~~~~
+/home/csc/met-io-rs/met-io-rs/hdf5-rust/hdf5-src/ext/hdf5/src/H5Zshuffle.c:258:21: note: here
+                     case 1:
+                     ^~~~

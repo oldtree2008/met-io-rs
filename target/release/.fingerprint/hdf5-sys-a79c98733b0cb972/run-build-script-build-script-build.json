@@ -1,0 +1,1 @@
+{"rustc":66165631676752942,"features":"","target":0,"profile":0,"path":0,"deps":[[6593587854017916658,"build_script_build",false,17411514286019400730],[9058991736235899391,"build_script_build",false,6628039914791280275]],"local":[{"RerunIfChanged":{"output":"release/build/hdf5-sys-a79c98733b0cb972/output","paths":["build.rs"]}}],"rustflags":[],"metadata":0,"config":0}

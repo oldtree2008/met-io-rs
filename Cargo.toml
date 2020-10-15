@@ -127,3 +127,8 @@ path="bin/awsreader.rs"
 [[bin]]
 name="mercatortrans"
 path="bin/mercatortrans.rs"
+
+[[bin]]
+name="warnh5reader"
+path="bin/warnh5reader.rs"
+
