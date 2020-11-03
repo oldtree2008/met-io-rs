@@ -1,5 +1,6 @@
 use crate::interplate;
-use crate::SingleGrid;
+// use crate::SingleGrid;
+use common_data::SingleGrid;
 use rayon::prelude::*;
 
 /// 将lon和lat 间隔不同的格点，转换为格距相同的格点。

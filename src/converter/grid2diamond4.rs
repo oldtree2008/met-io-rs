@@ -1,4 +1,5 @@
-use crate::data_type::SingleGrid;
+// use crate::data_type::SingleGrid;
+use common_data::SingleGrid;
 use crate::{MetError, ToGrids};
 use chrono::prelude::*;
 use rayon::prelude::*;

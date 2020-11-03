@@ -1,5 +1,6 @@
 use crate::{LatLng, LatLngBounds, NomGrid};
-use crate::{MetError, SingleGrid, ToGrids};
+use crate::{MetError,ToGrids};
+use common_data::SingleGrid;
 use bincode;
 use rayon::prelude::*;
 use std::fs::{create_dir_all, File};

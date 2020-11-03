@@ -20,7 +20,7 @@ pub use utils::transforms;
 
 pub const MISSING: f32 = 9999.0; //无效值
 
-use crate::SingleGrid;
+use common_data::SingleGrid;
 
 pub trait ToGrids {
     fn to_grids(&self) -> Option<Vec<SingleGrid>>;
