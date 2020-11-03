@@ -1,4 +1,3 @@
-mod aws_reader;
 mod awx_reader;
 mod gpf_reader;
 mod grib_reader;
@@ -14,7 +13,6 @@ mod radar_vbt_gs_reader;
 mod warn_h5_reader;
 mod xradar_reader;
 
-pub use aws_reader::*;
 pub use awx_reader::*;
 pub use gpf_reader::*;
 pub use grib_reader::*;
