@@ -12,6 +12,8 @@ pub use output_type::*;
 pub use reader_type::ReaderType;
 pub use reader_type::ReaderType::*;
 
+/// 从监控的源路径转换到目的路径。从文件名称的后缀或文件特征字符，确定Reader类型。从而选择对应的
+/// Reader 解析文件。调用对应的转换函数。
 pub fn convert_data(
     fname: &str,
     output: &str,

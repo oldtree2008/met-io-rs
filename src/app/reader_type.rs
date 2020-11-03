@@ -1,18 +1,21 @@
 use crate::*;
 use std::path::Path;
+/// all the reader
 pub enum ReaderType {
-    AWX,
-    GPF,
-    GRIB,
-    KJSAT,
-    KJH5,
-    RAD386,
-    RADPD,
-    RADPT,
-    RADX,
+    AWX,    //卫星
+    GPF,    //卫星
+    GRIB,   //模式数据
+    KJSAT,  //kj卫星
+    KJH5,   //jk卫星hdf5
+    RAD386, // jk雷达。  还有问题
+    RADPD,  //单站雷达
+    RADPT,  //雷达拼图
+    RADX,   //X波段雷达
 }
 
 impl ReaderType {
+
+    ///根据文件后缀或文件的特定字符，确定Reader的类型。
     pub fn try_from_path(path: &Path) -> Option<ReaderType> {
         let fname = path.file_name().unwrap();
         let fname = fname.to_str().unwrap();

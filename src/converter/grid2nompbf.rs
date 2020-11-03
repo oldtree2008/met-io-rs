@@ -1,7 +1,7 @@
 // use protobuf::parse_from_bytes;
 use crate::nom::*;
-use common_data::SingleGrid;
 use crate::{MetError, ToGrids};
+use common_data::SingleGrid;
 use protobuf::Message;
 use std::fs::{create_dir_all, File};
 use std::io::Write;

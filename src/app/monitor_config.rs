@@ -4,6 +4,7 @@ use serde_json;
 use std::fs::File;
 use std::io::{BufReader, Read};
 
+/// 监控的配置信息。多个目录，一个目标
 #[derive(Debug, Serialize, Deserialize)]
 pub struct MonitorConfig {
     pub source: Vec<Source>,

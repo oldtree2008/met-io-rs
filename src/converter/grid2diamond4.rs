@@ -1,7 +1,7 @@
 // use crate::data_type::SingleGrid;
-use common_data::SingleGrid;
 use crate::{MetError, ToGrids};
 use chrono::prelude::*;
+use common_data::SingleGrid;
 use rayon::prelude::*;
 use std::fs::{create_dir_all, File};
 use std::io::*;

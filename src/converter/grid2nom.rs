@@ -1,7 +1,7 @@
 use crate::{LatLng, LatLngBounds, NomGrid};
-use crate::{MetError,ToGrids};
-use common_data::SingleGrid;
+use crate::{MetError, ToGrids};
 use bincode;
+use common_data::SingleGrid;
 use rayon::prelude::*;
 use std::fs::{create_dir_all, File};
 use std::io::Write;
