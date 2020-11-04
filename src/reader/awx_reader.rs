@@ -164,7 +164,7 @@ impl ToGrids for AwxReader {
         let p = &self.0;
         if p.productCategory == 1 {
             let header = p.header1.as_ref().unwrap();
-            let product = format!("awx/{}", &header.satelliteName.to_string());
+            let product = format!("awx_{}", &header.satelliteName.to_string());
             let chanel = header.channel;
             let element = if chanel == 1 {
                 "IR1".to_string()
