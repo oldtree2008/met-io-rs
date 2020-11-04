@@ -130,3 +130,6 @@ path="bin/mercatortrans.rs"
 name="warnh5reader"
 path="bin/warnh5reader.rs"
 
+[[bin]]
+name="createreader"
+path="bin/createreader.rs"

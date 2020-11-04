@@ -16,8 +16,8 @@ pub enum ReaderType {
 impl ReaderType {
     ///根据文件后缀或文件的特定字符，确定Reader的类型。
     pub fn try_from_path(path: &Path) -> Option<ReaderType> {
-        let fname = path.file_name().unwrap();
-        let fname = fname.to_str().unwrap();
+        let fname = format!("{}",path.display());
+        let fname = fname.as_str();
         if fname.ends_with(".awx") || fname.ends_with(".AWX") {
             if let Ok(reader) = AwxReader::new(fname) {
                 return Some(AWX(reader));

@@ -9,12 +9,14 @@ pub struct ReaderFactory;
 
 impl ReaderFactory {
     pub fn create_reader(path: &Path) -> Option<Box<dyn ToGrids>> {
-        let fname = path.file_name().unwrap();
-        let fname = fname.to_str().unwrap();
+        let fname = format!("{}",path.display());
+        let fname = fname.as_str();
         if fname.ends_with(".awx") || fname.ends_with(".AWX") {
             if let Ok(reader) = AwxReader::new(fname) {
+                println!("OK");
                 return Some(Box::new(reader));
             } else {
+                println!("None");
                 return None;
             }
         } else if fname.ends_with(".GPF") {
