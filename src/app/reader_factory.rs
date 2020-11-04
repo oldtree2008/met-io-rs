@@ -13,10 +13,8 @@ impl ReaderFactory {
         let fname = fname.as_str();
         if fname.ends_with(".awx") || fname.ends_with(".AWX") {
             if let Ok(reader) = AwxReader::new(fname) {
-                println!("OK");
                 return Some(Box::new(reader));
             } else {
-                println!("None");
                 return None;
             }
         } else if fname.ends_with(".GPF") {
