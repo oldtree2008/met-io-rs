@@ -4,11 +4,13 @@ use log::*;
 use std::path::Path;
 mod monitor_config;
 mod output_type;
+mod reader_factory;
 mod reader_type;
 
 pub use monitor_config::*;
 pub use output_type::OutputType::*;
 pub use output_type::*;
+pub use reader_factory::*;
 pub use reader_type::ReaderType;
 pub use reader_type::ReaderType::*;
 
