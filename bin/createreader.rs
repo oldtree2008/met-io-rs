@@ -1,4 +1,4 @@
-use met_io_rs::{AwxReader, ReaderFactory,ToGrids};
+use met_io_rs::{AwxReader, ReaderFactory, ToGrids};
 use std::path::Path;
 
 pub fn main() {
@@ -12,12 +12,10 @@ pub fn main() {
     // let path = Path::new("/mnt/d/demo/EILA19A1.AWX");
     if let Some(reader) = ReaderFactory::create_reader(&path) {
         if let Some(grids) = reader.to_grids() {
-
-        }else {
+        } else {
             println!("no grid");
         }
-
-    }else {
+    } else {
         println!("failed");
     }
 

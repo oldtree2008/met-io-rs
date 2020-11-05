@@ -9,7 +9,11 @@ pub struct ReaderFactory;
 
 impl ReaderFactory {
     pub fn create_reader(path: &Path) -> Option<Box<dyn ToGrids>> {
-        let fname = format!("{}",path.display());
+        //file_name不包括路径只是文件名称
+        let file_name = path.file_name().unwrap();
+        let file_name = file_name.to_str().unwrap();
+        //fname包括路径
+        let fname = format!("{}", path.display());
         let fname = fname.as_str();
         if fname.ends_with(".awx") || fname.ends_with(".AWX") {
             if let Ok(reader) = AwxReader::new(fname) {
@@ -53,7 +57,7 @@ impl ReaderFactory {
             } else {
                 return None;
             }
-        } else if &fname[3..5] == "PT" {
+        } else if &file_name[3..5] == "PT" {
             if let Ok(reader) = RadarPTReader::new(fname) {
                 return Some(Box::new(reader));
             } else {
