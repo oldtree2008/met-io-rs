@@ -37,6 +37,7 @@ bitvec = "0.18"
 #[patch.crates-io]
 hdf5 = { path = "./hdf5-rust" }
 # hdf5-sys = { path = "/mnt/g/hdf5src/hdf5-rust/hdf5-sys", features = ["static"]}
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 eccodes-rs={path="./eccodes-rs"}
 
 [build-dependencies]
