@@ -4,8 +4,10 @@ use std::path::Path;
 pub enum ReaderType {
     AWX(AwxReader),         //卫星
     GPF(GpfReader),         //卫星
+    #[cfg(not(target_arch = "wasm32"))]
     GRIB(GribReader),       //模式数据
     KJSAT(KJSatReader),     //kj卫星
+    #[cfg(not(target_arch = "wasm32"))]
     KJH5(KJH5SatReader),    //jk卫星hdf5
     RAD386(Radar386Reader), // jk雷达。  还有问题
     RADPD(RadarPDReader),   //单站雷达
@@ -15,6 +17,7 @@ pub enum ReaderType {
 
 impl ReaderType {
     ///根据文件后缀或文件的特定字符，确定Reader的类型。
+    #[cfg(not(target_arch = "wasm32"))]
     pub fn try_from_path(path: &Path) -> Option<ReaderType> {
         //file_name不包括路径只是文件名称
         let file_name = path.file_name().unwrap();

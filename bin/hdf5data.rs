@@ -2,6 +2,7 @@ use image::{imageops, GenericImageView, ImageBuffer, RgbaImage};
 use kdtree::distance::squared_euclidean;
 use kdtree::ErrorKind;
 use kdtree::KdTree;
+#[cfg(not(target_arch = "wasm32"))]
 use met_io_rs::Hdf5Reader;
 use ndarray::prelude::*;
 use palette::*;
@@ -44,7 +45,7 @@ fn point_value(lon: f32, lat: f32, lons: &[i16], lats: &[i16], values: &[i16]) -
         -9999.0
     }
 }
-
+#[cfg(not(target_arch = "wasm32"))]
 pub fn main() {
     // let fname = r##"/mnt/e/data/FY2E/FY2E_2018_11_01_00_31.HDF"##;
     let fname = r##"/mnt/e/kjdata/FY2G-0916-17/FY2G-0916-17/FY2G_2020_09_16_00_01.HDF"##;
@@ -211,3 +212,5 @@ pub fn main() {
     // }
     // imgbuf.save("IR1_1.png").unwrap();
 }
+#[cfg(target_arch = "wasm32")]
+fn main(){}

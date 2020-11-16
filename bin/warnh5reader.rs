@@ -1,5 +1,5 @@
 use met_io_rs::*;
-
+#[cfg(not(target_arch = "wasm32"))]
 pub fn main() {
     let fname = r##"/mnt/e/kjdata/监测预警产品/监测预警产品/飞机颠簸/FY2G_DB202006121201.hdf"##;
     let datas = [
@@ -39,3 +39,5 @@ pub fn main() {
         // todiamond4(&reader, output).unwrap();
     }
 }
+#[cfg(target_arch = "wasm32")]
+fn main() {}

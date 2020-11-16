@@ -11,7 +11,7 @@ thiserror = "1.0.16"
 byteorder = "1.3.4"
 binread = "1.0.0"
 palette={git="https://gitee.com/oldtree2008/palette"}
-eccodes-rs={path="./eccodes-rs"}
+
 common_data = {git="https://gitee.com/oldtree2008/common_data"}
 log = "0.4.8"
 image = "0.23.5"
@@ -32,10 +32,12 @@ env_logger = "0.7.1"
 dotenv = "0.15.0"
 bitvec = "0.18"
 
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 #hdf5-sys = { version = "0.7.0", features = ["static"] }
 #[patch.crates-io]
 hdf5 = { path = "./hdf5-rust" }
 # hdf5-sys = { path = "/mnt/g/hdf5src/hdf5-rust/hdf5-sys", features = ["static"]}
+eccodes-rs={path="./eccodes-rs"}
 
 [build-dependencies]
 protobuf-codegen-pure="*"

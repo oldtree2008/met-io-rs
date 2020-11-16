@@ -1,6 +1,7 @@
 use met_io_rs::*;
+#[cfg(not(target_arch = "wasm32"))]
 use KJH5SatReader;
-
+#[cfg(not(target_arch = "wasm32"))]
 pub fn main() {
     let files = [
         "/mnt/e/kjdata/FY2G-0916-17/FY2G-0916-17/FY2G_2020_09_16_00_01.HDF",
@@ -50,4 +51,9 @@ pub fn main() {
     }
     // let grids = rd.to_grids().unwrap();
     // grids2diamond4s(&grids, "/mnt/d/tmp/hdf5");
+}
+
+#[cfg(target_arch = "wasm32")]
+fn main() {
+    
 }

@@ -16,6 +16,7 @@ pub use reader_type::ReaderType::*;
 
 /// 从监控的源路径转换到目的路径。从文件名称的后缀或文件特征字符，确定Reader类型。从而选择对应的
 /// Reader 解析文件。调用对应的转换函数。
+#[cfg(not(target_arch = "wasm32"))]
 pub fn convert_data(
     fname: &str,
     output: &str,
@@ -59,6 +60,7 @@ pub fn convert_data(
                 }
             }
         }
+        #[cfg(not(target_arch = "wasm32"))]
         GRIB(reader) => {
             for o in ot {
                 match o {
@@ -77,6 +79,7 @@ pub fn convert_data(
                 }
             }
         }
+        #[cfg(not(target_arch = "wasm32"))]
         KJH5(reader) => {
             for o in ot {
                 match o {

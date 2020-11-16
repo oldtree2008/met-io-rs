@@ -1,6 +1,6 @@
 use met_io_rs::{AwxReader, ReaderFactory, ToGrids};
 use std::path::Path;
-
+#[cfg(not(target_arch = "wasm32"))]
 pub fn main() {
     let path = Path::new("/mnt/d/demo/EILA19A0.AWX");
     // let fname = format!("{}",path.display());
@@ -21,3 +21,5 @@ pub fn main() {
 
     // dbg!(reader);
 }
+#[cfg(target_arch = "wasm32")]
+fn main() {}

@@ -1,5 +1,5 @@
 use met_io_rs::*;
-
+#[cfg(not(target_arch = "wasm32"))]
 fn main() {
     let files = vec![
         "KWCPC2020010200999003.grb",
@@ -149,3 +149,6 @@ fn main() {
     //     tonoms(&reader, output);
     // }
 }
+#[cfg(target_arch = "wasm32")]
+
+fn main() {}

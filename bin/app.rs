@@ -6,6 +6,7 @@ use met_io_rs::*;
 use notify::{event::*, RecommendedWatcher, RecursiveMode, Result, Watcher};
 use std::path::Path;
 use std::time::Duration;
+#[cfg(not(target_arch = "wasm32"))]
 fn main() {
     dotenv().ok();
     env_logger::init();
@@ -53,3 +54,5 @@ fn main() {
         }
     }
 }
+#[cfg(target_arch = "wasm32")]
+fn main(){}

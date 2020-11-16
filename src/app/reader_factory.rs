@@ -1,13 +1,17 @@
 use std::path::Path;
 
 use crate::{
-    AwxReader, GpfReader, GribReader, KJH5SatReader, KJSatReader, Radar386Reader, RadarPDReader,
+    AwxReader, GpfReader, KJSatReader, Radar386Reader, RadarPDReader,
     RadarPTReader, ToGrids,
 };
-
+#[cfg(not(target_arch = "wasm32"))]
+use crate :: {
+    GribReader, KJH5SatReader
+};
 pub struct ReaderFactory;
 
 impl ReaderFactory {
+    #[cfg(not(target_arch = "wasm32"))]
     pub fn create_reader(path: &Path) -> Option<Box<dyn ToGrids>> {
         //file_name不包括路径只是文件名称
         let file_name = path.file_name().unwrap();
