@@ -139,13 +139,23 @@ impl AwxReader {
         let mut f = File::open(fname)?;
         let mut d = Vec::new();
         f.read_to_end(&mut d)?;
-        let mut reader = Cursor::new(&d);
-        dbg!(d.len());
+        // let mut reader = Cursor::new(&d);
+        // dbg!(d.len());
+        // let product: Product = reader.read_le()?;
+        // dbg!(&product.productCategory);
+        // dbg!(&product.manufacturer);
+        // // dbg!(&product.data1.unwrap()[900..1000]);
+        // // dbg!(product.header1.unwrap().channel);
+        // Ok(AwxReader(product))
+        AwxReader::new_from_slice(&d)
+    }
+
+    pub fn new_from_slice(data:&[u8])->Result<AwxReader,MetError> {
+        let mut reader = Cursor::new(data);
+        dbg!(data.len());
         let product: Product = reader.read_le()?;
         dbg!(&product.productCategory);
         dbg!(&product.manufacturer);
-        // dbg!(&product.data1.unwrap()[900..1000]);
-        // dbg!(product.header1.unwrap().channel);
         Ok(AwxReader(product))
     }
 }
