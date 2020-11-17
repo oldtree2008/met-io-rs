@@ -150,7 +150,7 @@ impl AwxReader {
         AwxReader::new_from_slice(&d)
     }
 
-    pub fn new_from_slice(data:&[u8])->Result<AwxReader,MetError> {
+    pub fn new_from_slice(data: &[u8]) -> Result<AwxReader, MetError> {
         let mut reader = Cursor::new(data);
         dbg!(data.len());
         let product: Product = reader.read_le()?;

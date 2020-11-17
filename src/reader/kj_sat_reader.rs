@@ -59,7 +59,15 @@ impl KJSatReader {
         let mut f = File::open(fname)?;
         let mut buf = Vec::new();
         f.read_to_end(&mut buf)?;
-        let mut cursor = Cursor::new(&buf);
+        // let mut cursor = Cursor::new(&buf);
+        // let reader: KJSatReader = BinRead::read(&mut cursor)?;
+        // dbg!(reader.width, reader.height, reader.values.len());
+        // Ok(reader)
+        Self::new_from_slice(&buf)
+    }
+
+    pub fn new_from_slice(data: &[u8]) -> Result<Self, MetError> {
+        let mut cursor = Cursor::new(data);
         let reader: KJSatReader = BinRead::read(&mut cursor)?;
         dbg!(reader.width, reader.height, reader.values.len());
         Ok(reader)

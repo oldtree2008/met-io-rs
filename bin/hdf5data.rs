@@ -213,4 +213,4 @@ pub fn main() {
     // imgbuf.save("IR1_1.png").unwrap();
 }
 #[cfg(target_arch = "wasm32")]
-fn main(){}
+fn main() {}

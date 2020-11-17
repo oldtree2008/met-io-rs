@@ -71,6 +71,9 @@ impl RadarPTReader {
         let mut f = File::open(fname)?;
         let mut buf = Vec::new();
         f.read_to_end(&mut buf)?;
+        Self::new_from_slice(&buf)
+    }
+    pub fn new_from_slice(buf: &[u8]) -> Result<Self, MetError> {
         let mut cursor = Cursor::new(&buf);
         let pt_info: PTInfo = BinRead::read(&mut cursor)?;
         let pt_product: PTProduction = BinRead::read(&mut cursor)?;

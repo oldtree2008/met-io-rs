@@ -1,13 +1,10 @@
 use std::path::Path;
 
 use crate::{
-    AwxReader, GpfReader, KJSatReader, Radar386Reader, RadarPDReader,
-    RadarPTReader, ToGrids,
+    AwxReader, GpfReader, KJSatReader, Radar386Reader, RadarPDReader, RadarPTReader, ToGrids,
 };
 #[cfg(not(target_arch = "wasm32"))]
-use crate :: {
-    GribReader, KJH5SatReader
-};
+use crate::{GribReader, KJH5SatReader};
 pub struct ReaderFactory;
 
 impl ReaderFactory {

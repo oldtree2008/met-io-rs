@@ -175,6 +175,9 @@ impl XRadarReader {
         let mut file = File::open(fname)?;
         let mut d = Vec::new();
         file.read_to_end(&mut d)?;
+        Self::new_from_slice(&d)
+    }
+    pub fn new_from_slice(d: &[u8]) -> Result<Self, MetError> {
         let mut reader = Cursor::new(&d);
         let p: Product = reader.read_le()?;
         // dbg!(&p.address);

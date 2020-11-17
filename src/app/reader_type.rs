@@ -2,17 +2,17 @@ use crate::*;
 use std::path::Path;
 /// all the reader
 pub enum ReaderType {
-    AWX(AwxReader),         //卫星
-    GPF(GpfReader),         //卫星
+    AWX(AwxReader), //卫星
+    GPF(GpfReader), //卫星
     #[cfg(not(target_arch = "wasm32"))]
-    GRIB(GribReader),       //模式数据
-    KJSAT(KJSatReader),     //kj卫星
+    GRIB(GribReader), //模式数据
+    KJSAT(KJSatReader), //kj卫星
     #[cfg(not(target_arch = "wasm32"))]
-    KJH5(KJH5SatReader),    //jk卫星hdf5
+    KJH5(KJH5SatReader), //jk卫星hdf5
     RAD386(Radar386Reader), // jk雷达。  还有问题
-    RADPD(RadarPDReader),   //单站雷达
-    RADPT(RadarPTReader),   //雷达拼图
-    RADX(XRadarReader),     //X波段雷达
+    RADPD(RadarPDReader), //单站雷达
+    RADPT(RadarPTReader), //雷达拼图
+    RADX(XRadarReader), //X波段雷达
 }
 
 impl ReaderType {

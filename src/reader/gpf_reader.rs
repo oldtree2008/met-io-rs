@@ -85,7 +85,21 @@ impl GpfReader {
         let mut f = File::open(fname)?;
         let mut data = Vec::new();
         f.read_to_end(&mut data);
-        let mut cursor = Cursor::new(&data);
+        // let mut cursor = Cursor::new(&data);
+        // let gpfreader: GpfReader = BinRead::read(&mut cursor)?;
+
+        // //   dbg!(&gpfreader);
+        // dbg!(
+        //     &gpfreader.channel1.len(),
+        //     &gpfreader.wWidth,
+        //     &gpfreader.wHeight
+        // );
+        // Ok(gpfreader)
+        GpfReader::new_from_slice(&data)
+    }
+
+    pub fn new_from_slice(data: &[u8]) -> Result<GpfReader, MetError> {
+        let mut cursor = Cursor::new(data);
         let gpfreader: GpfReader = BinRead::read(&mut cursor)?;
 
         //   dbg!(&gpfreader);

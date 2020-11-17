@@ -99,7 +99,10 @@ impl RadarPDReader {
         let mut file = File::open(fname)?;
         let mut buf = Vec::new();
         file.read_to_end(&mut buf)?;
-        let mut cursor = Cursor::new(&buf);
+        Self::new_from_slice(&buf)
+    }
+    pub fn new_from_slice(buf: &[u8]) -> Result<Self, MetError> {
+        let mut cursor = Cursor::new(buf);
         let station: RadarStation = BinRead::read(&mut cursor)?;
         let observe: ObservationParam = BinRead::read(&mut cursor)?;
 
