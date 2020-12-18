@@ -1,4 +1,5 @@
 mod awx_reader;
+mod cinradar_reader;
 mod gpf_reader;
 #[cfg(not(target_arch = "wasm32"))]
 mod grib_reader;
@@ -18,6 +19,7 @@ mod warn_h5_reader;
 mod xradar_reader;
 
 pub use awx_reader::*;
+pub use cinradar_reader::*;
 pub use gpf_reader::*;
 pub use kj_sat_reader::*;
 pub use radar_386_reader::*;

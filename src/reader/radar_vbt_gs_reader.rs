@@ -286,6 +286,9 @@ impl RadarVBTGSReader {
                     if d1 < -17.0 {
                         d1 = crate::MISSING;
                     }
+                    // if radar_data.data1[i] == 65535 {
+                    //     d1 = crate::MISSING;
+                    // }
                     // let d1 = radar_data.data1[i] as f32 * 0.5 - 32.0;
                     // let d1 = radar_data.data1[i] as f32 ;
                     line_data1.push(d1);
@@ -337,9 +340,9 @@ impl RadarVBTGSReader {
         rdata.rs = rs;
         rdata.elements = vec![
             "Z".to_string(),
+            "uZ".to_string(),
             "V".to_string(),
             "W".to_string(),
-            "uZ".to_string(),
         ];
         rdata.data = data;
 

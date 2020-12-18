@@ -152,10 +152,10 @@ impl AwxReader {
 
     pub fn new_from_slice(data: &[u8]) -> Result<AwxReader, MetError> {
         let mut reader = Cursor::new(data);
-        dbg!(data.len());
+        // dbg!(data.len());
         let product: Product = reader.read_le()?;
-        dbg!(&product.productCategory);
-        dbg!(&product.manufacturer);
+        // dbg!(&product.productCategory);
+        // dbg!(&product.manufacturer);
         Ok(AwxReader(product))
     }
 }
@@ -208,19 +208,19 @@ impl ToGrids for AwxReader {
                 "未投影".to_string()
             };
 
-            println!("proj {}", project);
-            println!(
-                "res {}  {}",
-                header.horizontalResolution, header.verticalResolution
-            );
-            println!(
-                "center {}  {}",
-                header.centerLatitudeOfProjection, header.centerLongitudeOfProjection
-            );
-            println!(
-                "lats {}  {}",
-                header.standardLatitude1, header.standardLatitude2
-            );
+            // println!("proj {}", project);
+            // println!(
+            //     "res {}  {}",
+            //     header.horizontalResolution, header.verticalResolution
+            // );
+            // println!(
+            //     "center {}  {}",
+            //     header.centerLatitudeOfProjection, header.centerLongitudeOfProjection
+            // );
+            // println!(
+            //     "lats {}  {}",
+            //     header.standardLatitude1, header.standardLatitude2
+            // );
             let lat0 = header.centerLatitudeOfProjection as f32 * 0.01;
             let lon0 = header.centerLongitudeOfProjection as f32 * 0.01;
             let xres = header.horizontalResolution as f32 * 0.01;

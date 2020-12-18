@@ -135,3 +135,7 @@ path="bin/warnh5reader.rs"
 [[bin]]
 name="createreader"
 path="bin/createreader.rs"
+
+[[bin]]
+name="cinrad"
+path="bin/cinrad.rs"

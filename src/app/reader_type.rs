@@ -37,7 +37,13 @@ impl ReaderType {
             } else {
                 return None;
             }
-        } else if fname.ends_with(".GRB") || fname.ends_with(".grb") {
+        } else if fname.ends_with(".GRB")
+            || fname.ends_with(".grb")
+            || fname.ends_with(".grib")
+            || fname.ends_with(".GRIB")
+            || fname.ends_with(".grib2")
+            || fname.ends_with(".GRIB2")
+        {
             if let Ok(reader) = GribReader::new(fname) {
                 return Some(GRIB(reader));
             } else {

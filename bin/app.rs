@@ -20,7 +20,8 @@ fn main() {
 
     let config = get_config("config/monitor_config.json").unwrap();
 
-    log::info!("{:?}", config);
+    // log::info!("{:?}", config);
+    println!("{:?}", config);
 
     let source = &config.source;
     let dest = &config.destination;
@@ -39,11 +40,12 @@ fn main() {
     for res in rx {
         match res {
             Ok(event) => {
-                // println!("changed: {:?}", event);
+                println!("changed: {:?}", event);
                 let kind = event.kind;
                 if kind == EventKind::Access(AccessKind::Close(AccessMode::Write)) {
                     // if kind == EventKind::Create(CreateKind::File) {
-                    log::info!("process files : {:?}", event.paths);
+                    // log::info!("process files : {:?}", event.paths);
+                    println!("process files : {:?}", event.paths);
                     // std::thread::sleep(Duration::from_millis(200));
                     for p in event.paths.iter() {
                         convert_data(p.to_str().unwrap(), output, None, None);

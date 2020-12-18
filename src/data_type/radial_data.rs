@@ -4,7 +4,7 @@ use crate::interplate;
 use crate::transforms;
 use crate::ToGrids;
 use common_data::SingleGrid;
-use rayon::prelude::*;
+// use rayon::prelude::*;
 use std::collections::HashMap;
 use std::default::Default;
 
@@ -92,7 +92,7 @@ impl RadialData {
         let total_num = (cols + 1) * (rows + 1);
         let mut grid_value: Vec<f32> = vec![crate::MISSING; total_num];
         let elv_values = &self.data[element_idx][ele_idx];
-        grid_value.par_iter_mut().enumerate().for_each(|(i, d)| {
+        grid_value.iter_mut().enumerate().for_each(|(i, d)| {
             let yi = i / (cols + 1);
             let xi = i % (rows + 1);
             let yv = y[yi];
@@ -179,7 +179,7 @@ impl RadialData {
         let mut grid_value: Vec<f32> = vec![crate::MISSING; total_num];
         let elv_values = &self.data[element_idx][ele_idx];
 
-        grid_value.par_iter_mut().enumerate().for_each(|(i, d)| {
+        grid_value.iter_mut().enumerate().for_each(|(i, d)| {
             let yi = i / (cols + 1);
             let xi = i % (rows + 1);
             let lat = lats[yi];
@@ -203,6 +203,15 @@ impl RadialData {
                 let v01 = elv_values[az_idx][range_idx + 1];
                 let v10 = elv_values[az_idx1][range_idx];
                 let v11 = elv_values[az_idx1][range_idx + 1];
+                // if v00 == 0f32 ||v01 == 0f32 ||v10 == 0f32 ||v11 == 0f32 {
+                //     println!("found");
+                // }
+
+                let v00 = if v00 == 0f32 { crate::MISSING } else { v00 };
+                let v01 = if v01 == 0f32 { crate::MISSING } else { v01 };
+                let v10 = if v10 == 0f32 { crate::MISSING } else { v10 };
+                let v11 = if v11 == 0f32 { crate::MISSING } else { v11 };
+
                 let v = interplate::interp_ppi(
                     az,
                     rang,
@@ -323,7 +332,7 @@ fn find_index1(azs: &Vec<f64>, az: f64) -> Option<usize> {
 impl Default for RadialData {
     fn default() -> Self {
         Self {
-            _extents: (-150000.0, 150000.0, -150000.0, 150000.0),
+            _extents: (-200000.0, 200000.0, -200000.0, 200000.0), //半径为200公里
             lon: 0.0f32,
             lat: 0f32,
             height: 0f32,

@@ -72,7 +72,7 @@ pub fn main() {
         // "/mnt/e/data/awx/EILY05I0.AWX",
         // "/mnt/e/data/awx/EILY05I1.AWX",
         // "/mnt/e/data/awx/ERLA19K0.AWX",
-        "/mnt/e/data/awx/EIEU052C.AWX",
+        "/mnt/e/data/testdata/awx/EILA19A0.AWX",
     ];
 
     for d in datas.iter() {
