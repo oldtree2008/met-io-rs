@@ -25,4 +25,7 @@ pub enum MetError {
     ECCodesError(#[from] eccodes_rs::errors::EccodesError),
     #[error("serdejson error")]
     SerdeError(#[from] serde_json::error::Error),
+
+    #[error("unknow cinrad formate error")]
+    UnknowCinRadError,
 }

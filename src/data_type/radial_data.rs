@@ -2,6 +2,7 @@
 // use crate::data_type::SingleGrid;
 use crate::interplate;
 use crate::transforms;
+use crate::MetError;
 use crate::ToGrids;
 use common_data::SingleGrid;
 // use rayon::prelude::*;
@@ -101,9 +102,9 @@ impl RadialData {
             let (az, rang, _z) = transforms::cartesian_to_antenna_cwr(xv, -yv, ele, self.height);
             let elv_azs = &self.azs[ele_idx];
             let az = az.to_degrees();
-            let (az_idx, az_idx1) = find_index(elv_azs, az);
+            let (az_idx, az_idx1) = find_az_index(elv_azs, az);
             let elv_rs = &self.rs[ele_idx][az_idx];
-            if let Some(range_idx) = find_index1(elv_rs, rang as f64) {
+            if let Some(range_idx) = find_range_index(elv_rs, rang as f64) {
                 let az0 = elv_azs[az_idx];
                 let az1 = elv_azs[az_idx1];
                 let rang0 = elv_rs[range_idx];
@@ -132,13 +133,8 @@ impl RadialData {
 
     pub fn ppi_to_grid_lonlat(
         &self,
-        ele: f32, //仰角
+        ele: f32,      //仰角
         element: &str, //物理量
-                  // xstart: f32,
-                  // xend: f32,
-                  // ystart: f32,
-                  // yend: f32,
-                  // h: f32,
     ) -> Option<SingleGrid> {
         let xstart = self._extents.0;
         let xend = self._extents.1;
@@ -157,8 +153,8 @@ impl RadialData {
         let ele_idx = idx.unwrap();
         let cols = 1024;
         let rows = 1024;
-        let cols = 256;
-        let rows = 256;
+        // let cols = 256;
+        // let rows = 256;
         let lon0 = self.lon;
         let lat0 = self.lat;
 
@@ -188,9 +184,11 @@ impl RadialData {
             let (az, rang, _z) = transforms::cartesian_to_antenna_cwr(xv, yv, ele, self.height);
             let elv_azs = &self.azs[ele_idx];
             let az = az.to_degrees();
-            let (az_idx, az_idx1) = find_index(elv_azs, az);
+            //找出临近方位角的索引
+            let (az_idx, az_idx1) = find_az_index(elv_azs, az);
             let elv_rs = &self.rs[ele_idx][az_idx];
-            if let Some(range_idx) = find_index1(elv_rs, rang as f64) {
+            //找出临近库的索引
+            if let Some(range_idx) = find_range_index(elv_rs, rang as f64) {
                 let az0 = elv_azs[az_idx];
                 let mut az1 = elv_azs[az_idx1];
                 //hack
@@ -212,6 +210,7 @@ impl RadialData {
                 let v10 = if v10 == 0f32 { crate::MISSING } else { v10 };
                 let v11 = if v11 == 0f32 { crate::MISSING } else { v11 };
 
+                //双线性插值
                 let v = interplate::interp_ppi(
                     az,
                     rang,
@@ -232,6 +231,12 @@ impl RadialData {
                     // );
                 }
                 *d = v;
+                // if v != crate::MISSING && ele == 0.5 && element == "Z" {
+                //     println!(
+                //         "az_idx :{} range_idx: {} v00:{} v01:{} v10:{} v11:{} v:{}",
+                //         az_idx, range_idx, v00, v01, v10, v11, v
+                //     );
+                // }
             }
         });
         let product = if self.props.contains_key("province") && self.props.contains_key("area") {
@@ -269,6 +274,24 @@ impl RadialData {
         };
         Some(sgrid)
     }
+
+    /// start_point 起始点经纬度  (lon,lat)
+    /// end_point 终止点经纬度   (lon,lat)
+    pub fn get_vcs_data(
+        &self,
+        start_point: &(f32, f32),
+        end_point: &(f32, f32),
+    ) -> Result<(), MetError> {
+        let (start_x, start_y) = transforms::geographic_to_cartesian_aeqd(
+            start_point.0,
+            start_point.1,
+            self.lon,
+            self.lat,
+        );
+        let (end_x, end_y) =
+            transforms::geographic_to_cartesian_aeqd(end_point.0, end_point.1, self.lon, self.lat);
+        Ok(())
+    }
 }
 fn create_grid_extent(
     x1: f32,
@@ -289,7 +312,7 @@ fn create_grid_extent(
     ((lon1, lat1, lon2, lat2), (steplon, steplat))
 }
 
-fn find_index(azs: &Vec<f32>, az: f32) -> (usize, usize) {
+fn find_az_index(azs: &Vec<f32>, az: f32) -> (usize, usize) {
     let az_len = azs.len();
     // println!("az_len {}",az_len);
     let first = azs[0];
@@ -308,7 +331,7 @@ fn find_index(azs: &Vec<f32>, az: f32) -> (usize, usize) {
     }
 }
 
-fn find_index1(azs: &Vec<f64>, az: f64) -> Option<usize> {
+fn find_range_index(azs: &Vec<f64>, az: f64) -> Option<usize> {
     let az_len = azs.len();
     // println!("az_len {}",az_len);
     let first = azs[0];

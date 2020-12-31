@@ -235,7 +235,7 @@ impl ToGrids for KJSatReader {
             forecast_time: 0,
             data_date: date_time.0,
             data_time: date_time.1,
-            product: format!("kj_{}", prod_el.0),
+            product: format!("kj/{}", prod_el.0),
             element: prod_el.1,
             center: String::from("center"),
             station: None,

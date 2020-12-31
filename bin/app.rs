@@ -40,7 +40,7 @@ fn main() {
     for res in rx {
         match res {
             Ok(event) => {
-                println!("changed: {:?}", event);
+                // println!("changed: {:?}", event);
                 let kind = event.kind;
                 if kind == EventKind::Access(AccessKind::Close(AccessMode::Write)) {
                     // if kind == EventKind::Create(CreateKind::File) {

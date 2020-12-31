@@ -260,7 +260,6 @@ impl RadarVBTGSReader {
             let mut el_line_data2 = Vec::new();
             let mut el_line_data3 = Vec::new();
             let mut el_line_data4 = Vec::new();
-            let mut first = true;
 
             for az in 0..azss {
                 let radar_data: RadarData = cursor.read_le()?;
@@ -278,7 +277,7 @@ impl RadarVBTGSReader {
                 let startel = radar_data.startel1 as f32 / 65536.0 * 360.0;
                 let endel = radar_data.endel1 as f32 / 65536.0 * 360.0;
 
-                // println!("{} {}  {}  {}    {} {}", el, az,startaz,endaz,startel,endel);
+                // println!("{} {}  {}  {}    {} {}  {:?}", el, az,startaz,endaz,startel,endel,radar_data.data1);
 
                 for i in 0..binNumber {
                     let r = i as f64 * binWidth;
@@ -286,9 +285,7 @@ impl RadarVBTGSReader {
                     if d1 < -17.0 {
                         d1 = crate::MISSING;
                     }
-                    // if radar_data.data1[i] == 65535 {
-                    //     d1 = crate::MISSING;
-                    // }
+
                     // let d1 = radar_data.data1[i] as f32 * 0.5 - 32.0;
                     // let d1 = radar_data.data1[i] as f32 ;
                     line_data1.push(d1);
