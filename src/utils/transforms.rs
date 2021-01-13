@@ -66,8 +66,9 @@ pub fn cartesian_xyz_to_antenna(x: f32, y: f32, z: f32, h: f32) -> (f32, f32, f3
     // println!("range {} {} {} {} ", v1, v2, v3, vv);
 
     let elevation: f64 =
-        f64::acos((R + z) * f64::sin((x.powf(2.0) + y.powf(2.0)).powf(0.5) / R) / ranges) * 180.
-            / std::f64::consts::PI;
+        f64::acos((R + z) * f64::sin((x.powf(2.0) + y.powf(2.0)).powf(0.5) / R) / ranges);
+    //     f64::acos((R + z) * f64::sin((x.powf(2.0) + y.powf(2.0)).powf(0.5) / R) / ranges) * 180.
+    //         / std::f64::consts::PI;
     let azimuth = _azimuth(x as f32, y as f32);
     let azimuth = azimuth.to_degrees();
     (azimuth, ranges as f32, elevation as f32)
@@ -152,4 +153,23 @@ pub fn cartesian_to_geographic_aeqd(x: f32, y: f32, lon_0: f32, lat_0: f32) -> (
         lon_deg += 360.0;
     }
     (lon_deg, lat_deg)
+}
+
+pub fn create_grid_extent(
+    x1: f32,
+    y1: f32,
+    x2: f32,
+    y2: f32,
+    lon0: f32,
+    lat0: f32,
+    row: usize,
+    col: usize,
+) -> ((f32, f32, f32, f32), (f32, f32)) {
+    let (lon1, lat1) = cartesian_to_geographic_aeqd(x1, y1, lon0, lat0);
+    let (lon2, lat2) = cartesian_to_geographic_aeqd(x2, y2, lon0, lat0);
+    let steplon = (lon2 - lon1) / (col - 1) as f32;
+    let steplat = (lat2 - lat1) / (row - 1) as f32;
+    let lon2 = lon1 + (col - 1) as f32 * steplon;
+    let lat2 = lat1 + (row - 1) as f32 * steplat;
+    ((lon1, lat1, lon2, lat2), (steplon, steplat))
 }

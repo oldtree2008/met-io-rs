@@ -273,7 +273,12 @@ impl WSR98DReader {
         let data = convert2radial(data_infos, &cut_infos);
 
         Ok(STRadialData {
-            _extents: (-100000.0, 100000.0, -100000.0, 100000.0),
+            _extents: (
+                -1840.0 * 250.0,
+                1840.0 * 250.0,
+                -1840.0 * 250.0,
+                1840.0 * 250.0,
+            ),
             site_code,
             site_name,
             latitude,
@@ -363,14 +368,14 @@ fn convert2radial(
                     .collect();
             }
             // if &ddd.data_type == "dBT" {
-            //     let print_data: Vec<&f32> =
-            //         own_data.iter().filter(|d| d != &&crate::MISSING).collect();
+            //     // let print_data: Vec<&f32> =
+            //     //     own_data.iter().filter(|d| d != &&crate::MISSING).collect();
             //     println!(
             //         "{:?}  {:?}  {:?}  {:?} ",
             //         dd.el,
             //         dd.az,
             //         ddd.data_type.clone(),
-            //         print_data
+            //         own_data
             //     );
             // }
             // println!("{:?}",own_data);
@@ -387,6 +392,20 @@ fn convert2radial(
         }
     }
 
+    // let d = &el_az_dt_data[&11];
+    // for dd in d.iter() {
+    //     println!("{} {} {} ", dd.0, dd.1, dd.2["dBZ"].len());
+    //     let tmp = &dd.2["dBZ"];
+    //     for (i, ddd) in tmp.iter().enumerate() {
+    //         // if *ddd != crate::MISSING {
+    //             print!("{}_{} ", i as f32 * 0.25, ddd);
+    //         // }
+    //         if i > 200 {
+    //             println!("");
+    //             break;
+    //         }
+    //     }
+    // }
     // println!("keys {:?}", el_az_dt_data.keys());
     // for i in 1..=11 {
     //     println!("keys {:?}", el_az_dt_data[&i][0].0);

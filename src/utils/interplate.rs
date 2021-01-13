@@ -53,6 +53,8 @@ pub fn interp_azimuth(az: f32, az_0: f32, az_1: f32, dat_0: f32, dat_1: f32) -> 
     let fillvalue = crate::MISSING;
     if (dat_0 - fillvalue).abs() > f32::EPSILON && (dat_1 - fillvalue).abs() > f32::EPSILON {
         return ((az_1 - az) * dat_0 + (az - az_0) * dat_1) / (az_1 - az_0);
+    } else if dat_0 == fillvalue && dat_1 == fillvalue {
+        return fillvalue;
     } else if dat_0 == fillvalue {
         return dat_1;
     } else {

@@ -23,6 +23,6 @@ pub fn main() {
     let reader = CinRadarReader::new(fname).unwrap();
 
     let output = "/mnt/d/temp/demo4";
-    todiamond4(&reader, output);
+    // todiamond4(&reader, output);
     println!("finished");
 }
