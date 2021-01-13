@@ -3,7 +3,7 @@
 use crate::interplate;
 use crate::transforms;
 use crate::MetError;
-use crate::ToGrids;
+use crate::{RadarData, ToGrids};
 use common_data::SingleGrid;
 // use rayon::prelude::*;
 use std::collections::HashMap;
@@ -140,17 +140,7 @@ impl RadialData {
         let xend = self._extents.1;
         let ystart = self._extents.2;
         let yend = self._extents.3;
-        let element_idx = self.get_element_idx(element);
-        if element_idx.is_none() {
-            return None;
-        }
-        let element_idx = element_idx.unwrap();
-        let idx = self.get_ele_idx(ele);
-        if idx.is_none() {
-            println!("{} not found ", ele);
-            return None;
-        }
-        let ele_idx = idx.unwrap();
+
         let cols = 1024;
         let rows = 1024;
         // let cols = 256;
@@ -159,7 +149,7 @@ impl RadialData {
         let lat0 = self.lat;
 
         let ((lon1, lat1, lon2, lat2), (steplon, steplat)) =
-            create_grid_extent(xstart, ystart, xend, yend, lon0, lat0, rows, cols);
+            transforms::create_grid_extent(xstart, ystart, xend, yend, lon0, lat0, rows, cols);
 
         let mut lons: Vec<f32> = Vec::with_capacity(cols * 4);
         let mut lats: Vec<f32> = Vec::with_capacity(rows * 4);
@@ -173,6 +163,19 @@ impl RadialData {
         }
         let total_num = (cols + 1) * (rows + 1);
         let mut grid_value: Vec<f32> = vec![crate::MISSING; total_num];
+
+        let element_idx = self.get_element_idx(element);
+        if element_idx.is_none() {
+            return None;
+        }
+        let element_idx = element_idx.unwrap();
+        let idx = self.get_ele_idx(ele);
+        if idx.is_none() {
+            println!("{} not found ", ele);
+            return None;
+        }
+        let ele_idx = idx.unwrap();
+
         let elv_values = &self.data[element_idx][ele_idx];
 
         grid_value.iter_mut().enumerate().for_each(|(i, d)| {
@@ -293,24 +296,6 @@ impl RadialData {
         Ok(())
     }
 }
-fn create_grid_extent(
-    x1: f32,
-    y1: f32,
-    x2: f32,
-    y2: f32,
-    lon0: f32,
-    lat0: f32,
-    row: usize,
-    col: usize,
-) -> ((f32, f32, f32, f32), (f32, f32)) {
-    let (lon1, lat1) = transforms::cartesian_to_geographic_aeqd(x1, y1, lon0, lat0);
-    let (lon2, lat2) = transforms::cartesian_to_geographic_aeqd(x2, y2, lon0, lat0);
-    let steplon = (lon2 - lon1) / (col - 1) as f32;
-    let steplat = (lat2 - lat1) / (row - 1) as f32;
-    let lon2 = lon1 + (col - 1) as f32 * steplon;
-    let lat2 = lat1 + (row - 1) as f32 * steplat;
-    ((lon1, lat1, lon2, lat2), (steplon, steplat))
-}
 
 fn find_az_index(azs: &Vec<f32>, az: f32) -> (usize, usize) {
     let az_len = azs.len();
@@ -368,6 +353,142 @@ impl Default for RadialData {
             azs: vec![vec![0f32]],              //每个仰角对应的方位角
             rs: vec![vec![vec![0f64]]],         //仰角->方位角->斜距   米为单位
             data: vec![vec![vec![vec![0f32]]]], //物理量->仰角->方位角->值
+        }
+    }
+}
+
+impl RadarData for RadialData {
+    fn site_name(&self) -> String {
+        if let Some(station) = self.props.get("station") {
+            station.to_string()
+        } else {
+            String::from("unknown")
+        }
+    }
+
+    fn product(&self) -> String {
+        if self.props.contains_key("province") && self.props.contains_key("area") {
+            format!("{}/{}", &self.props["province"], &self.props["area"])
+        } else if self.props.contains_key("product") {
+            self.props["product"].clone()
+        } else {
+            String::new()
+        }
+    }
+    fn start_date(&self) -> String {
+        self.start_date.clone()
+    }
+
+    fn start_time(&self) -> String {
+        self.start_time.clone()
+    }
+
+    fn ground_height(&self) -> f32 {
+        self.height
+    }
+
+    fn bin_length(&self) -> f32 {
+        todo!()
+    }
+
+    fn extents(&self) -> (f32, f32, f32, f32) {
+        self._extents
+    }
+
+    fn center_lon_lat(&self) -> Option<(f32, f32)> {
+        Some((self.lon, self.lat))
+    }
+
+    fn get_nearest_4v(
+        &self,
+        element: &str,
+        elv: f32,
+        az: f32,
+        rang: f32,
+    ) -> (f32, f32, f32, f32, f32, f32, f32, f32) {
+        let element_idx = self.get_element_idx(element);
+        if element_idx.is_none() {
+            return (
+                crate::MISSING,
+                crate::MISSING,
+                crate::MISSING,
+                crate::MISSING,
+                crate::MISSING,
+                crate::MISSING,
+                crate::MISSING,
+                crate::MISSING,
+            );
+        }
+        let element_idx = element_idx.unwrap();
+        let idx = self.get_ele_idx(elv);
+        if idx.is_none() {
+            println!("{} not found ", elv);
+            return (
+                crate::MISSING,
+                crate::MISSING,
+                crate::MISSING,
+                crate::MISSING,
+                crate::MISSING,
+                crate::MISSING,
+                crate::MISSING,
+                crate::MISSING,
+            );
+        }
+        let ele_idx = idx.unwrap();
+
+        let elv_values = &self.data[element_idx][ele_idx];
+        let elv_azs = &self.azs[ele_idx];
+        let az = az.to_degrees();
+        //找出临近方位角的索引
+        let (az_idx, az_idx1) = find_az_index(elv_azs, az);
+        let elv_rs = &self.rs[ele_idx][az_idx];
+        //找出临近库的索引
+        if let Some(range_idx) = find_range_index(elv_rs, rang as f64) {
+            let az0 = elv_azs[az_idx];
+            let mut az1 = elv_azs[az_idx1];
+            //hack
+            if az0 == az1 {
+                az1 = 0.0001;
+            }
+            let rang0 = elv_rs[range_idx];
+            let rang1 = elv_rs[range_idx + 1];
+            let v00 = elv_values[az_idx][range_idx];
+            let v01 = elv_values[az_idx][range_idx + 1];
+            let v10 = elv_values[az_idx1][range_idx];
+            let v11 = elv_values[az_idx1][range_idx + 1];
+            return (v00, v01, v10, v11, az0, az1, rang0 as f32, rang1 as f32);
+        }
+
+        return (
+            crate::MISSING,
+            crate::MISSING,
+            crate::MISSING,
+            crate::MISSING,
+            crate::MISSING,
+            crate::MISSING,
+            crate::MISSING,
+            crate::MISSING,
+        );
+    }
+
+    fn get_nearest_el(&self, el: f32) -> Option<Vec<f32>> {
+        if el.is_nan() {
+            return None;
+        }
+        let els = &self.eles;
+        let min = els[0];
+        let max = els[els.len() - 1];
+        if el < min || el > max {
+            return None;
+        } else {
+            let mut el_dis: Vec<(usize, f32, f32)> = Vec::new();
+            for (i, e) in els.iter().enumerate() {
+                el_dis.push((i, (*e - el).abs(), *e));
+            }
+            el_dis
+                .as_mut_slice()
+                .sort_by(|a, b| a.1.partial_cmp(&b.1).unwrap());
+            return Some(vec![el_dis[0].2, el_dis[1].2]);
         }
     }
 }

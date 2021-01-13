@@ -122,7 +122,7 @@ pub trait RadarData {
             data_time: self.start_time(), //时次   时分秒
             forecast_time: 0,             //时效
             center: String::from("radar"),
-            product: String::from("standard"),
+            product: self.product(),
             station: Some(self.site_name()),
         };
         Some(sgrid)
@@ -276,6 +276,7 @@ pub trait RadarData {
     fn ground_height(&self) -> f32;
     //库长
     fn bin_length(&self) -> f32;
+    fn product(&self) -> String;
     fn extents(&self) -> (f32, f32, f32, f32);
     fn center_lon_lat(&self) -> Option<(f32, f32)>;
     fn get_nearest_4v(

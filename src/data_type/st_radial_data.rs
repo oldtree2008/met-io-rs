@@ -86,6 +86,9 @@ impl RadarData for STRadialData {
     fn site_name(&self) -> String {
         self.site_name.clone()
     }
+    fn product(&self) -> String {
+        String::from("standard")
+    }
     fn start_date(&self) -> String {
         self.start_date.clone()
     }
