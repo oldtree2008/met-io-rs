@@ -1,84 +1,94 @@
+#![allow(non_snake_case)]
 use crate::MetError;
+use crate::{RadialData, SingleGrid, ToGrids};
 use binread::prelude::*;
 use encoding_rs::*;
-use std::io::Cursor;
+use rayon::prelude::*;
+use std::io::{Cursor, Read, SeekFrom};
+use std::mem::*;
+use std::path::Path;
+
+#[derive(Debug, BinRead)]
+struct Product {
+    site_info: SiteInfo,
+    performance_info: PerformanceInfo,
+    observation_info: ObservationInfo,
+    #[br(count = 163)]
+    reserved: Vec<u8>,
+}
 
 #[derive(Debug, BinRead)]
 struct SiteInfo {
     #[br(count = 30)]
-    country_: Vec<u8>,
-    #[br(calc=GBK.decode(&country_).0.trim_end_matches('\u{0}').to_string())]
-    country: String,
+    Country_: Vec<u8>,
+    #[br(calc=GBK.decode(&Country_).0.trim_end_matches('\u{0}').to_string())]
+    Country: String,
     #[br(count = 20)]
-    province_: Vec<u8>,
-    #[br(calc=GBK.decode(&province_).0.trim_end_matches('\u{0}').to_string())]
-    province: String,
+    Province_: Vec<u8>,
+    #[br(calc=GBK.decode(&Province_).0.trim_end_matches('\u{0}').to_string())]
+    Province: String,
     #[br(count = 40)]
-    station_: Vec<u8>,
-    #[br(calc=GBK.decode(&station_).0.trim_end_matches('\u{0}').to_string())]
-    station: String,
+    Station_: Vec<u8>,
+    #[br(calc=GBK.decode(&Station_).0.trim_end_matches('\u{0}').to_string())]
+    Station: String,
     #[br(count = 10)]
-    station_number_: Vec<u8>,
-    #[br(calc=GBK.decode(&station_number_).0.trim_end_matches('\u{0}').to_string())]
-    station_number: String,
+    StationNumber_: Vec<u8>,
+    #[br(calc=GBK.decode(&StationNumber_).0.trim_end_matches('\u{0}').to_string())]
+    StationNumber: String,
     #[br(count = 20)]
-    radar_type_: Vec<u8>,
-    #[br(calc=GBK.decode(&radar_type_).0.trim_end_matches('\u{0}').to_string())]
-    radar_type: String,
+    RadarType_: Vec<u8>,
+    #[br(calc=GBK.decode(&RadarType_).0.trim_end_matches('\u{0}').to_string())]
+    RadarType: String,
     #[br(count = 16)]
-    longitude_: Vec<u8>,
-    #[br(calc=GBK.decode(&longitude_).0.trim_end_matches('\u{0}').to_string())]
-    longitude: String,
+    Longitude_: Vec<u8>,
+    #[br(calc=GBK.decode(&Longitude_).0.trim_end_matches('\u{0}').to_string())]
+    Longitude: String,
     #[br(count = 16)]
-    latitude_: Vec<u8>,
-    #[br(calc=GBK.decode(&latitude_).0.trim_end_matches('\u{0}').to_string())]
-    latitude: String,
-    longitude_value_: i32,
-    #[br(calc=longitude_value_ as f32 /100.0)]
-    longitude_value: f32,
-    latitude_value_: i32,
-    #[br(calc=latitude_value_ as f32 /100.0)]
-    latitude_value: f32,
-    height_: i32,
-    #[br(calc=height_ as f32 /1000.0)]
-    height: f32, //单位为米
-    max_angle_: i16, // 测站四周地物最大遮挡仰角，以1/100度为计数单位
-    #[br(calc=max_angle_ as f32 /100.0)]
-    max_angle: f32,
-    opti_angle_: i16, // 测站四周地物最大遮挡仰角，以1/100度为计数单位
-    #[br(calc=opti_angle_ as f32 /100.0)]
-    opti_angle: f32, //测站的最佳观测仰角（地物回波强度<10dBZ），以1/100度为计数单位
-    mang_freq: i16,
-}
-#[derive(Debug, BinRead)]
-struct PerformanceInfo {
-    AntennaG: u32, // 天线增益以0.001dB为计数单位
-    VerBeamW: u16, //垂直波束宽度，以1/100度为计数单位
-    HorBeamW: u16, //水平波束宽度，以1/100度为计数单位
-    Polarizations: u8, /*    偏振状况                                    （188）
-                   0=水平
-                   1=垂直
-                   2=双线偏振
-                   3=圆偏振
-                   4=其他
-                   */
-    SideLobe: u16,   // 第一旁瓣，以0.01dB为计数单位
-    Power: i32,      //           雷达脉冲峰值功率，以瓦为单位
-    WaveLength: i32, //波长，以微米为计数单位
-    LogA: u16,       //       对数接收机动态范围，以以0.01dB为计数单位
-    LineA: u16,      //       线性接收机动态范围，以以0.01dB为计数单位
-    AGCP: u16,       //       AGC延迟量，以微秒为计数单
-    // LogMinPower: u16, // 对数接收机最小可测功率，计数单位为0.01dBm
-    // LinMinPower: u16, // 线性接收机最小可测功率，计数单位为0.01dBm
-    ClutterT: u8,   //     杂波消除阈值，计数单位为0.01dB
-    VelocityP: u8,  /*     速度处理方式                                （210）*/
-    filderP: u8, //地物消除方式 0 = 无地物消除 1 = 地物杂波图扣除法 2 = 地物杂波图 + 滤波器处理 3 = 滤波器处理 4 = 谱分析处理
-    noiseT: u8,  // #噪声消除阀值	（0-255）
-    SQIT: u8,    // #SQI阀值，以0.01为计数单位
-    intensityC: u8, // #rvp强度值估算采用的通道 1 = 对数通道 2 = 线性通道
-    intensityR: u8, //#强度估算是否进行了距离订正 0 = 无 1 = 已进行了距离订正
+    Latitude_: Vec<u8>,
+    #[br(calc=GBK.decode(&Latitude_).0.trim_end_matches('\u{0}').to_string())]
+    Latitude: String,
+    LongitudeValue_: i32,
+    #[br(calc=LongitudeValue_ as f32 /100.0)]
+    LongitudeValue: f32,
+    LatitudeValue_: i32,
+    #[br(calc=LatitudeValue_ as f32 /100.0)]
+    LatitudeValue: f32,
+    Height_: i32,
+    #[br(calc=Height_ as f32 /1000.0)]
+    Height: f32,        //单位为米
+    MaxAngle_: i16,     // 测站四周地物最大遮挡仰角，以1/100度为计数单位
+    #[br(calc=MaxAngle_ as f32 /100.0)]
+    MaxAngle: f32,
+    OptiAngle_: i16,    // 测站四周地物最大遮挡仰角，以1/100度为计数单位
+    #[br(calc=OptiAngle_ as f32 /100.0)]
+    OptiAngle: f32,     //测站的最佳观测仰角（地物回波强度<10dBZ），以1/100度为计数单位
+    MangFreq: i16,
 }
 
+#[derive(Debug, BinRead)]
+struct PerformanceInfo {
+    AntennaG: u32,      // 天线增益以0.001dB为计数单位
+    VerBeamW: u16,      //垂直波束宽度，以1/100度为计数单位
+    HorBeamW: u16,      //水平波束宽度，以1/100度为计数单位
+    Polarizations: u8, 
+                        /*    偏振状况                                    （188）
+                            0=水平
+                            1=垂直
+                            2=双线偏振
+                            3=圆偏振
+                            4=其他
+                        */
+    SideLobe: u16,      // 第一旁瓣，以0.01dB为计数单位
+    Power: i32,         //           雷达脉冲峰值功率，以瓦为单位
+    WaveLength: i32,    //波长，以微米为计数单位
+    LogA: u16,          //       对数接收机动态范围，以以0.01dB为计数单位
+    LineA: u16,         //       线性接收机动态范围，以以0.01dB为计数单位
+    AGCP: u16,          //       AGC延迟量，以微秒为计数单
+    LogMinPower: u16,   // 对数接收机最小可测功率，计数单位为0.01dBm
+    LinMinPower: u16,   // 线性接收机最小可测功率，计数单位为0.01dBm
+    ClutterT: u8,       //     杂波消除阈值，计数单位为0.01dB
+    VelocityP: u8,      /*     速度处理方式                                （210）*/
+}
 #[derive(Debug, BinRead)]
 struct ObservationInfo {
     Stype: u8,   /*         扫描方式                                   （216）
@@ -147,59 +157,269 @@ struct LayerInfo {
     RecordNumber: u16, //     本层扫描径向个数
     SwpAngles: i16, //                本层的仰角，计数单位为1/100度，当扫描方式为RHI，不填此数组，当扫描方式为PPI时，第一个元素为做PPI时的仰角，计数单位为1/100，其它元素填-32768
 }
-
 #[derive(Debug, BinRead)]
 #[br(little)]
-struct CDDTType {
-    site_info: SiteInfo,
-    performance: PerformanceInfo,
-    obs: ObservationInfo,
-    #[br(count = 163)]
-    reserved: Vec<u8>,
+struct PZData {
+    pub startaz1: u16,
+    pub startel1: u16,
+    pub endaz1: u16,
+    pub endel1: u16,
+    #[br(count = 1000)]
+    pub data1: Vec<u16>,
+    #[br(count = 1000)]
+    pub data2: Vec<u16>,
+    #[br(count = 1000)]
+    pub data3: Vec<u16>,
+    #[br(count = 1000)]
+    pub data4: Vec<u16>,
+    #[br(count = 1000)]
+    pub data5: Vec<u16>,
+    #[br(count = 1000)]
+    pub data6: Vec<u16>,
+    #[br(count = 1000)]
+    pub data7: Vec<u16>,
+    #[br(count = 1000)]
+    pub data8: Vec<u16>,
 }
 
 #[derive(Debug, BinRead)]
 #[br(little)]
-struct CDRecorder {
-    s_az_: u16,
-    // #[br(calc=s_az_ as f32 / 65536.0 * 360.0)]
-    // s_az:f32,
-    s_el_: u16,
-    // #[br(calc=s_el_ as f32 / 65536.0 * 360.0)]
-    // s_el:f32,
-    e_az_: u16,
-    // #[br(calc=e_az_ as f32 / 65536.0 * 360.0)]
-    // e_az:f32,
-    e_el_: u16,
-    // #[br(calc=e_el_ as f32 / 65536.0 * 360.0)]
-    // e_el:f32,
+struct NormData {
+    pub startaz1: u16,
+    pub startel1: u16,
+    pub endaz1: u16,
+    pub endel1: u16,
     #[br(count = 998)]
-    dbz: Vec<u8>,
+    pub data1: Vec<u8>,
     #[br(count = 998)]
-    v: Vec<u8>,
+    pub data2: Vec<u8>,
     #[br(count = 998)]
-    undbz: Vec<u8>,
+    pub data3: Vec<u8>,
     #[br(count = 998)]
-    sw: Vec<u8>,
+    pub data4: Vec<u8>,
 }
 
-pub struct SCReader;
+enum Data {
+    PZ(PZData),
+    Norm(NormData),
+}
+
+pub struct SCReader(RadialData);
 
 impl SCReader {
     pub fn new(data: &[u8]) -> Result<Self, MetError> {
-        println!("parser sc radar");
-        let mut cursor = Cursor::new(data);
-        let cddt: CDDTType = cursor.read_le()?;
-        dbg!(&cddt);
+        // let mut f = File::open(fname)?;
+        // let mut data = Vec::new();
+        // f.read_to_end(&mut data)?;
+        let mut cursor = Cursor::new(&data);
+        let p: Product = cursor.read_le()?;
+        dbg!(&p);
+        dbg!(size_of::<Product>());
+        dbg!(data.len());
+        let perf_info = &p.performance_info;
+        let polar = perf_info.Polarizations;
+        let site_info = &p.site_info;
+        let lon = site_info.LongitudeValue;
+        let lat = site_info.LatitudeValue;
+        let height = site_info.Height;
 
-        let el_num = cddt.obs.Stype - 100;
-        dbg!(&el_num);
-        // for _ in 0..el_num {
-        //     for _ in 0..360 {
-        //         let d: CDRecorder = cursor.read_le()?;
-        //         println!("{:?}", &d);
-        //     }
-        // }
-        Ok(SCReader)
+        let observation_info = &p.observation_info;
+        let start_date = format!(
+            "{}{:02}{:02}",
+            observation_info.Syear, observation_info.SMonth, observation_info.SDay
+        );
+        let start_time = format!(
+            "{:02}{:02}{:02}",
+            observation_info.SHour, observation_info.SMinute, observation_info.SSecond
+        );
+        // let data_des = format!("{}{}{}", data_date, data_time, site_info.RadarType);
+
+        let layers = &p.observation_info.layer_info;
+
+        let layers = layers
+            .iter()
+            .filter(|&l| l.RecordNumber != 0)
+            .collect::<Vec<&LayerInfo>>();
+        let mut eles = Vec::new();
+        let mut azs = Vec::new();
+        let mut rs = Vec::new();
+        let mut datas1 = Vec::new();
+        let mut datas2 = Vec::new();
+        let mut datas3 = Vec::new();
+        let mut datas4 = Vec::new();
+        let mut data = Vec::new(); //所有数据
+        for l in layers.iter() {
+            println!("{}  {}  {}", l.binNumber, l.RecordNumber, l.SwpAngles);
+            let el = l.SwpAngles;
+            let el = el as f32 * 0.01;
+            eles.push(el);
+            let azss = l.RecordNumber;
+
+            let binWidth = l.binWidth as f64 * 0.1;
+            let mut el_az = Vec::new();
+            let mut el_ranges = Vec::new();
+            let mut el_line_data1 = Vec::new();
+            let mut el_line_data2 = Vec::new();
+            let mut el_line_data3 = Vec::new();
+            let mut el_line_data4 = Vec::new();
+
+            for az in 0..azss {
+                let radar_data: Data = if polar == 2 {
+                    let d: PZData = cursor.read_le()?;
+                    Data::PZ(d)
+                } else {
+                    let d: NormData = cursor.read_le()?;
+                    Data::Norm(d)
+                };
+                el_az.push(az as f32);
+                let (ranges, line_data1, line_data2, line_data3, line_data4) =
+                    SCReader::process_data(&radar_data,binWidth);
+                el_ranges.push(ranges);
+                el_line_data1.push(line_data1);
+                el_line_data2.push(line_data2);
+                el_line_data3.push(line_data3);
+                el_line_data4.push(line_data4);
+            }
+            azs.push(el_az);
+            rs.push(el_ranges);
+            datas1.push(el_line_data1);
+            datas2.push(el_line_data2);
+            datas3.push(el_line_data3);
+            datas4.push(el_line_data4);
+        }
+        data.push(datas1);
+        data.push(datas2);
+        data.push(datas3);
+        data.push(datas4);
+        // dbg!(&eles);
+        let mut rdata = RadialData::default();
+        rdata.lon = lon;
+        rdata.lat = lat;
+        rdata.height = height;
+        rdata.start_date = start_date;
+        rdata.start_time = start_time;
+        rdata.eles = eles;
+        rdata.azs = azs;
+        rdata.rs = rs;
+        rdata.elements = vec![
+            "Z".to_string(),
+            "V".to_string(),
+            "uZ".to_string(),
+            "W".to_string(),
+        ];
+        rdata.data = data;
+
+        dbg!(cursor.position());
+        Ok(Self(rdata))
+    }
+
+    fn process_data(
+        data: &Data,
+        binWidth: f64,
+    ) -> (Vec<f64>, Vec<f32>, Vec<f32>, Vec<f32>, Vec<f32>) {
+        let mut ranges = Vec::new();
+        let mut line_data1 = Vec::new();
+        let mut line_data2 = Vec::new();
+        let mut line_data3 = Vec::new();
+        let mut line_data4 = Vec::new();
+        match data {
+            Data::PZ(radar_data) => {
+                // println!("{:?}",&radar_data.data1);
+
+                let startaz = radar_data.startaz1 as f32 / 65536.0 * 360.0;
+                let endaz = radar_data.endaz1 as f32 / 65536.0 * 360.0;
+
+                let startel = radar_data.startel1 as f32 / 65536.0 * 360.0;
+                let endel = radar_data.endel1 as f32 / 65536.0 * 360.0;
+                let binNumber = 1000 as usize;
+                // println!("{} {}  {}  {}    {} {}  {:?}", el, az,startaz,endaz,startel,endel,radar_data.data1);
+                // println!("{} {}  {}  {}    {} {} ", el, az,startaz,endaz,startel,endel);
+                for i in 0..binNumber {
+                    let r = i as f64 * binWidth;
+                    let mut d1 = (radar_data.data1[i] as f32 - 32768.0) * 0.01;
+                    if d1 < -17.0 {
+                        d1 = crate::MISSING;
+                    }
+
+                    // let d1 = radar_data.data1[i] as f32 * 0.5 - 32.0;
+                    // let d1 = radar_data.data1[i] as f32 ;
+                    line_data1.push(d1);
+                    let mut d2 = (radar_data.data2[i] as f32 - 32768.0) * 0.01;
+                    if d2 < -17.0 {
+                        d2 = crate::MISSING;
+                    }
+                    line_data2.push(d2);
+                    let mut d3 = (radar_data.data3[i] as f32 - 32768.0) * 0.01;
+                    if d3 < -28.0 {
+                        d3 = crate::MISSING;
+                    }
+                    line_data3.push(d3);
+                    let mut d4 = (radar_data.data4[i] as f32 - 32768.0) * 0.01;
+                    if d4 < 0.0 {
+                        d4 = crate::MISSING;
+                    }
+                    line_data4.push(d4);
+
+                    ranges.push(r);
+                }
+            }
+            Data::Norm(radar_data) => {
+                // println!("{:?}",&radar_data.data1);
+
+                let startaz = radar_data.startaz1 as f32 / 65536.0 * 360.0;
+                let endaz = radar_data.endaz1 as f32 / 65536.0 * 360.0;
+
+                let startel = radar_data.startel1 as f32 / 65536.0 * 360.0;
+                let endel = radar_data.endel1 as f32 / 65536.0 * 360.0;
+                let binNumber = 998 as usize;
+                // println!("{}  {}    {} {}  {:?}", startaz,endaz,startel,endel,radar_data.data1);
+                // println!("data2: {:?}", radar_data.data2);
+                // println!("data3: {:?}", radar_data.data3);
+                // println!("data4: {:?}", radar_data.data4);
+                // println!("{} {}  {}  {}    {} {} ", el, az,startaz,endaz,startel,endel);
+                for i in 0..binNumber {
+                    let r = i as f64 * binWidth;
+                    // let d1 = radar_data.data1[i] as f32;
+                    let d1 = if radar_data.data1[i] == 0 {
+                        crate::MISSING                        
+                        // 0.0
+                    } else {
+                        (radar_data.data1[i] as i32 - 64) as f32 * 0.5
+                    };
+                    line_data1.push(d1);
+
+                    let d2 = if radar_data.data2[i] == 0 {
+                        crate::MISSING
+                    } else {
+                        (radar_data.data2[i] as f32 - 128.0) / 128.0
+                    };
+                    line_data2.push(d2);
+
+                    // let d3 = radar_data.data3[i] as f32;
+                    let d3 = if radar_data.data3[i] == 0 {
+                        crate::MISSING
+                    } else {
+                        radar_data.data3[i] as f32 * 0.5 - 32.0
+                    };
+                    line_data3.push(d3);
+
+                    let d4 = if radar_data.data4[i] == 0 {
+                        crate::MISSING
+                    } else {
+                        radar_data.data4[i] as f32 / 256.0
+                    };
+                    line_data4.push(d4);
+
+                    ranges.push(r);
+                }
+            }
+        }
+        (ranges, line_data1, line_data2, line_data3, line_data4)
+    }
+}
+impl ToGrids for SCReader {
+    fn to_grids(&self) -> Option<Vec<SingleGrid>> {
+        let rd = &self.0;
+        rd.to_grids()
     }
 }

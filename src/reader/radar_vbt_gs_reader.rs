@@ -164,7 +164,7 @@ struct LayerInfo {
 }
 #[derive(Debug, BinRead)]
 #[br(little)]
-struct RadarData {
+struct Data {
     pub startaz1: u16,
     pub startel1: u16,
     pub endaz1: u16,
@@ -262,7 +262,7 @@ impl RadarVBTGSReader {
             let mut el_line_data4 = Vec::new();
 
             for az in 0..azss {
-                let radar_data: RadarData = cursor.read_le()?;
+                let radar_data: Data = cursor.read_le()?;
 
                 el_az.push(az as f32);
                 let mut ranges = Vec::new();

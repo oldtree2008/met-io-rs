@@ -11,6 +11,7 @@ fn main() {
 
     let fname = r##"/mnt/e/临时/临时/SC偏振雷达/202003180849090.05V"##;
     // let fname = r##"/mnt/e/临时/临时/SC偏振雷达/DP2020031808490.05V"##;
+    // let fname = r##"/mnt/e/临时/临时/SC雷达/Z_RADR_I_Z9796_20151205080100_O_DOR_SC_CAP.bin"##;
     let reader = RadarVBTGSReader::new(fname).unwrap();
-    todiamond4(&reader, "/mnt/d/temp/gs1");
+    todiamond4(&reader, "/mnt/d/temp/gs2");
 }

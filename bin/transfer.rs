@@ -1,16 +1,34 @@
+use met_io_rs::interplate;
 use met_io_rs::transforms;
 
 pub fn main() {
-    println!("transfer");
-    //x -4652.235  y 4652.2334 z 520
-    let (az, rang, elv) = transforms::cartesian_xyz_to_antenna(-4652.235, 4652.2334, 520.0, 0.0);
-    println!("az {}  rang {} elv {}", az, rang, elv);
-    // let (x, y, z) = transforms::antenna_to_cartesian_cwr(6600.0, 315.0, 4.5, 0.0);
+    // az 2.7072957 rang 18017.172 az0 155 az1 156 rs0 18000 rs1 18300 v 1739.3853  v00 9 v01 50 v10 0 v11 0
 
-    // println!("x {}  y {} z {}", x, y, z);
+    // let v = interplate::interp_ppi(
+    //     2.7072957,
+    //     18017.172,
+    //     155.0,
+    //     156.0,
+    //     18000.0,
+    //     18300.0,
+    //     9.0,
+    //     50.0,
+    //     0.0,
+    //     0.0
+    // );
 
-    let (az, rang, elv) = transforms::cartesian_to_antenna_cwr(460000.0, 460000.0, 1.0, 1000.0);
-    println!("az {}  rang {} elv {}", az.to_degrees(), rang, elv);
+    // println!("{} ",v);
+
+    // println!("transfer");
+    // //x -4652.235  y 4652.2334 z 520
+    // let (az, rang, elv) = transforms::cartesian_xyz_to_antenna(-4652.235, 4652.2334, 520.0, 0.0);
+    // println!("az {}  rang {} elv {}", az, rang, elv);
+    // // let (x, y, z) = transforms::antenna_to_cartesian_cwr(6600.0, 315.0, 4.5, 0.0);
+
+    // // println!("x {}  y {} z {}", x, y, z);
+
+    // let (az, rang, elv) = transforms::cartesian_to_antenna_cwr(460000.0, 460000.0, 1.0, 1000.0);
+    // println!("az {}  rang {} elv {}", az.to_degrees(), rang, elv);
 
     // let (lon1, lat1) = transforms::cartesian_to_geographic_aeqd(-150000.0, -150000.0, 114.0, 40.0);
     // let (lon2, lat2) = transforms::cartesian_to_geographic_aeqd(150000.0, 150000.0, 114.0, 40.0);

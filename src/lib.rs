@@ -41,10 +41,10 @@ pub trait RadarData {
 
         let cols = 1024;
         let rows = 1024;
-        let cols = 1840;
-        let rows = 1840;
-        // let cols = 256;
-        // let rows = 256;
+        // let cols = 1840;
+        // let rows = 1840;
+        let cols = 256;
+        let rows = 256;
         let (lon0, lat0) = self.center_lon_lat().unwrap_or((0.0, 0.0));
 
         let ((lon1, lat1, lon2, lat2), (steplon, steplat)) =
@@ -97,7 +97,7 @@ pub trait RadarData {
             // if v.is_nan() {
             //     println!("is_nan");
             // }
-            // if v != crate::MISSING {
+            // if v >1000.0{
             //     println!(
             //         "az {} rang {} az0 {} az1 {} rs0 {} rs1 {} v {}  v00 {} v01 {} v10 {} v11 {}",
             //         az, rang, az0, az1, rs0, rs1, v, v00, v01, v10, v11
