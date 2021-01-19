@@ -55,39 +55,39 @@ struct SiteInfo {
     LatitudeValue: f32,
     Height_: i32,
     #[br(calc=Height_ as f32 /1000.0)]
-    Height: f32,        //单位为米
-    MaxAngle_: i16,     // 测站四周地物最大遮挡仰角，以1/100度为计数单位
+    Height: f32, //单位为米
+    MaxAngle_: i16, // 测站四周地物最大遮挡仰角，以1/100度为计数单位
     #[br(calc=MaxAngle_ as f32 /100.0)]
     MaxAngle: f32,
-    OptiAngle_: i16,    // 测站四周地物最大遮挡仰角，以1/100度为计数单位
+    OptiAngle_: i16, // 测站四周地物最大遮挡仰角，以1/100度为计数单位
     #[br(calc=OptiAngle_ as f32 /100.0)]
-    OptiAngle: f32,     //测站的最佳观测仰角（地物回波强度<10dBZ），以1/100度为计数单位
+    OptiAngle: f32, //测站的最佳观测仰角（地物回波强度<10dBZ），以1/100度为计数单位
     MangFreq: i16,
 }
 
 #[derive(Debug, BinRead)]
 struct PerformanceInfo {
-    AntennaG: u32,      // 天线增益以0.001dB为计数单位
-    VerBeamW: u16,      //垂直波束宽度，以1/100度为计数单位
-    HorBeamW: u16,      //水平波束宽度，以1/100度为计数单位
-    Polarizations: u8, 
-                        /*    偏振状况                                    （188）
-                            0=水平
-                            1=垂直
-                            2=双线偏振
-                            3=圆偏振
-                            4=其他
-                        */
-    SideLobe: u16,      // 第一旁瓣，以0.01dB为计数单位
-    Power: i32,         //           雷达脉冲峰值功率，以瓦为单位
-    WaveLength: i32,    //波长，以微米为计数单位
-    LogA: u16,          //       对数接收机动态范围，以以0.01dB为计数单位
-    LineA: u16,         //       线性接收机动态范围，以以0.01dB为计数单位
-    AGCP: u16,          //       AGC延迟量，以微秒为计数单
-    LogMinPower: u16,   // 对数接收机最小可测功率，计数单位为0.01dBm
-    LinMinPower: u16,   // 线性接收机最小可测功率，计数单位为0.01dBm
-    ClutterT: u8,       //     杂波消除阈值，计数单位为0.01dB
-    VelocityP: u8,      /*     速度处理方式                                （210）*/
+    AntennaG: u32, // 天线增益以0.001dB为计数单位
+    VerBeamW: u16, //垂直波束宽度，以1/100度为计数单位
+    HorBeamW: u16, //水平波束宽度，以1/100度为计数单位
+    Polarizations: u8,
+    /*    偏振状况                                    （188）
+        0=水平
+        1=垂直
+        2=双线偏振
+        3=圆偏振
+        4=其他
+    */
+    SideLobe: u16,    // 第一旁瓣，以0.01dB为计数单位
+    Power: i32,       //           雷达脉冲峰值功率，以瓦为单位
+    WaveLength: i32,  //波长，以微米为计数单位
+    LogA: u16,        //       对数接收机动态范围，以以0.01dB为计数单位
+    LineA: u16,       //       线性接收机动态范围，以以0.01dB为计数单位
+    AGCP: u16,        //       AGC延迟量，以微秒为计数单
+    LogMinPower: u16, // 对数接收机最小可测功率，计数单位为0.01dBm
+    LinMinPower: u16, // 线性接收机最小可测功率，计数单位为0.01dBm
+    ClutterT: u8,     //     杂波消除阈值，计数单位为0.01dB
+    VelocityP: u8,    /*     速度处理方式                                （210）*/
 }
 #[derive(Debug, BinRead)]
 struct ObservationInfo {
@@ -204,10 +204,10 @@ enum Data {
     Norm(NormData),
 }
 
-pub struct SCReader(RadialData);
+pub struct SCReader;
 
 impl SCReader {
-    pub fn new(data: &[u8]) -> Result<Self, MetError> {
+    pub fn new(data: &[u8]) -> Result<RadialData, MetError> {
         // let mut f = File::open(fname)?;
         // let mut data = Vec::new();
         // f.read_to_end(&mut data)?;
@@ -248,6 +248,11 @@ impl SCReader {
         let mut datas3 = Vec::new();
         let mut datas4 = Vec::new();
         let mut data = Vec::new(); //所有数据
+
+        let bin_length = layers[0].binWidth;
+        let bin_num = 1000;
+        dbg!(bin_length, bin_num);
+
         for l in layers.iter() {
             println!("{}  {}  {}", l.binNumber, l.RecordNumber, l.SwpAngles);
             let el = l.SwpAngles;
@@ -273,7 +278,7 @@ impl SCReader {
                 };
                 el_az.push(az as f32);
                 let (ranges, line_data1, line_data2, line_data3, line_data4) =
-                    SCReader::process_data(&radar_data,binWidth);
+                    SCReader::process_data(&radar_data, binWidth);
                 el_ranges.push(ranges);
                 el_line_data1.push(line_data1);
                 el_line_data2.push(line_data2);
@@ -308,9 +313,12 @@ impl SCReader {
             "W".to_string(),
         ];
         rdata.data = data;
+        rdata.bin_length = bin_length as f32 * 0.1;
 
+        let dist = rdata.bin_length * bin_num as f32;
+        rdata._extents = (-dist, dist, -dist, dist);
         dbg!(cursor.position());
-        Ok(Self(rdata))
+        Ok(rdata)
     }
 
     fn process_data(
@@ -381,8 +389,8 @@ impl SCReader {
                     let r = i as f64 * binWidth;
                     // let d1 = radar_data.data1[i] as f32;
                     let d1 = if radar_data.data1[i] == 0 {
-                        crate::MISSING                        
-                        // 0.0
+                        crate::MISSING
+                    // 0.0
                     } else {
                         (radar_data.data1[i] as i32 - 64) as f32 * 0.5
                     };
@@ -417,9 +425,9 @@ impl SCReader {
         (ranges, line_data1, line_data2, line_data3, line_data4)
     }
 }
-impl ToGrids for SCReader {
-    fn to_grids(&self) -> Option<Vec<SingleGrid>> {
-        let rd = &self.0;
-        rd.to_grids()
-    }
-}
+// impl ToGrids for SCReader {
+//     fn to_grids(&self) -> Option<Vec<SingleGrid>> {
+//         let rd = &self.0;
+//         rd.to_grids()
+//     }
+// }

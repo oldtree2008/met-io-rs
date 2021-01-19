@@ -1,4 +1,4 @@
-use crate::{MetError, RadarData, STRadialData, ToGrids};
+use crate::{MetError, RadarData, RadialData, STRadialData, ToGrids};
 use contour::*;
 use geojson::Value;
 use plotters::prelude::*;
@@ -16,8 +16,8 @@ use wsr98d_reader::WSR98DReader;
 
 pub enum CinRadarReader {
     WSR98D(STRadialData),
-    // SAB(SABReader),
-    SC(SCReader),
+    SAB(SABReader),
+    SC(RadialData),
 }
 
 impl CinRadarReader {
@@ -34,11 +34,11 @@ impl CinRadarReader {
             let reader = WSR98DReader::new(&buf).unwrap();
             return Ok(Self::WSR98D(reader));
         } else {
-            // if &flag[14..16] == b"\x01\x00" {
-            //     println!("SAB");
-            //     let reader = SABReader::new(&buf)?;
-            //     return Ok(Self::SAB(reader));
-            // }
+            if &flag[14..16] == b"\x01\x00" {
+                println!("SAB");
+                let reader = SABReader::new(&buf)?;
+                return Ok(Self::SAB(reader));
+            }
 
             // // dbg!(flag1);
 

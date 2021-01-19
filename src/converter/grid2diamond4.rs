@@ -20,7 +20,7 @@ where
 }
 
 pub fn grids2diamond4s(grids: &Vec<SingleGrid>, output: &str) -> Result<(), MetError> {
-    grids.iter().for_each(|grid| {
+    grids.par_iter().for_each(|grid| {
         grid2diamond4(grid, output).unwrap();
     });
     Ok(())

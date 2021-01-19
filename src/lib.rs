@@ -1,3 +1,5 @@
+use rayon::prelude::*;
+
 mod app;
 mod converter;
 mod data_type;
@@ -32,7 +34,10 @@ pub trait RadarData {
         &self,
         ele: f32,      //仰角
         element: &str, //物理量
-    ) -> Option<SingleGrid> {
+    ) -> Option<SingleGrid>
+    where
+        Self: Sync,
+    {
         // let xstart = self._extents.0;
         // let xend = self._extents.1;
         // let ystart = self._extents.2;
@@ -45,6 +50,14 @@ pub trait RadarData {
         // let rows = 1840;
         let cols = 256;
         let rows = 256;
+
+        let bin_num = (self.extents().0 / self.bin_length()).abs() as usize;
+
+        dbg!(self.extents(),bin_num);
+
+        let cols = bin_num;
+        let rows = bin_num;
+
         let (lon0, lat0) = self.center_lon_lat().unwrap_or((0.0, 0.0));
 
         let ((lon1, lat1, lon2, lat2), (steplon, steplat)) =
@@ -64,7 +77,8 @@ pub trait RadarData {
         let mut grid_value: Vec<f32> = vec![crate::MISSING; total_num];
         // let elv_values = &self.data[element_idx][ele_idx];
 
-        grid_value.iter_mut().enumerate().for_each(|(i, d)| {
+        // grid_value.iter_mut().enumerate().for_each(|(i, d)| {
+        grid_value.par_iter_mut().enumerate().for_each(|(i, d)| {
             let yi = i / (cols + 1);
             let xi = i % (rows + 1);
             let lat = lats[yi];
@@ -277,6 +291,7 @@ pub trait RadarData {
     //库长
     fn bin_length(&self) -> f32;
     fn product(&self) -> String;
+    /// (xstart, xend, ystart, yend)
     fn extents(&self) -> (f32, f32, f32, f32);
     fn center_lon_lat(&self) -> Option<(f32, f32)>;
     fn get_nearest_4v(

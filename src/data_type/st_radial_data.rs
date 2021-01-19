@@ -17,8 +17,9 @@ pub struct STRadialData {
     pub longtitude: f32,
     pub antena_height: i32,
     pub ground_height: i32,
-    pub log_res: i32,
-    pub dop_res: i32,
+    pub log_res: i32, //库长
+    pub dop_res: i32, //库长
+    pub bin_num: i32,
     pub idx_el: Vec<(i32, f32)>,
     pub data: HashMap<i32, Vec<(f32, f32, HashMap<String, Vec<f32>>)>>,
 }

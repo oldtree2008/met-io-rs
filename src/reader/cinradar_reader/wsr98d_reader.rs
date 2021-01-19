@@ -201,9 +201,9 @@ struct DataBlock {
     data_type: String,
     scale: i32,
     offset: i32,
-    pub bin_len: u16,
+    pub bin_len: u16, //一个库的字节数 。2为两个字节
     flag: u16,
-    pub len: i32,
+    pub len: i32, //库长
     #[br(count = 12)]
     reserved: Vec<u8>,
     #[br(count= len)]
@@ -253,7 +253,14 @@ impl WSR98DReader {
 
         let log_res = cut_infos[0].log_res;
         let dop_res = cut_infos[0].log_res;
-        // println!("log_rs {} dop_res {}",log_res,dop_res);
+
+        let max_range1 = cut_infos[0].max_range1;
+        let max_range2 = cut_infos[0].max_range2;
+
+        println!(
+            "log_rs {} dop_res {}  max_range1 {}  max_range2 {}",
+            log_res, dop_res, max_range1, max_range2
+        );
 
         let mut data_infos = Vec::new();
         loop {
@@ -268,17 +275,15 @@ impl WSR98DReader {
                 break;
             }
         }
-        dbg!(data_infos.len());
+        let bin_num = data_infos[0].data_block[0].len;
+        // dbg!(data_infos.len(), bin_num);
 
         let data = convert2radial(data_infos, &cut_infos);
+        let dist = bin_num as f32 * log_res as f32;
 
+        dbg!(dist);
         Ok(STRadialData {
-            _extents: (
-                -1840.0 * 250.0,
-                1840.0 * 250.0,
-                -1840.0 * 250.0,
-                1840.0 * 250.0,
-            ),
+            _extents: (-dist, dist, -dist, dist),
             site_code,
             site_name,
             latitude,
@@ -291,6 +296,7 @@ impl WSR98DReader {
             dop_res,
             idx_el,
             data,
+            bin_num,
         })
     }
 }

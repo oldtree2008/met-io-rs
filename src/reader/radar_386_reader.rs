@@ -254,6 +254,7 @@ impl Radar386Reader {
             start_time,
             start_date,
             elements: vec!["Z".to_string()],
+            bin_length:200.0,
             lon: lon,
             lat: lat,
             height: 0.0,

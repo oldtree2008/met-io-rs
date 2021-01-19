@@ -246,6 +246,8 @@ impl RadarVBTGSReader {
         let mut datas3 = Vec::new();
         let mut datas4 = Vec::new();
         let mut data = Vec::new(); //所有数据
+        let bin_length = layers[0].binWidth;
+        
         for l in layers.iter() {
             println!("{}  {}  {}", l.binNumber, l.RecordNumber, l.SwpAngles);
             let el = l.SwpAngles;
@@ -342,7 +344,10 @@ impl RadarVBTGSReader {
             "W".to_string(),
         ];
         rdata.data = data;
-
+        rdata.bin_length = bin_length as f32 * 0.1;
+        let bin_num = 1000;
+        let dist = rdata.bin_length * bin_num as f32;
+        rdata._extents = (-dist, dist, -dist, dist);
         dbg!(cursor.position());
         Ok(Self(rdata))
     }

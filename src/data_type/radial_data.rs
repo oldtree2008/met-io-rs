@@ -19,6 +19,7 @@ pub struct RadialData {
     pub start_date: String,
     pub start_time: String,
     pub elements: Vec<String>, //物理量名称  Z,uZ,V,W等等
+    pub bin_length: f32,       //库长
     // pub end_time: String,
     pub eles: Vec<f32>,                //所有的仰角
     pub azs: Vec<Vec<f32>>,            //每个仰角对应的方位角
@@ -130,7 +131,6 @@ impl RadialData {
         });
         Some((cols + 1, rows + 1, grid_value))
     }
-
 }
 
 fn find_az_index(azs: &Vec<f32>, az: f32) -> (usize, usize) {
@@ -180,6 +180,7 @@ impl Default for RadialData {
             lon: 0.0f32,
             lat: 0f32,
             height: 0f32,
+            bin_length: 200.0,
             props: HashMap::<String, String>::new(),
             start_date: String::from(""),
             start_time: String::from(""),
@@ -224,7 +225,7 @@ impl RadarData for RadialData {
     }
 
     fn bin_length(&self) -> f32 {
-        todo!()
+        self.bin_length
     }
 
     fn extents(&self) -> (f32, f32, f32, f32) {
