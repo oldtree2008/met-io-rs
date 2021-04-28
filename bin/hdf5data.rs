@@ -49,6 +49,12 @@ fn point_value(lon: f32, lat: f32, lons: &[i16], lats: &[i16], values: &[i16]) -
 pub fn main() {
     // let fname = r##"/mnt/e/data/FY2E/FY2E_2018_11_01_00_31.HDF"##;
     let fname = r##"/mnt/e/kjdata/FY2G-0916-17/FY2G-0916-17/FY2G_2020_09_16_00_01.HDF"##;
+
+    // let fname = r##"/mnt/d/tmp/testdata/patmosx_v05r03-preliminary_NOAA-19_asc_d20130630_c20140325.nc"##;
+    // let fname = r##"/mnt/d/tmp/testdata/pres_temp_4D.nc"##;//error
+    // let fname = r##"/mnt/d/tmp/testdata/simple_nc4.nc"##;
+    let fname = r##"/mnt/d/tmp/testdata/data-1996-06-09-01-1.nc"##;
+    // let fname = r##"/mnt/d/tmp/testdata/simple_xy.nc"##;
     // let fname = r##"/mnt/e/kjdata/FY2G-0916-17/FY2G-0916-17/FY2G_CBT_2020_09_16_00_01.HDF5"##;
     // let fname = r##"/mnt/e/kjdata/FY2G-0916-17/FY2G-0916-17/FY2G_CHE_2020_09_16_20_00.HDF5"##;
     // let fname = r##"/mnt/e/kjdata/FY2G-0916-17/FY2G-0916-17/FY2G_CLC_2020_09_16_20_00.HDF5"##;
@@ -68,23 +74,29 @@ pub fn main() {
     dbg!(vars);
 
     let attrs = reader.attribute_names();
-    let attr = reader.attribute("Column").unwrap();
-    let attr = reader.attribute("Default").unwrap();
-    let attr = reader.attribute("End_Date").unwrap();
-    let attr = reader.attribute("Start_Time").unwrap();
-    let attr = reader.attribute("Sat_Name").unwrap();
-    let shape = attr.shape();
-    // let attr = attr.read_1d::<u16>().unwrap();
-    let attr = attr
-        .read_scalar::<hdf5::types::FixedAscii<[u8; 16]>>()
-        .unwrap();
-    // let attr = attr.read_scalar::<hdf5::types::VarLenAscii>().unwrap();
     dbg!(attrs);
-    dbg!(shape);
-    dbg!(attr);
 
-    let dataset = reader.dataset("ChannelIR1").unwrap();
-    dbg!(dataset.ndim());
+    // let dataset = reader.dataset("ChannelIR1").unwrap();
+    // dbg!(dataset.ndim());
+
+    // let attr = reader.attribute("Column").unwrap();
+    // let attr = reader.attribute("Default").unwrap();
+    // let attr = reader.attribute("End_Date").unwrap();
+    // let attr = reader.attribute("Start_Time").unwrap();
+    // let attr = reader.attribute("Sat_Name").unwrap();
+    // let shape = attr.shape();
+    // // let attr = attr.read_1d::<u16>().unwrap();
+    // let attr = attr
+    //     .read_scalar::<hdf5::types::FixedAscii<[u8; 16]>>()
+    //     .unwrap();
+    // // let attr = attr.read_scalar::<hdf5::types::VarLenAscii>().unwrap();
+
+    // dbg!(shape);
+    // dbg!(attr);
+
+    // let dataset = reader.dataset("ChannelIR1").unwrap();
+    // dbg!(dataset.ndim());
+
     // let data = dataset.as_ref();
     // let data = dataset.read_2d::<i16>().unwrap();
     // let data = dataset.read_scalar::<hdf5::types::FixedAscii<[u8;16]>>().unwrap();

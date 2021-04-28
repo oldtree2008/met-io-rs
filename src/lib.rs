@@ -4,6 +4,7 @@ mod app;
 mod converter;
 mod data_type;
 mod error;
+mod plotter;
 mod protos;
 mod reader;
 mod utils;
@@ -13,6 +14,7 @@ pub use data_type::*;
 use error::MetError;
 // pub use hdf5_error::Hdf5Error;
 pub use app::*;
+pub use plotter::*;
 pub use protos::nom;
 pub use reader::*;
 pub use utils::interplate;
@@ -53,7 +55,7 @@ pub trait RadarData {
 
         let bin_num = (self.extents().0 / self.bin_length()).abs() as usize;
 
-        dbg!(self.extents(),bin_num);
+        dbg!(self.extents(), bin_num);
 
         let cols = bin_num;
         let rows = bin_num;

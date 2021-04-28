@@ -289,7 +289,7 @@ impl XRadarReader {
             data: data,
             start_time,
             start_date,
-            bin_length:200.0,
+            bin_length: 200.0,
             elements: vec!["Z".to_string()],
             // end_time,
             lon: *&p.address.Longitude,

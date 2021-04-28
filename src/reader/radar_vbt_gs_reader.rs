@@ -247,7 +247,7 @@ impl RadarVBTGSReader {
         let mut datas4 = Vec::new();
         let mut data = Vec::new(); //所有数据
         let bin_length = layers[0].binWidth;
-        
+
         for l in layers.iter() {
             println!("{}  {}  {}", l.binNumber, l.RecordNumber, l.SwpAngles);
             let el = l.SwpAngles;
