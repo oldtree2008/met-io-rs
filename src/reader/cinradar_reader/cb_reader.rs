@@ -2,7 +2,7 @@ use crate::MetError;
 use binread::prelude::*;
 use std::io::Cursor;
 
-pub struct SABReader;
+pub struct CBReader;
 #[derive(Debug, BinRead)]
 pub struct Header {
     #[br(count = 14)]
@@ -38,21 +38,21 @@ pub struct Header {
     reserve3: Vec<u8>,
 }
 
-impl SABReader {
+impl CBReader {
     pub fn new(data: &[u8]) -> Result<Self, MetError> {
         println!("parse the sab radar file");
         // let mut rd = Cursor::new(data);
-        let (radial_num, num) = SABReader::radial_num_SAB_CB(data);
-        dbg!(&radial_num, &num);
-        for i in 0..num {
+        let radial_num = 1632;
+        for i in 0..3600 {
             let from = radial_num * i;
             let end = (i + 1) * radial_num;
             let mut rd = Cursor::new(&data[from..end]);
             // rd.seek(SeekFrom::Start(step as u64))?;
             let header: Header = rd.read_le()?;
-            println!("{:#?}", header);
-            let el = (header.el as f32 / 8.0) * (180.0 / 1096.0);
-            let az = (header.az as f32 / 8.0) * (180.0 / 1096.0);
+            //println!("{:#?}", header);
+            let el = (header.el as f32 / 8.0) * (180.0 / 4096.0);
+            let az = (header.az as f32 / 8.0) * (180.0 / 4096.0);
+
             println!(
                 "el {} el_number:{} az:{} radial_number:{} status:{}   {}",
                 el,
@@ -62,31 +62,41 @@ impl SABReader {
                 header.radial_status,
                 header.julian_data / 365
             );
-
+            /*
+            dbg!(
+                header.ptr_of_reflectivity,
+                header.ptr_of_velocity,
+                header.ptr_of_spectrum_width
+            );*/
             let start_index = header.ptr_of_reflectivity as usize + 28;
-            let end_index = start_index + header.gate_size_of_reflectivity as usize;
-
+            let end_index = start_index + header.gates_number_of_reflectivity as usize;
             let dBZ = &data[start_index..end_index];
+            /*
+            for d in dBZ.iter() {
+                print!("{:0x} ", d);
+            }
+            println!("");
+            */
             let start_index = header.ptr_of_velocity as usize + 28;
-            let end_index = start_index + header.gate_size_of_doppler as usize;
+            let end_index = start_index + header.gates_number_of_doppler as usize;
             let V = &data[start_index..end_index];
+            /*
+            for d in V.iter() {
+                print!("{:0x} ", d);
+            }
+            println!("");
+            */
             let start_index = header.ptr_of_spectrum_width as usize + 28;
-            let end_index = start_index + header.gate_size_of_doppler as usize;
+            let end_index = start_index + header.gates_number_of_doppler as usize;
             let W = &data[start_index..end_index];
+            /*
+            for d in W.iter() {
+                print!("{:0x} ", d);
+            }
+            println!("");
+            */
         }
 
-        Ok(SABReader)
-    }
-
-    pub fn radial_num_SAB_CB(data: &[u8]) -> (usize, usize) {
-        let data_len = data.len();
-        let radial_num = if data_len % 2432 == 0 {
-            2432 //SAB
-        } else if data_len % 4132 == 0 {
-            4132 //CB
-        } else {
-            3132 //SB
-        };
-        (radial_num, data_len / radial_num)
+        Ok(CBReader)
     }
 }

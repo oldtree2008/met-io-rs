@@ -141,7 +141,7 @@ fn main() {
     // /mnt/e/kjdata/0930to东华/5.NCEP样例数据FNL/FNL/fnl_20200201_00_00.grib2
     let output = r##"/mnt/d/temp/grib2"##;
     todiamond4(&reader, output);
-    tonoms(&reader,output);
+    tonoms(&reader, output);
     // for f in files.iter() {
     //     let fname = format!("/mnt/j/kj/data/WRF/GRB/{}", f);
     //     let reader = GribReader::new(&fname).unwrap();

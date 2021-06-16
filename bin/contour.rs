@@ -1,6 +1,6 @@
 use geo;
-use geojson::{Value, GeoJson};
 use geo::prelude::Simplify;
+use geojson::{GeoJson, Value};
 use met_io_rs::*;
 use std::convert::TryInto;
 
@@ -12,10 +12,10 @@ fn main() {
     let grid = &grids[0];
     let ret = contour(grid, &vec![0.5]);
     println!("{:?}", ret);
-    
-    let ret= ret[5].clone().geometry.unwrap().value;
+
+    let ret = ret[5].clone().geometry.unwrap().value;
     dbg!(&ret);
-    let r :geo::MultiPolygon<f64> = ret.try_into().unwrap();
+    let r: geo::MultiPolygon<f64> = ret.try_into().unwrap();
     dbg!(&r);
 
     let r = r.simplify(&1.0);

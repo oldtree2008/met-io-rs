@@ -10,7 +10,7 @@ pub fn main() {
 
     // let fname = r##"/mnt/e/临时/临时/云雷达/DTB20200318165435.090"##;//unknown type
     // let fname = r##"/mnt/e/临时/临时/云雷达/VTB20200318164112.009"##;//unknown type
-    // let fname = r##"/mnt/e/雷达/Z_RADR_I_Z9010_20171028210600_O_DOR_SA_CAP.bin/Z_RADR_I_Z9010_20171028210600_O_DOR_SA_CAP.bin"##;
+    //let fname = r##"/mnt/e/雷达/Z_RADR_I_Z9010_20171028210600_O_DOR_SA_CAP.bin/Z_RADR_I_Z9010_20171028210600_O_DOR_SA_CAP.bin"##;
     // // let fname = r##"/mnt/e/青海数据/青海数据/青海数据/201908230248200.05V"##;//unknown type
     // let fname = r#"/mnt/h/陕西云雷达/陕西云雷达/Z_RADA_I_57131_20190302000000_O_YCCR_HTKAA_RAW_M.BIN"#;
 
@@ -19,12 +19,14 @@ pub fn main() {
     // let fname = r#"/mnt/e/标准格式/Z_RADR_I_Z9570_20201222001048_O_DOR_SAD_CAP_FMT.bin"#; //error
     //   let fname = r#"/mnt/e/标准格式/Z_RADR_I_Z9796_20201222000013_O_DOR_SCD_CAP_FMT.bin"#; //error
     // let fname = r#"/mnt/e/标准格式/Z_RADR_I_Z9852_20201222013218_O_DOR_CDD_CAP_FMT.bin"#; //error
-    // let fname = r#"/mnt/e/标准格式/Z_RADR_I_Z9931_20201222040248_O_DOR_CC_CAP_FMT.bin"#;
+    let fname = r#"/mnt/e/标准格式/Z_RADR_I_Z9931_20201222040248_O_DOR_CC_CAP_FMT.bin"#;
     // let fname = r#"/mnt/h/陕西云雷达/陕西云雷达/Z_RADA_I_57131_20190302000000_O_YCCR_HTKAA_RAW_M.BIN"#;
-
+    //F:\H\东北雷达数据\Z_RADR_I_Z9431_20210611063107_O_DOR_CC_CAP.bin
+    let fname = r##"/mnt/f/h/东北雷达数据/Z_RADR_I_Z9431_20210611063107_O_DOR_CC_CAP.bin"##; //解析错误 DP2020031808490.05V
+    //let fname = r##"/mnt/f/h/东北雷达数据/Z_RADR_I_Z9436_20210531150152_O_DOR_CC_CAP.bin"##; //解析错误 DP2020031808490.05V
     let reader = CinRadarReader::new(fname).unwrap();
 
     let output = "/mnt/d/temp/demo6";
-    todiamond4(&reader, output);
+    //todiamond4(&reader, output);
     println!("finished");
 }
