@@ -1,8 +1,10 @@
 use crate::MetError;
+use crate::{RadialData, SingleGrid, ToGrids};
 use binread::prelude::*;
+use std::collections::{HashMap, HashSet};
 use std::io::Cursor;
 
-pub struct CBReader;
+pub struct CBReader(pub RadialData);
 #[derive(Debug, BinRead)]
 pub struct Header {
     #[br(count = 14)]
@@ -40,9 +42,22 @@ pub struct Header {
 
 impl CBReader {
     pub fn new(data: &[u8]) -> Result<Self, MetError> {
-        println!("parse the sab radar file");
+        println!("parse the cb radar file");
         // let mut rd = Cursor::new(data);
         let radial_num = 1632;
+        //let mut radial_data = Vec::new();
+        let mut eles = Vec::new();
+        let mut azs = Vec::new();
+        let mut az_child = Vec::new();
+        let mut rs = Vec::new();
+        let mut rs_child = Vec::new();
+        let mut dataZ = Vec::new();
+        let mut dataZ_child = Vec::new();
+        let mut dataV = Vec::new();
+        let mut dataV_child = Vec::new();
+        let mut dataW = Vec::new();
+        let mut dataW_child = Vec::new();
+        let mut radial_data = Vec::new();
         for i in 0..3600 {
             let from = radial_num * i;
             let end = (i + 1) * radial_num;
@@ -52,23 +67,14 @@ impl CBReader {
             //println!("{:#?}", header);
             let el = (header.el as f32 / 8.0) * (180.0 / 4096.0);
             let az = (header.az as f32 / 8.0) * (180.0 / 4096.0);
-
-            println!(
-                "el {} el_number:{} az:{} radial_number:{} status:{}   {}",
-                el,
-                header.el_number,
-                az,
-                header.radial_number,
-                header.radial_status,
-                header.julian_data / 365
-            );
             /*
             dbg!(
+                el,
                 header.ptr_of_reflectivity,
                 header.ptr_of_velocity,
                 header.ptr_of_spectrum_width
             );*/
-            let start_index = header.ptr_of_reflectivity as usize + 28;
+            let start_index = from + header.ptr_of_reflectivity as usize + 28;
             let end_index = start_index + header.gates_number_of_reflectivity as usize;
             let dBZ = &data[start_index..end_index];
             /*
@@ -77,7 +83,19 @@ impl CBReader {
             }
             println!("");
             */
-            let start_index = header.ptr_of_velocity as usize + 28;
+            let dBZ: Vec<f32> = dBZ
+                .iter()
+                .map(|&d| {
+                    if d == 0 {
+                        crate::MISSING
+                    } else {
+                        //(d as f32 - 2f32) / 2f32 - 32f32
+                        (d as f32 - 64f32) / 2f32
+                    }
+                })
+                .collect();
+
+            let start_index = from + header.ptr_of_velocity as usize + 28;
             let end_index = start_index + header.gates_number_of_doppler as usize;
             let V = &data[start_index..end_index];
             /*
@@ -86,7 +104,27 @@ impl CBReader {
             }
             println!("");
             */
-            let start_index = header.ptr_of_spectrum_width as usize + 28;
+            let V: Vec<f32> = V
+                .iter()
+                .map(|&d| {
+                    if d == 0 {
+                        crate::MISSING
+                    } else {
+                        (d as f32 - 2f32) / 2f32 - 63.5f32
+                    }
+                })
+                .collect();
+            /*  println!(
+                "el {} el_number:{} az:{} radial_number:{} status:{}   {:?}",
+                el,
+                header.el_number,
+                az,
+                header.radial_number,
+                header.radial_status,
+                dBZ
+            );*/
+
+            let start_index = from + header.ptr_of_spectrum_width as usize + 28;
             let end_index = start_index + header.gates_number_of_doppler as usize;
             let W = &data[start_index..end_index];
             /*
@@ -95,8 +133,94 @@ impl CBReader {
             }
             println!("");
             */
-        }
 
-        Ok(CBReader)
+            let W: Vec<f32> = W
+                .iter()
+                .map(|&d| {
+                    if d == 0 {
+                        crate::MISSING
+                    } else {
+                        (d as f32 - 2f32) / 2f32 - 63.5f32
+                    }
+                })
+                .collect();
+
+            az_child.push(az);
+            let mut rs_grand_child: Vec<f64> = (0..500)
+                .into_iter()
+                .map(|d| d as f64 * 300 as f64)
+                .collect();
+            rs_child.push(rs_grand_child);
+            dataZ_child.push(dBZ);
+            dataV_child.push(V);
+            dataW_child.push(W);
+            if header.radial_status == 2 || header.radial_status == 4 {
+                eles.push(el);
+                azs.push(az_child);
+                az_child = Vec::new();
+                rs.push(rs_child);
+                rs_child = Vec::new();
+                dataZ.push(dataZ_child);
+                dataZ_child = Vec::new();
+                dataV.push(dataV_child);
+                dataV_child = Vec::new();
+                dataW.push(dataW_child);
+                dataW_child = Vec::new();
+            }
+            //radial_data.push((el,az,dBZ.to_vec(),V.to_vec(),W.to_vec(),header.radial_status));
+        }
+        println!("{:#?}", eles);
+        println!("{:#?} {}", azs.len(), azs[0].len());
+        println!(
+            "{:#?} {}  {}  {}",
+            rs.len(),
+            rs[0].len(),
+            rs[0][1].len(),
+            rs[8][2][499]
+        );
+
+        println!("{} {}", dataZ[0][0][0], dataZ[2][360][250]);
+
+        radial_data.push(dataZ);
+        radial_data.push(dataV);
+        radial_data.push(dataW);
+
+        println!(
+            "element:{} elevate:{} az:{} range:{}",
+            radial_data.len(),
+            radial_data[0].len(),
+            radial_data[0][0].len(),
+            radial_data[0][0][0].len()
+        );
+
+        let start_date = "20210611".to_string(); //format!("{}{:02}{:02}", observe.year, observe.month, observe.day);
+        let start_time = "120331".to_string(); // format!("{:02}{:02}{:02}", observe.hour, observe.minute, observe.sec);
+
+        let mut props = HashMap::new();
+        props.insert(String::from("product"), String::from("单站雷达"));
+        props.insert(String::from("station"), "9433".to_string());
+
+        let mut rdata = RadialData::default();
+        rdata.lon = 125.246; //lon;
+        rdata.lat = 43.899; //lat;
+        rdata.height = 0f32; // 289.800; //height;
+        rdata.start_date = start_date;
+        rdata.start_time = start_time;
+        rdata.bin_length = 300.0;
+        rdata.eles = eles;
+        rdata.azs = azs;
+        rdata.rs = rs;
+        rdata.elements = vec!["Z".to_string(), "V".to_string(), "W".to_string()]; //elements;
+        rdata.data = radial_data;
+        rdata.props = props;
+
+        Ok(CBReader(rdata))
+    }
+}
+
+impl ToGrids for CBReader {
+    fn to_grids(&self) -> Option<Vec<SingleGrid>> {
+        let rd = &self.0;
+        rd.to_grids()
     }
 }

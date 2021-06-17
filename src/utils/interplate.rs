@@ -26,6 +26,16 @@ pub fn interp_ppi(
     // return target value interped, units: like mat
     let interped;
     let fillvalue = crate::MISSING;
+    if az_0 == az_1 && r_0 == r_1 {
+        return mat_00;
+    }
+    if az_0 == az_1 {
+        return ((r_1 - r) * mat_00 + (r - r_0) * mat_01) / (r_1 - r_0);
+    }
+    if r_0 == r_1 {
+        return ((az_1 - az) * mat_00 + (az - az_0) * mat_10) / (az_1 - az_0);
+    }
+
     if ((mat_00 != fillvalue) && (mat_01 != fillvalue))
         && ((mat_10 != fillvalue) && (mat_11 != fillvalue))
     {

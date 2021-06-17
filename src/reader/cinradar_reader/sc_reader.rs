@@ -213,9 +213,9 @@ impl SCReader {
         // f.read_to_end(&mut data)?;
         let mut cursor = Cursor::new(&data);
         let p: Product = cursor.read_le()?;
-        dbg!(&p);
-        dbg!(size_of::<Product>());
-        dbg!(data.len());
+        //dbg!(&p);
+        //dbg!(size_of::<Product>());
+        //dbg!(data.len());
         let perf_info = &p.performance_info;
         let polar = perf_info.Polarizations;
         let site_info = &p.site_info;

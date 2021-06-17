@@ -45,16 +45,17 @@ impl CinRadarReader {
             let reader = WSR98DReader::new(&buf).unwrap();
             return Ok(Self::WSR98D(reader));
         } else {
-            /*             if &flag[14..16] == b"\x01\x00" {
+            if buf.len() % 1632 == 0 {
+                let reader = CBReader::new(&buf)?;
+                return Ok(Self::CB(reader));
+            }
+            if &flag[14..16] == b"\x01\x00" {
                 println!("SAB");
                 let reader = SABReader::new(&buf)?;
                 return Ok(Self::SAB(reader));
-            }*/
+            }
 
             // // dbg!(flag1);
-            let reader = CBReader::new(&buf)?;
-            return Ok(Self::CB(reader));
-
             let sc_flag = &buf[100..109];
             if sc_flag == b"CINRAD/SC" || sc_flag == b"CINRAD/CD" {
                 println!("SC");
@@ -81,6 +82,7 @@ impl ToGrids for CinRadarReader {
         match self {
             Self::WSR98D(std) => std.to_grids(),
             Self::SC(std) => std.to_grids(),
+            Self::CB(std) => std.to_grids(),
             _ => None,
         }
     }

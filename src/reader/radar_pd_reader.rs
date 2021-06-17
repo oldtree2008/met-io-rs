@@ -292,6 +292,8 @@ impl RadarPDReader {
         );
         println!("{:#?}  {} ", &azs.len(), &azs[0].len());
         println!("{:#?}  {}  {}", &rs.len(), &rs[0].len(), &rs[0][0].len());
+
+        println!("eles:{:#?}", eles);
         let mut rdata = RadialData::default();
         rdata.lon = lon;
         rdata.lat = lat;

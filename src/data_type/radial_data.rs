@@ -132,7 +132,7 @@ impl RadialData {
         Some((cols + 1, rows + 1, grid_value))
     }
 }
-
+/*
 fn find_az_index(azs: &Vec<f32>, az: f32) -> (usize, usize) {
     let az_len = azs.len();
     // println!("az_len {}",az_len);
@@ -150,9 +150,31 @@ fn find_az_index(azs: &Vec<f32>, az: f32) -> (usize, usize) {
     } else {
         (0, 1)
     }
-}
+}*/
 
-fn find_range_index(azs: &Vec<f64>, az: f64) -> Option<usize> {
+fn find_az_index(azs: &Vec<f32>, az: f32) -> (usize, usize) {
+    let ret = azs.binary_search_by(|d| d.partial_cmp(&az).unwrap());
+    let idx;
+    let idx1;
+
+    match ret {
+        Ok(l) => {
+            idx = l;
+            idx1 = l;
+        }
+        Err(l) => {
+            if l > 1 {
+                idx = l - 2;
+                idx1 = l - 1;
+            } else {
+                idx = 0;
+                idx1 = 0;
+            }
+        }
+    }
+    (idx, idx1)
+}
+/*fn find_range_index(azs: &Vec<f64>, az: f64) -> Option<usize> {
     let az_len = azs.len();
     // println!("az_len {}",az_len);
     let first = azs[0];
@@ -169,6 +191,31 @@ fn find_range_index(azs: &Vec<f64>, az: f64) -> Option<usize> {
             // println!("az {}  az_len {}", idx3, az_len);
             return Some(idx3);
         }
+    }
+    None
+}*/
+fn find_range_index(azs: &Vec<f64>, az: f64) -> Option<usize> {
+    let az_len = azs.len();
+    // println!("az_len {}",az_len);
+    let first = azs[0];
+    let last = azs[az_len - 1];
+    //let step = (last - first) / (az_len as f64 - 1.0);
+    if az >= first && az <= last {
+        let ret = azs.binary_search_by(|d| d.partial_cmp(&az).unwrap());
+        let idx;
+        match ret {
+            Ok(l) => {
+                idx = l;
+            }
+            Err(l) => {
+                if l > 1 {
+                    idx = l - 1;
+                } else {
+                    idx = 0;
+                }
+            }
+        }
+        return Some(idx);
     }
     None
 }
@@ -277,7 +324,11 @@ impl RadarData for RadialData {
         let elv_azs = &self.azs[ele_idx];
         // let az = az.to_degrees();
         //找出临近方位角的索引
+        //dbg!(elv_azs.len(),az);
         let (az_idx, az_idx1) = find_az_index(elv_azs, az);
+        /*if az_idx >= 400 || az_idx1 >= 400 {
+            dbg!(az_idx, az_idx1, az);
+        }*/
         let elv_rs = &self.rs[ele_idx][az_idx];
         //找出临近库的索引
         if let Some(range_idx) = find_range_index(elv_rs, rang as f64) {

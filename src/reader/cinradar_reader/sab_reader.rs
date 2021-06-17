@@ -50,9 +50,9 @@ impl SABReader {
             let mut rd = Cursor::new(&data[from..end]);
             // rd.seek(SeekFrom::Start(step as u64))?;
             let header: Header = rd.read_le()?;
-            println!("{:#?}", header);
-            let el = (header.el as f32 / 8.0) * (180.0 / 1096.0);
-            let az = (header.az as f32 / 8.0) * (180.0 / 1096.0);
+            //println!("{:#?}", header);
+            let el = (header.el as f32 / 8.0) * (180.0 / 4096.0);
+            let az = (header.az as f32 / 8.0) * (180.0 / 4096.0);
             println!(
                 "el {} el_number:{} az:{} radial_number:{} status:{}   {}",
                 el,

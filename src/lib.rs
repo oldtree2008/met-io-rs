@@ -50,12 +50,12 @@ pub trait RadarData {
         let rows = 1024;
         // let cols = 1840;
         // let rows = 1840;
-        let cols = 256;
-        let rows = 256;
+        //let cols = 256;
+        //let rows = 256;
 
         let bin_num = (self.extents().0 / self.bin_length()).abs() as usize;
 
-        dbg!(self.extents(), bin_num);
+        //dbg!(self.extents(), bin_num);
 
         let cols = bin_num;
         let rows = bin_num;
