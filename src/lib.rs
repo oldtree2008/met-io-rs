@@ -50,8 +50,8 @@ pub trait RadarData {
         let rows = 1024;
         // let cols = 1840;
         // let rows = 1840;
-        //let cols = 256;
-        //let rows = 256;
+        let cols = 256;
+        let rows = 256;
 
         let bin_num = (self.extents().0 / self.bin_length()).abs() as usize;
 
@@ -79,8 +79,8 @@ pub trait RadarData {
         let mut grid_value: Vec<f32> = vec![crate::MISSING; total_num];
         // let elv_values = &self.data[element_idx][ele_idx];
 
-        // grid_value.iter_mut().enumerate().for_each(|(i, d)| {
-        grid_value.par_iter_mut().enumerate().for_each(|(i, d)| {
+        grid_value.iter_mut().enumerate().for_each(|(i, d)| {
+            //grid_value.par_iter_mut().enumerate().for_each(|(i, d)| {
             let yi = i / (cols + 1);
             let xi = i % (rows + 1);
             let lat = lats[yi];

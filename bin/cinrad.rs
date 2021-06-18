@@ -15,11 +15,11 @@ pub fn main() {
     // let fname = r#"/mnt/h/陕西云雷达/陕西云雷达/Z_RADA_I_57131_20190302000000_O_YCCR_HTKAA_RAW_M.BIN"#;
 
     //标准格式
-    let fname = r#"/mnt/e/标准格式/Z_RADR_I_Z9377_20201222012400_O_DOR_SB_CAP_FMT.bin"#;
+    //let fname = r#"/mnt/e/标准格式/Z_RADR_I_Z9377_20201222012400_O_DOR_SB_CAP_FMT.bin"#;
     // let fname = r#"/mnt/e/标准格式/Z_RADR_I_Z9570_20201222001048_O_DOR_SAD_CAP_FMT.bin"#; //error
     //   let fname = r#"/mnt/e/标准格式/Z_RADR_I_Z9796_20201222000013_O_DOR_SCD_CAP_FMT.bin"#; //error
     // let fname = r#"/mnt/e/标准格式/Z_RADR_I_Z9852_20201222013218_O_DOR_CDD_CAP_FMT.bin"#; //error
-    let fname = r#"/mnt/e/标准格式/Z_RADR_I_Z9931_20201222040248_O_DOR_CC_CAP_FMT.bin"#;
+    //let fname = r#"/mnt/e/标准格式/Z_RADR_I_Z9931_20201222040248_O_DOR_CC_CAP_FMT.bin"#;
     // let fname = r#"/mnt/h/陕西云雷达/陕西云雷达/Z_RADA_I_57131_20190302000000_O_YCCR_HTKAA_RAW_M.BIN"#;
     //F:\H\东北雷达数据\Z_RADR_I_Z9431_20210611063107_O_DOR_CC_CAP.bin
     //Z_RADR_I_Z9433_20210611070504_O_DOR_CC_CAP.bin
@@ -29,6 +29,6 @@ pub fn main() {
     let reader = CinRadarReader::new(fname).unwrap();
 
     let output = "/mnt/d/temp/demo7";
-    todiamond4(&reader, output);
+    //todiamond4(&reader, output);
     println!("finished");
 }

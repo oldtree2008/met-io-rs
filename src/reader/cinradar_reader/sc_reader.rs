@@ -253,7 +253,9 @@ impl SCReader {
         let bin_num = 1000;
         dbg!(bin_length, bin_num);
 
-        for l in layers.iter() {
+        //for l in layers.iter() {
+        for i in 0..1 {
+            let l = &layers[i];
             println!("{}  {}  {}", l.binNumber, l.RecordNumber, l.SwpAngles);
             let el = l.SwpAngles;
             let el = el as f32 * 0.01;
@@ -315,7 +317,7 @@ impl SCReader {
         rdata.data = data;
         rdata.bin_length = bin_length as f32 * 0.1;
 
-        let dist = rdata.bin_length * bin_num as f32;
+        let dist = rdata.bin_length * bin_num as f32/2f32;
         rdata._extents = (-dist, dist, -dist, dist);
         dbg!(cursor.position());
         Ok(rdata)
@@ -341,7 +343,7 @@ impl SCReader {
                 let endel = radar_data.endel1 as f32 / 65536.0 * 360.0;
                 let binNumber = 1000 as usize;
                 // println!("{} {}  {}  {}    {} {}  {:?}", el, az,startaz,endaz,startel,endel,radar_data.data1);
-                // println!("{} {}  {}  {}    {} {} ", el, az,startaz,endaz,startel,endel);
+                //println!("{}  {}    {} {} ",startaz,endaz,startel,endel);
                 for i in 0..binNumber {
                     let r = i as f64 * binWidth;
                     let mut d1 = (radar_data.data1[i] as f32 - 32768.0) * 0.01;
@@ -384,7 +386,7 @@ impl SCReader {
                 // println!("data2: {:?}", radar_data.data2);
                 // println!("data3: {:?}", radar_data.data3);
                 // println!("data4: {:?}", radar_data.data4);
-                // println!("{} {}  {}  {}    {} {} ", el, az,startaz,endaz,startel,endel);
+                 println!("{}  {}    {} {} {:?}",startaz,endaz,startel,endel,radar_data.data1);
                 for i in 0..binNumber {
                     let r = i as f64 * binWidth;
                     // let d1 = radar_data.data1[i] as f32;
@@ -425,9 +427,11 @@ impl SCReader {
         (ranges, line_data1, line_data2, line_data3, line_data4)
     }
 }
-// impl ToGrids for SCReader {
-//     fn to_grids(&self) -> Option<Vec<SingleGrid>> {
-//         let rd = &self.0;
-//         rd.to_grids()
-//     }
-// }
+
+/*
+impl ToGrids for SCReader {
+    fn to_grids(&self) -> Option<Vec<SingleGrid>> {
+        let rd = &self.0;
+        rd.to_grids()
+    }
+}*/
